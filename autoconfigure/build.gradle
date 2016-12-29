@@ -9,6 +9,8 @@ archivesBaseName = "okhttp-spring-boot-autoconfigure"
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+bootRepackage.enabled = false
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
 
