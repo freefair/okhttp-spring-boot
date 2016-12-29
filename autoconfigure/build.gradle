@@ -1,0 +1,20 @@
+plugins {
+    id "java"
+    id "maven"
+    id "org.springframework.boot" version "1.4.3.RELEASE"
+}
+
+archivesBaseName = "okhttp-spring-boot-autoconfigure"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+
+    compile 'org.springframework.boot:spring-boot-autoconfigure'
+    compileOnly 'com.squareup.okhttp3:okhttp:3.5.0'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+compileJava.dependsOn(processResources)
