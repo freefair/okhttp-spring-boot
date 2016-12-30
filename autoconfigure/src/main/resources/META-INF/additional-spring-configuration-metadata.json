@@ -1,0 +1,21 @@
+{
+  "hints": [
+    {
+      "name": "okhttp.logging.level",
+      "providers": [
+        {
+          "name": "handle-as",
+          "parameters": {
+            "target": "com.squareup.okhttp.logging.HttpLoggingInterceptor$Level"
+          }
+        },
+        {
+          "name": "handle-as",
+          "parameters": {
+            "target": "okhttp3.logging.HttpLoggingInterceptor$Level"
+          }
+        }
+      ]
+    }
+  ]
+}

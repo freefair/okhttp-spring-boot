@@ -2,7 +2,7 @@ package io.freefair.spring.okhttp;
 
 import okhttp3.OkHttpClient;
 
-public interface OkHttpConfigurator {
+public interface OkHttp3Configurator {
 
     void configure(OkHttpClient.Builder builder);
 }

@@ -15,8 +15,13 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
 
     compile 'org.springframework.boot:spring-boot-autoconfigure'
-    compileOnly 'com.squareup.okhttp3:okhttp:3.5.0'
-    compileOnly 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+
+    compileOnly 'com.squareup.okhttp3:okhttp:3.+'
+    compileOnly 'com.squareup.okhttp3:logging-interceptor:3.+'
+
+    compileOnly 'com.squareup.okhttp:okhttp:2.+'
+    compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
+
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
