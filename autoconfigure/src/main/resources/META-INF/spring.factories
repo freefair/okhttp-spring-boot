@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  io.freefair.spring.okhttp.OkHttpAutoConfiguration
+  io.freefair.spring.okhttp.OkHttpAutoConfiguration,\
+  io.freefair.spring.okhttp.logging.OkHttpLoggingInterceptorAutoConfiguration

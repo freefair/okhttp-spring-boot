@@ -1,6 +1,5 @@
 package io.freefair.spring.okhttp;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -9,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import static lombok.AccessLevel.NONE;
 
+@SuppressWarnings("WeakerAccess")
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "okhttp")
@@ -27,15 +27,18 @@ public class OkHttpProperties {
     @Setter
     public static class Timeout {
 
-        private long value;
+        private long value = 10_000;
 
-        private TimeUnit unit;
+        private TimeUnit unit = TimeUnit.MILLISECONDS;
     }
 
     @Getter
     @Setter
     public static class Cache {
-        private long size = 10 * 1024 * 1024;
+        /**
+         * The maximum number of bytes this cache should use to store
+         */
+        private long size = 10485760;
 
         private boolean enabled = true;
     }
