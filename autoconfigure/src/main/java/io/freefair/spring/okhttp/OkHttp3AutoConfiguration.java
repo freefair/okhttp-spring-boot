@@ -1,36 +1,36 @@
 package io.freefair.spring.okhttp;
 
-import okhttp3.Cache;
-import okhttp3.CookieJar;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
+import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
+/**
+ * @author Lars Grefer
+ */
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
-public class OkHttp3AutoConfiguration {
+public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
 
-    @Autowired
-    private OkHttpProperties properties;
-
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Autowired(required = false)
-    private List<OkHttp3Configurator> configurators;
+    private List<OkHttp3Configurer> configurers;
 
+    @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
     @ApplicationInterceptor
     private List<Interceptor> applicationInterceptors;
 
+    @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
     @NetworkInterceptor
     private List<Interceptor> networkInterceptors;
@@ -38,10 +38,17 @@ public class OkHttp3AutoConfiguration {
     @Autowired(required = false)
     private CookieJar cookieJar;
 
+    @Autowired(required = false)
+    private Dns dns;
+
+    @Lazy
     @Bean
     @ConditionalOnMissingBean
     public Cache okHttpCache() throws IOException {
-        return new Cache(Files.createTempDirectory("okhttp-cache").toFile(), properties.getCache().getSize());
+        File cacheDir = getCacheDir("okhttp3-cache");
+
+        return new Cache(cacheDir, properties.getCache().getSize());
+
     }
 
     @Bean
@@ -49,12 +56,8 @@ public class OkHttp3AutoConfiguration {
     public OkHttpClient okHttpClient() throws IOException {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        if (properties.getCache().isEnabled()) {
+        if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {
             builder.cache(okHttpCache());
-        }
-
-        if (cookieJar != null) {
-            builder.cookieJar(cookieJar);
         }
 
         OkHttpProperties.Timeout connectTimeout = properties.getConnectTimeout();
@@ -72,21 +75,34 @@ public class OkHttp3AutoConfiguration {
             builder.writeTimeout(writeTimeout.getValue(), writeTimeout.getUnit());
         }
 
+        OkHttpProperties.PingInterval pingInterval = properties.getPingInterval();
+        if(pingInterval != null) {
+            builder.pingInterval(pingInterval.getValue(), pingInterval.getUnit());
+        }
+
+        if (cookieJar != null) {
+            builder.cookieJar(cookieJar);
+        }
+
+        if (dns != null) {
+            builder.dns(dns);
+        }
+
+        builder.followRedirects(properties.isFollowRedirects());
+        builder.followSslRedirects(properties.isFollowSslRedirects());
+        builder.retryOnConnectionFailure(properties.isRetryOnConnectionFailure());
+
         if (applicationInterceptors != null && !applicationInterceptors.isEmpty()) {
-            for (Interceptor interceptor : applicationInterceptors) {
-                builder.addInterceptor(interceptor);
-            }
+            builder.interceptors().addAll(applicationInterceptors);
         }
 
         if (networkInterceptors != null && !networkInterceptors.isEmpty()) {
-            for (Interceptor networkInterceptor : networkInterceptors) {
-                builder.addNetworkInterceptor(networkInterceptor);
-            }
+            builder.networkInterceptors().addAll(networkInterceptors);
         }
 
-        if (configurators != null) {
-            for (OkHttp3Configurator okHttpConfigurator : configurators) {
-                okHttpConfigurator.configure(builder);
+        if (configurers != null) {
+            for (OkHttp3Configurer configurer : configurers) {
+                configurer.configure(builder);
             }
         }
 

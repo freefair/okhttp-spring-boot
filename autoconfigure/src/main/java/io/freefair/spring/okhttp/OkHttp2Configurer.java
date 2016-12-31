@@ -2,7 +2,10 @@ package io.freefair.spring.okhttp;
 
 import com.squareup.okhttp.OkHttpClient;
 
-public interface OkHttp2Configurator {
+/**
+ * @author Lars Grefer
+ */
+public interface OkHttp2Configurer {
 
     void configure(OkHttpClient builder);
 }

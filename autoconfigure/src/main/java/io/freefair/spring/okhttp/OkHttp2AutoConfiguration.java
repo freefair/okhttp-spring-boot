@@ -1,6 +1,7 @@
 package io.freefair.spring.okhttp;
 
 import com.squareup.okhttp.Cache;
+import com.squareup.okhttp.Dns;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,27 +10,30 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.CookieHandler;
-import java.nio.file.Files;
 import java.util.List;
 
+/**
+ * @author Lars Grefer
+ */
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
-public class OkHttp2AutoConfiguration {
-
-    @Autowired
-    private OkHttpProperties properties;
+public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
 
     @Autowired(required = false)
-    private List<OkHttp2Configurator> configurators;
+    private List<OkHttp2Configurer> configurers;
 
+    @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
     @ApplicationInterceptor
     private List<Interceptor> applicationInterceptors;
 
+    @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
     @NetworkInterceptor
     private List<Interceptor> networkInterceptors;
@@ -37,10 +41,17 @@ public class OkHttp2AutoConfiguration {
     @Autowired(required = false)
     private CookieHandler cookieHandler;
 
+    @Autowired(required = false)
+    private Dns dns;
+
+    @Lazy
     @Bean
     @ConditionalOnMissingBean
     public Cache okHttpCache() throws IOException {
-        return new Cache(Files.createTempDirectory("okhttp-cache").toFile(), properties.getCache().getSize());
+        File cacheDir = getCacheDir("okhttp2-cache");
+
+        return new Cache(cacheDir, properties.getCache().getSize());
+
     }
 
     @Bean
@@ -48,7 +59,7 @@ public class OkHttp2AutoConfiguration {
     public OkHttpClient okHttpClient() throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
 
-        if (properties.getCache().isEnabled()) {
+        if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {
             okHttpClient.setCache(okHttpCache());
         }
 
@@ -71,6 +82,13 @@ public class OkHttp2AutoConfiguration {
             okHttpClient.setWriteTimeout(writeTimeout.getValue(), writeTimeout.getUnit());
         }
 
+        if (dns != null)
+            okHttpClient.setDns(dns);
+
+        okHttpClient.setFollowRedirects(properties.isFollowRedirects());
+        okHttpClient.setFollowSslRedirects(properties.isFollowSslRedirects());
+        okHttpClient.setRetryOnConnectionFailure(properties.isRetryOnConnectionFailure());
+
         if (applicationInterceptors != null && !applicationInterceptors.isEmpty()) {
             okHttpClient.interceptors().addAll(applicationInterceptors);
         }
@@ -79,9 +97,9 @@ public class OkHttp2AutoConfiguration {
             okHttpClient.networkInterceptors().addAll(networkInterceptors);
         }
 
-        if (configurators != null) {
-            for (OkHttp2Configurator okHttpConfigurator : configurators) {
-                okHttpConfigurator.configure(okHttpClient);
+        if (configurers != null) {
+            for (OkHttp2Configurer configurer : configurers) {
+                configurer.configure(okHttpClient);
             }
         }
 

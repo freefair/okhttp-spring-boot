@@ -9,8 +9,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Locale;
-
+/**
+ * @author Lars Grefer
+ */
 @Configuration
 @ConditionalOnClass(HttpLoggingInterceptor.class)
 @EnableConfigurationProperties(OkHttpLoggingInterceptorProperties.class)
@@ -34,8 +35,11 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
             httpLoggingInterceptor = new HttpLoggingInterceptor();
         }
 
-        String level = properties.getLevel().toUpperCase(Locale.US);
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.valueOf(level));
+        String level = properties.getLevel();
+        if (level != null && !level.isEmpty()) {
+            HttpLoggingInterceptor.Level logLevel = EnumHelper.valueOf(HttpLoggingInterceptor.Level.class, level);
+            httpLoggingInterceptor.setLevel(logLevel);
+        }
 
         return httpLoggingInterceptor;
     }

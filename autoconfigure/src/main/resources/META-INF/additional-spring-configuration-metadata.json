@@ -1,7 +1,57 @@
 {
+  "groups": [
+    {
+      "name": "okhttp.connect-timeout",
+      "description": "The default connect timeout for new connections."
+    },
+    {
+      "name": "okhttp.read-timeout",
+      "description": "The default read timeout for new connections."
+    },
+    {
+      "name": "okhttp.write-timeout",
+      "description": "The default write timeout for new connections."
+    }
+  ],
+  "properties": [
+    {
+      "name": "okhttp.connect-timeout.unit",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "okhttp.read-timeout.unit",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "okhttp.write-timeout.unit",
+      "defaultValue": "milliseconds"
+    },
+    {
+      "name": "okhttp.ping-interval.unit",
+      "defaultValue": "milliseconds"
+    }
+  ],
   "hints": [
     {
       "name": "okhttp.logging.level",
+      "values": [
+        {
+          "value": "none",
+          "description": "No logs."
+        },
+        {
+          "value": "basic",
+          "description": "Logs request and response lines."
+        },
+        {
+          "value": "headers",
+          "description": "Logs request and response lines and their respective headers."
+        },
+        {
+          "value": "body",
+          "description": "Logs request and response lines and their respective headers and bodies (if present)."
+        }
+      ],
       "providers": [
         {
           "name": "handle-as",
