@@ -10,6 +10,9 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 class EnumHelper {
 
+    /**
+     * @see org.springframework.boot.bind.RelaxedConversionService.StringToEnumIgnoringCaseConverterFactory.StringToEnum#convert(String)
+     */
     @SuppressWarnings("unchecked")
     static <E extends Enum<E>> E valueOf(Class<E> enumType, String name) {
         name = name.trim();

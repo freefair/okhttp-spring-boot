@@ -5,7 +5,6 @@ import okhttp3.OkHttpClient;
 /**
  * @author Lars Grefer
  */
-public interface OkHttp3Configurer {
+public interface OkHttp3Configurer extends Configurer<OkHttpClient.Builder> {
 
-    void configure(OkHttpClient.Builder builder);
 }

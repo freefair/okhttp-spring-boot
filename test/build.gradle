@@ -1,0 +1,18 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "1.4.3.RELEASE"
+}
+
+dependencies {
+    compile project(':starter')
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'com.squareup.okhttp3:okhttp:3.+'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.+'
+    //compile 'com.squareup.okhttp:okhttp:2.+'
+    //compile 'com.squareup.okhttp:logging-interceptor:2.+'
+    compile 'org.springframework:spring-web'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}

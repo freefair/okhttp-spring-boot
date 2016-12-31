@@ -1,8 +1,10 @@
 package io.freefair.spring.okhttp.logging;
 
 import io.freefair.spring.okhttp.ApplicationInterceptor;
+import io.freefair.spring.okhttp.OkHttp3AutoConfiguration;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -14,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnClass(HttpLoggingInterceptor.class)
+@AutoConfigureBefore(OkHttp3AutoConfiguration.class)
 @EnableConfigurationProperties(OkHttpLoggingInterceptorProperties.class)
 public class OkHttp3LoggingInterceptorAutoConfiguration {
 
@@ -26,7 +29,7 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
     @Bean
     @ApplicationInterceptor
     @ConditionalOnMissingBean
-    public HttpLoggingInterceptor httpLoggingInterceptor() {
+    public HttpLoggingInterceptor okHttp3LoggingInterceptor() {
         HttpLoggingInterceptor httpLoggingInterceptor;
 
         if (logger != null) {

@@ -5,7 +5,6 @@ import com.squareup.okhttp.OkHttpClient;
 /**
  * @author Lars Grefer
  */
-public interface OkHttp2Configurer {
+public interface OkHttp2Configurer extends Configurer<OkHttpClient> {
 
-    void configure(OkHttpClient builder);
 }

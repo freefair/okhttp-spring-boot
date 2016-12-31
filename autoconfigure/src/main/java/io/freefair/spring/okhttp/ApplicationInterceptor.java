@@ -9,7 +9,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * A {@link Qualifier} annotation.
+ * A {@link Qualifier} annotation for {@link com.squareup.okhttp.Interceptor OkHttp2-Interceptors} and {@link okhttp3.Interceptor OkHttp3-Interceptors}.
  *
  * @author Lars Grefer
  * @see NetworkInterceptor

@@ -16,6 +16,8 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-autoconfigure'
 
+    compileOnly 'org.springframework:spring-web'
+    
     compileOnly 'com.squareup.okhttp3:okhttp:3.+'
     compileOnly 'com.squareup.okhttp3:logging-interceptor:3.+'
 
@@ -23,6 +25,7 @@ dependencies {
     compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+
 }
 
 compileJava.dependsOn(processResources)

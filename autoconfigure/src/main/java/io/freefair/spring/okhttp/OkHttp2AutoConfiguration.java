@@ -5,12 +5,15 @@ import com.squareup.okhttp.Dns;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.client.OkHttpClientHttpRequestFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +29,7 @@ import java.util.List;
 public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
 
     @Autowired(required = false)
-    private List<OkHttp2Configurer> configurers;
+    private List<Configurer<OkHttpClient>> configurers;
 
     @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
@@ -47,7 +50,7 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
     @Lazy
     @Bean
     @ConditionalOnMissingBean
-    public Cache okHttpCache() throws IOException {
+    public Cache okHttp2Cache() throws IOException {
         File cacheDir = getCacheDir("okhttp2-cache");
 
         return new Cache(cacheDir, properties.getCache().getSize());
@@ -56,11 +59,11 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public OkHttpClient okHttpClient() throws IOException {
+    public OkHttpClient okHttp2Client() throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {
-            okHttpClient.setCache(okHttpCache());
+            okHttpClient.setCache(okHttp2Cache());
         }
 
         if (cookieHandler != null) {
@@ -98,11 +101,24 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
         }
 
         if (configurers != null) {
-            for (OkHttp2Configurer configurer : configurers) {
+            for (Configurer<OkHttpClient> configurer : configurers) {
                 configurer.configure(okHttpClient);
             }
         }
 
         return okHttpClient;
+    }
+
+    @Configuration
+    @ConditionalOnClass(OkHttpClientHttpRequestFactory.class)
+    @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)
+    @AutoConfigureAfter(OkHttp2AutoConfiguration.class)
+    public static class RequestFactoryAutoConfiguration {
+
+        @Bean
+        @ConditionalOnMissingBean(OkHttpClientHttpRequestFactory.class)
+        public OkHttpClientHttpRequestFactory okHttpClientHttpRequestFactory(OkHttpClient okHttpClient) {
+            return new OkHttpClientHttpRequestFactory(okHttpClient);
+        }
     }
 }

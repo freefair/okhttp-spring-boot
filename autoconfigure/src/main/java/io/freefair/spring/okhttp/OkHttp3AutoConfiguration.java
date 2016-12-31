@@ -2,12 +2,16 @@ package io.freefair.spring.okhttp;
 
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
+import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +27,7 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Autowired(required = false)
-    private List<OkHttp3Configurer> configurers;
+    private List<Configurer<OkHttpClient.Builder>> configurers;
 
     @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
@@ -44,7 +48,7 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
     @Lazy
     @Bean
     @ConditionalOnMissingBean
-    public Cache okHttpCache() throws IOException {
+    public Cache okHttp3Cache() throws IOException {
         File cacheDir = getCacheDir("okhttp3-cache");
 
         return new Cache(cacheDir, properties.getCache().getSize());
@@ -53,11 +57,11 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public OkHttpClient okHttpClient() throws IOException {
+    public OkHttpClient okHttp3Client() throws IOException {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {
-            builder.cache(okHttpCache());
+            builder.cache(okHttp3Cache());
         }
 
         OkHttpProperties.Timeout connectTimeout = properties.getConnectTimeout();
@@ -101,11 +105,24 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
         }
 
         if (configurers != null) {
-            for (OkHttp3Configurer configurer : configurers) {
+            for (Configurer<OkHttpClient.Builder> configurer : configurers) {
                 configurer.configure(builder);
             }
         }
 
         return builder.build();
+    }
+
+    @Configuration
+    @ConditionalOnClass(OkHttp3ClientHttpRequestFactory.class)
+    @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)
+    @AutoConfigureAfter(OkHttp3AutoConfiguration.class)
+    public static class RequestFactoryAutoConfiguration {
+
+        @Bean
+        @ConditionalOnMissingBean(OkHttp3ClientHttpRequestFactory.class)
+        public OkHttp3ClientHttpRequestFactory okHttp3ClientHttpRequestFactory(OkHttpClient okHttpClient) {
+            return new OkHttp3ClientHttpRequestFactory(okHttpClient);
+        }
     }
 }
