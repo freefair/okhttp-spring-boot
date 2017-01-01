@@ -16,6 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author Lars Grefer
  * @see ApplicationInterceptor
  */
+@SuppressWarnings("WeakerAccess")
 @Target({METHOD, FIELD, CONSTRUCTOR})
 @Retention(RUNTIME)
 @Qualifier
