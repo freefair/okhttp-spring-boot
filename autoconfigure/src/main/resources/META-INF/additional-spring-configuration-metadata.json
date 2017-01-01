@@ -30,42 +30,5 @@
       "name": "okhttp.ping-interval.unit",
       "defaultValue": "milliseconds"
     }
-  ],
-  "hints": [
-    {
-      "name": "okhttp.logging.level",
-      "values": [
-        {
-          "value": "none",
-          "description": "No logs."
-        },
-        {
-          "value": "basic",
-          "description": "Logs request and response lines."
-        },
-        {
-          "value": "headers",
-          "description": "Logs request and response lines and their respective headers."
-        },
-        {
-          "value": "body",
-          "description": "Logs request and response lines and their respective headers and bodies (if present)."
-        }
-      ],
-      "providers": [
-        {
-          "name": "handle-as",
-          "parameters": {
-            "target": "com.squareup.okhttp.logging.HttpLoggingInterceptor$Level"
-          }
-        },
-        {
-          "name": "handle-as",
-          "parameters": {
-            "target": "okhttp3.logging.HttpLoggingInterceptor$Level"
-          }
-        }
-      ]
-    }
   ]
 }
