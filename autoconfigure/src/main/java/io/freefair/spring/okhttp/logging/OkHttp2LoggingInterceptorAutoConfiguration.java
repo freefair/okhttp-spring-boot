@@ -17,15 +17,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(HttpLoggingInterceptor.class)
 @AutoConfigureBefore(OkHttp2AutoConfiguration.class)
-@EnableConfigurationProperties(OkHttpLoggingInterceptorProperties.class)
+@EnableConfigurationProperties(OkHttp2LoggingInterceptorProperties.class)
 public class OkHttp2LoggingInterceptorAutoConfiguration {
 
     @Autowired
-    private OkHttpLoggingInterceptorProperties properties;
+    private OkHttp2LoggingInterceptorProperties properties;
 
     @Autowired(required = false)
     private HttpLoggingInterceptor.Logger logger;
 
+    @SuppressWarnings("Duplicates")
     @Bean
     @ApplicationInterceptor
     @ConditionalOnMissingBean
@@ -38,10 +39,9 @@ public class OkHttp2LoggingInterceptorAutoConfiguration {
             httpLoggingInterceptor = new HttpLoggingInterceptor();
         }
 
-        String level = properties.getLevel();
-        if (level != null && !level.isEmpty()) {
-            HttpLoggingInterceptor.Level logLevel = EnumHelper.valueOf(HttpLoggingInterceptor.Level.class, level);
-            httpLoggingInterceptor.setLevel(logLevel);
+        HttpLoggingInterceptor.Level level = properties.getLevel();
+        if (level != null) {
+            httpLoggingInterceptor.setLevel(level);
         }
 
         return httpLoggingInterceptor;
