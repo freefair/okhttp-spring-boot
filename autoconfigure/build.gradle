@@ -2,6 +2,7 @@ plugins {
     id "java"
     id "maven"
     id "org.springframework.boot" version "1.4.3.RELEASE"
+    id "io.freefair.maven-jars" version "0.9.7-maven"
 }
 
 archivesBaseName = "okhttp-spring-boot-autoconfigure"
@@ -10,6 +11,12 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 bootRepackage.enabled = false
+
+javadoc.options.links "http://docs.oracle.com/javase/7/docs/api/"
+javadoc.options.links "http://square.github.io/okhttp/3.x/okhttp/"
+javadoc.options.links "http://square.github.io/okhttp/2.x/okhttp/"
+javadoc.options.links "http://docs.spring.io/spring-boot/docs/1.4.3.RELEASE/api/"
+javadoc.options.links "http://docs.spring.io/spring/docs/4.3.5.RELEASE/javadoc-api/"
 
 dependencies {
     compileOnly 'org.projectlombok:lombok'
