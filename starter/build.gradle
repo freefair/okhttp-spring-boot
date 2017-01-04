@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "maven"
-    id "io.freefair.maven-jars" version "0.9.7-maven"
+    id "io.freefair.maven-jars" version "0.9.10"
 }
 
 archivesBaseName = "okhttp-spring-boot-starter"
