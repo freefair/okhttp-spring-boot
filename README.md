@@ -1,11 +1,17 @@
-# Spring Boot Starter for [OkHttp](http://square.github.io/okhttp/) 
+# Spring Boot Starters for [OkHttp](http://square.github.io/okhttp/) 
 
 Latest version: [![](https://jitpack.io/v/io.freefair/okhttp-spring-boot.svg)](https://jitpack.io/#io.freefair/okhttp-spring-boot)
+
+## Available Starters
+
+- `okhttp2-spring-boot-starter`
+- `okhttp3-spring-boot-starter`
+- `okhttp-spring-boot-starter` (Alias for `okhttp3-spring-boot-starter`)
 
 ## Using Gradle
 ```gradle
 dependencies {
-    compile "io.freefair.okhttp-spring-boot:okhttp-spring-boot-starter:$version"
+    compile "io.freefair.okhttp-spring-boot:okhttp3-spring-boot-starter:$version"
 }
 ```
 
@@ -13,7 +19,7 @@ dependencies {
 ```xml
 <dependency>
     <groupId>io.freefair.okhttp-spring-boot</groupId>
-    <artifactId>okhttp-spring-boot-starter</artifactId>
+    <artifactId>okhttp3-spring-boot-starter</artifactId>
     <version>${version}</version>
 </dependency>
 ```
