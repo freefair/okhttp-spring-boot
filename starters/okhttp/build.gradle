@@ -7,6 +7,5 @@ plugins {
 archivesBaseName = "okhttp-spring-boot-starter"
 
 dependencies {
-    compile project(':autoconfigure')
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile project(':starters:okhttp3')
 }

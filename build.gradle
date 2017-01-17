@@ -3,5 +3,5 @@ allprojects {
         jcenter()
     }
 
-    group = "io.freefair"
+    group = "io.freefair.okhttp-spring-boot"
 }
