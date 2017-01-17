@@ -4,8 +4,7 @@ plugins {
 }
 
 dependencies {
-    compile project(':starters:okhttp')
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile project(':autoconfigure')
 
     compile 'org.springframework.boot:spring-boot-starter'
 
