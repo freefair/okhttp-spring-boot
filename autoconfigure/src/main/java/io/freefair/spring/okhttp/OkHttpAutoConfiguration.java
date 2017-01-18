@@ -9,7 +9,7 @@ import java.nio.file.Files;
 abstract class OkHttpAutoConfiguration {
 
     @Autowired
-    protected OkHttpProperties properties;
+    OkHttpProperties properties;
 
     File getCacheDir(String prefix) throws IOException {
         File cacheDir;

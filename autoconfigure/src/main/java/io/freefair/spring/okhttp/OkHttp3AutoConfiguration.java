@@ -19,21 +19,19 @@ import java.util.List;
 /**
  * @author Lars Grefer
  */
+@SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "SpringJavaAutowiringInspection"})
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
 
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Autowired(required = false)
     private List<Configurer<OkHttpClient.Builder>> configurers;
 
-    @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
     @ApplicationInterceptor
     private List<Interceptor> applicationInterceptors;
 
-    @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
     @Autowired(required = false)
     @NetworkInterceptor
     private List<Interceptor> networkInterceptors;
@@ -51,7 +49,6 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
         File cacheDir = getCacheDir("okhttp3-cache");
 
         return new Cache(cacheDir, properties.getCache().getSize());
-
     }
 
     @Bean
