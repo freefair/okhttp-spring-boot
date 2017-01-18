@@ -8,5 +8,5 @@ archivesBaseName = "okhttp2-spring-boot-starter"
 
 dependencies {
     compile project(':autoconfigure')
-    compile 'com.squareup.okhttp:okhttp:2.+'
+    compile 'com.squareup.okhttp:okhttp:2.7.5'
 }
