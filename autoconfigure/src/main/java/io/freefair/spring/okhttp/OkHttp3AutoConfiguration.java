@@ -109,6 +109,9 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
         return builder.build();
     }
 
+    /**
+     * @author Lars Grefer
+     */
     @Configuration
     @ConditionalOnClass(OkHttp3ClientHttpRequestFactory.class)
     @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)

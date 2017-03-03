@@ -1,6 +1,8 @@
 plugins {
     id "java"
     id "maven"
+    id "findbugs"
+    id "checkstyle"
     id "org.springframework.boot" version "1.5.1.RELEASE"
     id "io.freefair.maven-jars" version "0.9.12"
     id "io.freefair.javadoc-links" version "0.9.12"
@@ -14,6 +16,8 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 bootRepackage.enabled = false
+
+checkstyle.toolVersion = "7.6"
 
 dependencies {
     compileOnly 'org.projectlombok:lombok'
