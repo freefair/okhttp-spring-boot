@@ -3,7 +3,7 @@ plugins {
     id "maven"
     id "findbugs"
     id "checkstyle"
-    id "org.springframework.boot" version "1.5.1.RELEASE"
+    id "org.springframework.boot" version "1.5.2.RELEASE"
     id "io.freefair.maven-jars" version "0.9.12"
     id "io.freefair.javadoc-links" version "0.9.12"
 }
@@ -22,7 +22,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-autoconfigure'
 
     compileOnly 'org.springframework:spring-web'
-    
+
     compileOnly 'com.squareup.okhttp3:okhttp:3.+'
     compileOnly 'com.squareup.okhttp3:logging-interceptor:3.+'
 
@@ -30,6 +30,9 @@ dependencies {
     compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+    
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'com.squareup.okhttp3:okhttp:3.+'
 
 }
 
