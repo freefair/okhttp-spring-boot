@@ -12,9 +12,6 @@ archivesBaseName = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
 bootRepackage.enabled = false
 
 checkstyle.toolVersion = "7.6"
