@@ -32,6 +32,7 @@ dependencies {
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.boot:spring-boot-starter-logging' //https://github.com/spring-projects/spring-boot/issues/8492
     testCompile 'com.squareup.okhttp3:okhttp:3.+'
 
 }
