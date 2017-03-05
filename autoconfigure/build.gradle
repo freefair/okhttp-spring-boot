@@ -1,7 +1,9 @@
 plugins {
     id "java"
     id "maven"
-    id "org.springframework.boot" version "1.5.1.RELEASE"
+    id "findbugs"
+    id "checkstyle"
+    id "org.springframework.boot" version "1.5.2.RELEASE"
     id "io.freefair.maven-jars" version "0.9.12"
     id "io.freefair.javadoc-links" version "0.9.12"
 }
@@ -10,10 +12,11 @@ archivesBaseName = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
 bootRepackage.enabled = false
+
+checkstyle.toolVersion = "7.6"
+
+compileJava.dependsOn(processResources)
 
 dependencies {
     compileOnly 'org.projectlombok:lombok'
@@ -21,7 +24,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-autoconfigure'
 
     compileOnly 'org.springframework:spring-web'
-    
+
     compileOnly 'com.squareup.okhttp3:okhttp:3.+'
     compileOnly 'com.squareup.okhttp3:logging-interceptor:3.+'
 
@@ -30,6 +33,9 @@ dependencies {
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
-}
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    //https://github.com/spring-projects/spring-boot/issues/8492
+    testCompile 'org.springframework.boot:spring-boot-starter-logging'
+    testCompile 'com.squareup.okhttp3:okhttp:3.+'
 
-compileJava.dependsOn(processResources)
+}

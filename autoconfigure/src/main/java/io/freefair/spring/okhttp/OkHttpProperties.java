@@ -61,12 +61,18 @@ public class OkHttpProperties {
      */
     private boolean retryOnConnectionFailure = true;
 
+    /**
+     * @author Lars Grefer
+     */
     @Getter
     @Setter
     public static class Duration {
         private TimeUnit unit = TimeUnit.MILLISECONDS;
     }
 
+    /**
+     * @author Lars Grefer
+     */
     @Getter
     @Setter
     public static class Timeout extends Duration {
@@ -77,6 +83,9 @@ public class OkHttpProperties {
         private long value = 10_000;
     }
 
+    /**
+     * @author Lars Grefer
+     */
     @Getter
     @Setter
     public static class PingInterval extends Duration {
@@ -87,6 +96,9 @@ public class OkHttpProperties {
         private long value = 0;
     }
 
+    /**
+     * @author Lars Grefer
+     */
     @Getter
     @Setter
     public static class Cache {
@@ -102,6 +114,9 @@ public class OkHttpProperties {
 
         private Mode mode = Mode.TEMPORARY;
 
+        /**
+         * @author Lars Grefer
+         */
         public enum Mode {
             /**
              * No caching.

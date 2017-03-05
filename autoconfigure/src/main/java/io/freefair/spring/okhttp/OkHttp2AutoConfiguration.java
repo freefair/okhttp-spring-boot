@@ -83,8 +83,9 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
             okHttpClient.setWriteTimeout(writeTimeout.getValue(), writeTimeout.getUnit());
         }
 
-        if (dns != null)
+        if (dns != null) {
             okHttpClient.setDns(dns);
+        }
 
         okHttpClient.setFollowRedirects(properties.isFollowRedirects());
         okHttpClient.setFollowSslRedirects(properties.isFollowSslRedirects());
@@ -107,6 +108,9 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
         return okHttpClient;
     }
 
+    /**
+     * @author Lars Grefer
+     */
     @Configuration
     @ConditionalOnClass(OkHttpClientHttpRequestFactory.class)
     @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)
