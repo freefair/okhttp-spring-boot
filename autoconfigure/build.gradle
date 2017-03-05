@@ -16,6 +16,8 @@ bootRepackage.enabled = false
 
 checkstyle.toolVersion = "7.6"
 
+compileJava.dependsOn(processResources)
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
 
@@ -30,11 +32,10 @@ dependencies {
     compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-    
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'org.springframework.boot:spring-boot-starter-logging' //https://github.com/spring-projects/spring-boot/issues/8492
+    //https://github.com/spring-projects/spring-boot/issues/8492
+    testCompile 'org.springframework.boot:spring-boot-starter-logging'
     testCompile 'com.squareup.okhttp3:okhttp:3.+'
 
 }
-
-compileJava.dependsOn(processResources)
