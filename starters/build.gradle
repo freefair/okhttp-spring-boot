@@ -1,0 +1,11 @@
+subprojects { Project starterProject ->
+    starterProject.pluginManager.withPlugin("java") {
+        starterProject.archivesBaseName = "$starterProject.name-spring-boot-starter"
+
+        starterProject.pluginManager.withPlugin("maven") {
+            starterProject.artifacts {
+                archives starterProject.jar
+            }
+        }
+    }
+}

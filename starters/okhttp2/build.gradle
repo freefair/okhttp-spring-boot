@@ -4,8 +4,6 @@ plugins {
     id "io.freefair.maven-jars" version "0.9.12"
 }
 
-archivesBaseName = "okhttp2-spring-boot-starter"
-
 dependencies {
     compile project(':autoconfigure')
     compile 'com.squareup.okhttp:okhttp:2.7.5'
