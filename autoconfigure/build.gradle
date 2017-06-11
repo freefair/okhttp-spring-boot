@@ -38,6 +38,6 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     //https://github.com/spring-projects/spring-boot/issues/8492
     testCompile 'org.springframework.boot:spring-boot-starter-logging'
-    testCompile 'com.squareup.okhttp3:okhttp:3.+'
+    testCompile 'com.squareup.okhttp3:okhttp'
 
 }
