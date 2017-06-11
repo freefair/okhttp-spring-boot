@@ -10,18 +10,13 @@ archivesBaseName = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
 
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M1'
-    }
-}
-
 checkstyle.toolVersion = "7.8.1"
 
 compileJava.dependsOn(processResources)
 
 dependencies {
     compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
     compile 'org.springframework.boot:spring-boot-autoconfigure'
 
@@ -33,11 +28,6 @@ dependencies {
     compileOnly 'com.squareup.okhttp:okhttp:2.+'
     compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
 
-    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
-
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    //https://github.com/spring-projects/spring-boot/issues/8492
-    testCompile 'org.springframework.boot:spring-boot-starter-logging'
-    testCompile 'com.squareup.okhttp3:okhttp'
-
+    testCompile 'com.squareup.okhttp3:okhttp:3.8.0'
 }
