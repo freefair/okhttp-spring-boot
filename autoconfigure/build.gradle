@@ -1,20 +1,22 @@
-plugins {
-    id "java"
-    id "maven"
-    id "findbugs"
-    id "checkstyle"
-    id "org.springframework.boot" version "1.5.4.RELEASE"
-    id "io.freefair.maven-jars" version "0.10.1"
-    id "io.freefair.javadoc-links" version "0.10.1"
-}
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
+apply plugin: 'io.freefair.maven-jars'
+apply plugin: 'io.freefair.javadoc-links'
+apply plugin: 'io.spring.dependency-management'
 
 archivesBaseName = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
 
-bootRepackage.enabled = false
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M1'
+    }
+}
 
-checkstyle.toolVersion = "7.6"
+checkstyle.toolVersion = "7.8.1"
 
 compileJava.dependsOn(processResources)
 

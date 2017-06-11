@@ -5,15 +5,12 @@ import com.squareup.okhttp.Dns;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.client.OkHttpClientHttpRequestFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -106,21 +103,5 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
         }
 
         return okHttpClient;
-    }
-
-    /**
-     * @author Lars Grefer
-     */
-    @Configuration
-    @ConditionalOnClass(OkHttpClientHttpRequestFactory.class)
-    @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)
-    @AutoConfigureAfter(OkHttp2AutoConfiguration.class)
-    public static class RequestFactoryAutoConfiguration {
-
-        @Bean
-        @ConditionalOnMissingBean(OkHttpClientHttpRequestFactory.class)
-        public OkHttpClientHttpRequestFactory okHttpClientHttpRequestFactory(OkHttpClient okHttpClient) {
-            return new OkHttpClientHttpRequestFactory(okHttpClient);
-        }
     }
 }
