@@ -4,6 +4,7 @@ import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,6 +23,7 @@ import java.util.List;
 @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "SpringJavaAutowiringInspection"})
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
+@ConditionalOnBean(OkHttpMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
 

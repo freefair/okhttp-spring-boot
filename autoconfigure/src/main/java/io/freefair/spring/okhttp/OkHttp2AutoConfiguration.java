@@ -5,6 +5,7 @@ import com.squareup.okhttp.Dns;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -23,6 +24,7 @@ import java.util.List;
 @SuppressWarnings({"SpringJavaAutowiringInspection", "MismatchedQueryAndUpdateOfCollection"})
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
+@ConditionalOnBean(OkHttpMarkerConfiguration.Marker.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
 

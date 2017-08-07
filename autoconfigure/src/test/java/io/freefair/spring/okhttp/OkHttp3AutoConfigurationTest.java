@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.fail;
  * @author Lars Grefer
  */
 @SpringBootTest
+@EnableOkHttp
 @RunWith(SpringRunner.class)
 public class OkHttp3AutoConfigurationTest {
 
