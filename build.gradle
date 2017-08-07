@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M1'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M3'
         classpath "io.freefair.gradle:gradle-plugins:0.10.1"
     }
 }
@@ -29,7 +29,7 @@ allprojects {
     pluginManager.withPlugin('io.spring.dependency-management') {
         dependencyManagement {
             imports {
-                mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M1'
+                mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M3'
             }
         }
     }
