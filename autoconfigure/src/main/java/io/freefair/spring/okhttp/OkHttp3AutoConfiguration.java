@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * @author Lars Grefer
  */
-@SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "SpringJavaAutowiringInspection"})
+@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
