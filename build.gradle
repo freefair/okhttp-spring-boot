@@ -2,12 +2,11 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://plugins.gradle.org/m2/' }
-        maven { url 'http://repo.spring.io/snapshot' }
         maven { url 'http://repo.spring.io/milestone' }
     }
 
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.M3'
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
         classpath "io.freefair.gradle:gradle-plugins:0.10.1"
     }
 }
@@ -15,7 +14,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url 'http://repo.spring.io/snapshot' }
         maven { url 'http://repo.spring.io/milestone' }
     }
 
@@ -29,7 +27,7 @@ allprojects {
     pluginManager.withPlugin('io.spring.dependency-management') {
         dependencyManagement {
             imports {
-                mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M3'
+                mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M4'
             }
         }
     }
