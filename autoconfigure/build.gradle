@@ -3,7 +3,7 @@ plugins {
     id "maven"
     id "findbugs"
     id "checkstyle"
-    id "org.springframework.boot" version "1.5.6.RELEASE"
+    id "org.springframework.boot" version "1.5.7.RELEASE"
     id "io.freefair.maven-jars" version "1.0.0"
     id "io.freefair.javadoc-links" version "1.0.0"
 }
