@@ -1,10 +1,12 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'findbugs'
-apply plugin: 'checkstyle'
-apply plugin: 'io.freefair.maven-jars'
-apply plugin: 'io.freefair.javadoc-links'
-apply plugin: 'io.spring.dependency-management'
+plugins {
+    id "java"
+    id "maven"
+    id "findbugs"
+    id "checkstyle"
+    id "io.spring.dependency-management" version "1.0.3.RELEASE"
+    id "io.freefair.maven-jars" version "2.0.1"
+    id "io.freefair.javadoc-links" version "2.0.1"
+}
 
 archivesBaseName = "okhttp-spring-boot-autoconfigure"
 

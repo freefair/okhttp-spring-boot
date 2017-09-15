@@ -1,6 +1,8 @@
-apply plugin: "java"
-apply plugin: "maven"
-apply plugin: "io.freefair.maven-jars"
+plugins {
+    id "java"
+    id "maven"
+    id "io.freefair.maven-jars" version "2.0.1"
+}
 
 dependencies {
     compile project(':autoconfigure')
