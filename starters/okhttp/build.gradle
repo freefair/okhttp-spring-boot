@@ -1,8 +1,5 @@
-plugins {
-    id "java"
-    id "maven"
-    id "io.freefair.maven-jars" version "2.0.1"
-}
+apply plugin: "io.freefair.maven-publish-java"
+apply plugin: "io.freefair.maven-jars"
 
 dependencies {
     compile project(':starters:okhttp3')
