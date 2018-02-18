@@ -1,20 +1,19 @@
 plugins {
-    id "java"
-    id "maven"
     id "findbugs"
     id "checkstyle"
-    id "org.springframework.boot" version "1.5.7.RELEASE"
-    id "io.freefair.maven-jars" version "2.0.1"
-    id "io.freefair.javadoc-links" version "2.0.1"
+    id "org.springframework.boot" version "1.5.10.RELEASE"
 }
+apply plugin: "io.freefair.maven-jars"
+apply plugin: "io.freefair.javadoc-links"
 
 archivesBaseName = "okhttp-spring-boot-autoconfigure"
+apply plugin: "io.freefair.maven-publish-java"
 
 javadoc.options.linkSource true
 
 bootRepackage.enabled = false
 
-checkstyle.toolVersion = "7.6"
+checkstyle.toolVersion = "8.8"
 
 compileJava.dependsOn(processResources)
 
