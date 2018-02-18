@@ -10,7 +10,6 @@ apply plugin: "io.freefair.maven-publish-java"
 publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
-compileJava.options.compilerArgs.add("--permit-illegal-access")
 
 checkstyle.toolVersion = "8.8"
 
