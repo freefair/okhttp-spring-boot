@@ -5,9 +5,9 @@ plugins {
 }
 apply plugin: "io.freefair.maven-jars"
 apply plugin: "io.freefair.javadoc-links"
-
-archivesBaseName = "okhttp-spring-boot-autoconfigure"
 apply plugin: "io.freefair.maven-publish-java"
+
+publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
 
