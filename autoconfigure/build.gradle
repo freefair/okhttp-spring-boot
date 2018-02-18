@@ -17,6 +17,9 @@ checkstyle.toolVersion = "8.8"
 
 compileJava.dependsOn(processResources)
 
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
 
