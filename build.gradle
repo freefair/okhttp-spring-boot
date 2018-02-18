@@ -16,9 +16,4 @@ allprojects {
     }
 
     group = "io.freefair.okhttp-spring-boot"
-
-    pluginManager.withPlugin("java") {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
 }
