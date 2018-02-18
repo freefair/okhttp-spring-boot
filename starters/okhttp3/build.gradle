@@ -1,10 +1,7 @@
-plugins {
-    id "java"
-    id "maven"
-    id "io.freefair.maven-jars" version "2.0.1"
-}
+apply plugin: "io.freefair.maven-publish-java"
+apply plugin: "io.freefair.maven-jars"
 
 dependencies {
     compile project(':autoconfigure')
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
 }

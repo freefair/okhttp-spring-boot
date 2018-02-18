@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.freefair.gradle:gradle-plugins:2.3.0"
+    }
+}
+
 allprojects {
     repositories {
         jcenter()
@@ -5,17 +16,4 @@ allprojects {
     }
 
     group = "io.freefair.okhttp-spring-boot"
-
-    pluginManager.withPlugin("java") {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
-
-    pluginManager.withPlugin('io.spring.dependency-management') {
-        dependencyManagement {
-            imports {
-                mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.M4'
-            }
-        }
-    }
 }
