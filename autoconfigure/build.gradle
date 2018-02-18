@@ -15,6 +15,12 @@ checkstyle.toolVersion = "8.8"
 
 compileJava.dependsOn(processResources)
 
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RC1'
+    }
+}
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
