@@ -17,7 +17,7 @@ compileJava.dependsOn(processResources)
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RC1'
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RC2'
     }
 }
 
