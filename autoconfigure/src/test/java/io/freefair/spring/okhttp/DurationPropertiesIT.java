@@ -46,6 +46,6 @@ public class DurationPropertiesIT {
 
     @SpringBootConfiguration
     @EnableConfigurationProperties(OkHttpProperties.class)
-    public static class Config {
+    static class Config {
     }
 }
