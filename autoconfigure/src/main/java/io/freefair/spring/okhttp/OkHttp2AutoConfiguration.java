@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Lazy;
 import java.io.File;
 import java.io.IOException;
 import java.net.CookieHandler;
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lars Grefer
@@ -65,19 +67,19 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
             okHttpClient.setCookieHandler(cookieHandler);
         }
 
-        OkHttpProperties.Timeout connectTimeout = properties.getConnectTimeout();
+        Duration connectTimeout = properties.getConnectTimeout();
         if (connectTimeout != null) {
-            okHttpClient.setConnectTimeout(connectTimeout.getValue(), connectTimeout.getUnit());
+            okHttpClient.setConnectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);
         }
 
-        OkHttpProperties.Timeout readTimeout = properties.getReadTimeout();
+        Duration readTimeout = properties.getReadTimeout();
         if (readTimeout != null) {
-            okHttpClient.setReadTimeout(readTimeout.getValue(), readTimeout.getUnit());
+            okHttpClient.setReadTimeout(readTimeout.toMillis(), TimeUnit.MILLISECONDS);
         }
 
-        OkHttpProperties.Timeout writeTimeout = properties.getWriteTimeout();
+        Duration writeTimeout = properties.getWriteTimeout();
         if (writeTimeout != null) {
-            okHttpClient.setWriteTimeout(writeTimeout.getValue(), writeTimeout.getUnit());
+            okHttpClient.setWriteTimeout(writeTimeout.toMillis(), TimeUnit.MILLISECONDS);
         }
 
         if (dns != null) {

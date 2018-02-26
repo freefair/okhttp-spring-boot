@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import static lombok.AccessLevel.NONE;
 
@@ -20,17 +20,17 @@ public class OkHttpProperties {
     /**
      * The default connect timeout for new connections.
      */
-    private Timeout connectTimeout;
+    private Duration connectTimeout;
 
     /**
      * The default read timeout for new connections.
      */
-    private Timeout readTimeout;
+    private Duration readTimeout = Duration.ofSeconds(10);
 
     /**
      * The default write timeout for new connections.
      */
-    private Timeout writeTimeout;
+    private Duration writeTimeout = Duration.ofSeconds(10);
 
     /**
      * The interval between web socket pings initiated by this client. Use this to
@@ -40,7 +40,7 @@ public class OkHttpProperties {
      * <p>
      * <p>The default value of 0 disables client-initiated pings.
      */
-    private PingInterval pingInterval;
+    private Duration pingInterval;
 
     @Setter(NONE)
     private Cache cache = new Cache();
@@ -60,41 +60,6 @@ public class OkHttpProperties {
      * Whether to retry or not when a connectivity problem is encountered.
      */
     private boolean retryOnConnectionFailure = true;
-
-    /**
-     * @author Lars Grefer
-     */
-    @Getter
-    @Setter
-    public static class Duration {
-        private TimeUnit unit = TimeUnit.MILLISECONDS;
-    }
-
-    /**
-     * @author Lars Grefer
-     */
-    @Getter
-    @Setter
-    public static class Timeout extends Duration {
-
-        /**
-         * A value of 0 means no timeout, otherwise values must be between 1 and {@link Integer#MAX_VALUE} when converted to milliseconds.
-         */
-        private long value = 10_000;
-    }
-
-    /**
-     * @author Lars Grefer
-     */
-    @Getter
-    @Setter
-    public static class PingInterval extends Duration {
-
-        /**
-         * The interval between web socket pings initiated by this client (The default value of 0 disables client-initiated pings).
-         */
-        private long value = 0;
-    }
 
     /**
      * @author Lars Grefer

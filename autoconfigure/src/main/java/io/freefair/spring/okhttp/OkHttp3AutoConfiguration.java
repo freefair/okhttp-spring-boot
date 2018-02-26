@@ -14,7 +14,9 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lars Grefer
@@ -60,24 +62,24 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
             builder.cache(okHttp3Cache());
         }
 
-        OkHttpProperties.Timeout connectTimeout = properties.getConnectTimeout();
+        Duration connectTimeout = properties.getConnectTimeout();
         if (connectTimeout != null) {
-            builder.connectTimeout(connectTimeout.getValue(), connectTimeout.getUnit());
+            builder.connectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);
         }
 
-        OkHttpProperties.Timeout readTimeout = properties.getReadTimeout();
+        Duration readTimeout = properties.getReadTimeout();
         if (readTimeout != null) {
-            builder.readTimeout(readTimeout.getValue(), readTimeout.getUnit());
+            builder.readTimeout(readTimeout.toMillis(), TimeUnit.MILLISECONDS);
         }
 
-        OkHttpProperties.Timeout writeTimeout = properties.getWriteTimeout();
+        Duration writeTimeout = properties.getWriteTimeout();
         if (writeTimeout != null) {
-            builder.writeTimeout(writeTimeout.getValue(), writeTimeout.getUnit());
+            builder.writeTimeout(writeTimeout.toMillis(), TimeUnit.MILLISECONDS);
         }
 
-        OkHttpProperties.PingInterval pingInterval = properties.getPingInterval();
+        Duration pingInterval = properties.getPingInterval();
         if(pingInterval != null) {
-            builder.pingInterval(pingInterval.getValue(), pingInterval.getUnit());
+            builder.pingInterval(pingInterval.toMillis(), TimeUnit.MILLISECONDS);
         }
 
         if (cookieJar != null) {
