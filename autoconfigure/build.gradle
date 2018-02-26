@@ -1,6 +1,7 @@
 plugins {
     id "findbugs"
     id "checkstyle"
+    id "jacoco"
     id "io.spring.dependency-management" version "1.0.3.RELEASE"
 }
 apply plugin: "io.freefair.maven-jars"
@@ -20,6 +21,8 @@ dependencyManagement {
         mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RC2'
     }
 }
+
+jacoco.toolVersion = "0.8.0"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

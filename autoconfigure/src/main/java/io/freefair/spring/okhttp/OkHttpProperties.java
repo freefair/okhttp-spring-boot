@@ -25,12 +25,12 @@ public class OkHttpProperties {
     /**
      * The default read timeout for new connections.
      */
-    private Duration readTimeout = Duration.ofSeconds(10);
+    private Duration readTimeout;
 
     /**
      * The default write timeout for new connections.
      */
-    private Duration writeTimeout = Duration.ofSeconds(10);
+    private Duration writeTimeout;
 
     /**
      * The interval between web socket pings initiated by this client. Use this to

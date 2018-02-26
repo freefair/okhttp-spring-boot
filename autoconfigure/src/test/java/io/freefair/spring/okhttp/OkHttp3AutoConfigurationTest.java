@@ -28,7 +28,7 @@ public class OkHttp3AutoConfigurationTest {
     private OkHttpClient okHttpClient;
 
     @Test
-    public void testContextLoads() throws Exception {
+    public void testContextLoads() {
         assertThat(okHttpClient).isNotNull();
     }
 
