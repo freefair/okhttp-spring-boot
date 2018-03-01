@@ -41,5 +41,5 @@ dependencies {
     compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'com.squareup.okhttp3:okhttp:3.8.0'
+    testCompile 'com.squareup.okhttp3:okhttp:3.+'
 }
