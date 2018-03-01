@@ -2,7 +2,7 @@ plugins {
     id "findbugs"
     id "checkstyle"
     id "jacoco"
-    id "io.spring.dependency-management" version "1.0.3.RELEASE"
+    id "io.spring.dependency-management" version "1.0.4.RELEASE"
 }
 apply plugin: "io.freefair.maven-jars"
 apply plugin: "io.freefair.javadoc-links"
@@ -18,7 +18,7 @@ compileJava.dependsOn(processResources)
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RC2'
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.0.RELEASE'
     }
 }
 
