@@ -12,7 +12,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url 'http://repo.spring.io/milestone' }
     }
 
     group = "io.freefair.okhttp-spring-boot"
