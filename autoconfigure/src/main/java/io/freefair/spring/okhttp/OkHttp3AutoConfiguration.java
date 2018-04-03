@@ -14,7 +14,6 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
