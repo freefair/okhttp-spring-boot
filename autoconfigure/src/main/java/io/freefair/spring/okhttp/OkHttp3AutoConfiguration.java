@@ -62,25 +62,10 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
             builder.cache(okHttp3Cache());
         }
 
-        Duration connectTimeout = properties.getConnectTimeout();
-        if (connectTimeout != null) {
-            builder.connectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);
-        }
-
-        Duration readTimeout = properties.getReadTimeout();
-        if (readTimeout != null) {
-            builder.readTimeout(readTimeout.toMillis(), TimeUnit.MILLISECONDS);
-        }
-
-        Duration writeTimeout = properties.getWriteTimeout();
-        if (writeTimeout != null) {
-            builder.writeTimeout(writeTimeout.toMillis(), TimeUnit.MILLISECONDS);
-        }
-
-        Duration pingInterval = properties.getPingInterval();
-        if(pingInterval != null) {
-            builder.pingInterval(pingInterval.toMillis(), TimeUnit.MILLISECONDS);
-        }
+        builder.connectTimeout(properties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        builder.readTimeout(properties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        builder.writeTimeout(properties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        builder.pingInterval(properties.getPingInterval().toMillis(), TimeUnit.MILLISECONDS);
 
         if (cookieJar != null) {
             builder.cookieJar(cookieJar);

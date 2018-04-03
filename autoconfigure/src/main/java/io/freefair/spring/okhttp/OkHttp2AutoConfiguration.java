@@ -67,20 +67,9 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
             okHttpClient.setCookieHandler(cookieHandler);
         }
 
-        Duration connectTimeout = properties.getConnectTimeout();
-        if (connectTimeout != null) {
-            okHttpClient.setConnectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);
-        }
-
-        Duration readTimeout = properties.getReadTimeout();
-        if (readTimeout != null) {
-            okHttpClient.setReadTimeout(readTimeout.toMillis(), TimeUnit.MILLISECONDS);
-        }
-
-        Duration writeTimeout = properties.getWriteTimeout();
-        if (writeTimeout != null) {
-            okHttpClient.setWriteTimeout(writeTimeout.toMillis(), TimeUnit.MILLISECONDS);
-        }
+        okHttpClient.setConnectTimeout(properties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        okHttpClient.setReadTimeout(properties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        okHttpClient.setWriteTimeout(properties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
 
         if (dns != null) {
             okHttpClient.setDns(dns);

@@ -20,17 +20,17 @@ public class OkHttpProperties {
     /**
      * The default connect timeout for new connections.
      */
-    private Duration connectTimeout;
+    private Duration connectTimeout = Duration.ofSeconds(10);
 
     /**
      * The default read timeout for new connections.
      */
-    private Duration readTimeout;
+    private Duration readTimeout = Duration.ofSeconds(10);
 
     /**
      * The default write timeout for new connections.
      */
-    private Duration writeTimeout;
+    private Duration writeTimeout = Duration.ofSeconds(10);
 
     /**
      * The interval between web socket pings initiated by this client. Use this to
@@ -40,7 +40,7 @@ public class OkHttpProperties {
      * <p>
      * <p>The default value of 0 disables client-initiated pings.
      */
-    private Duration pingInterval;
+    private Duration pingInterval = Duration.ZERO;
 
     @Setter(NONE)
     private Cache cache = new Cache();
