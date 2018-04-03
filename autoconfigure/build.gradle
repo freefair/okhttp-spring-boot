@@ -25,6 +25,8 @@ dependencyManagement {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+jacocoTestReport.reports.xml.enabled = true
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
