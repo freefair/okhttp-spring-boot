@@ -2,6 +2,8 @@
 
 Latest version: [![](https://jitpack.io/v/io.freefair/okhttp-spring-boot.svg)](https://jitpack.io/#io.freefair/okhttp-spring-boot)
 
+[![codecov](https://codecov.io/gh/freefair/okhttp-spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/freefair/okhttp-spring-boot)
+
 ## Available Starters
 
 - `okhttp2-spring-boot-starter`
