@@ -27,6 +27,12 @@ targetCompatibility = 1.8
 
 jacocoTestReport.reports.xml.enabled = true
 
+configurations {
+    optional
+    compileOnly.extendsFrom(optional)
+    testCompile.extendsFrom(optional)
+}
+
 dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -34,14 +40,13 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-autoconfigure'
 
-    compileOnly 'org.springframework:spring-web'
+    optional 'org.springframework:spring-web'
 
-    compileOnly 'com.squareup.okhttp3:okhttp:3.+'
-    compileOnly 'com.squareup.okhttp3:logging-interceptor:3.+'
+    optional 'com.squareup.okhttp3:okhttp:3.+'
+    optional 'com.squareup.okhttp3:logging-interceptor:3.+'
 
-    compileOnly 'com.squareup.okhttp:okhttp:2.+'
-    compileOnly 'com.squareup.okhttp:logging-interceptor:2.+'
+    optional 'com.squareup.okhttp:okhttp:2.+'
+    optional 'com.squareup.okhttp:logging-interceptor:2.+'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'com.squareup.okhttp3:okhttp:3.+'
 }

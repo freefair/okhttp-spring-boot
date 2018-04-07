@@ -23,14 +23,13 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
     @Autowired
     private OkHttp3LoggingInterceptorProperties properties;
 
-    @Autowired(required = false)
-    private HttpLoggingInterceptor.Logger logger;
-
     @SuppressWarnings("Duplicates")
     @Bean
     @ApplicationInterceptor
     @ConditionalOnMissingBean
-    public HttpLoggingInterceptor okHttp3LoggingInterceptor() {
+    public HttpLoggingInterceptor okHttp3LoggingInterceptor(
+            @Autowired(required = false) HttpLoggingInterceptor.Logger logger
+    ) {
         HttpLoggingInterceptor httpLoggingInterceptor;
 
         if (logger != null) {
@@ -39,10 +38,7 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
             httpLoggingInterceptor = new HttpLoggingInterceptor();
         }
 
-        HttpLoggingInterceptor.Level level = properties.getLevel();
-        if (level != null) {
-            httpLoggingInterceptor.setLevel(level);
-        }
+        httpLoggingInterceptor.setLevel(properties.getLevel());
 
         return httpLoggingInterceptor;
     }
