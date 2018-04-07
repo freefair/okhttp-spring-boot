@@ -9,11 +9,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +20,10 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
-public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
+public class OkHttp3AutoConfiguration {
+
+    @Autowired
+    private OkHttpProperties okHttpProperties;
 
     @Autowired(required = false)
     private List<Configurer<OkHttpClient.Builder>> configurers;
@@ -36,31 +36,26 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
     @NetworkInterceptor
     private List<Interceptor> networkInterceptors;
 
-    @Lazy
-    @Bean
-    @ConditionalOnMissingBean
-    public Cache okHttp3Cache() throws IOException {
-        File cacheDir = getCacheDir("okhttp3-cache");
-
-        return new Cache(cacheDir, properties.getCache().getSize());
-    }
-
     @Bean
     @ConditionalOnMissingBean
     public OkHttpClient okHttp3Client(
+            @Autowired(required = false) Cache cache,
             @Autowired(required = false) CookieJar cookieJar,
             @Autowired(required = false) Dns dns
-    ) throws IOException {
+    ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {
-            builder.cache(okHttp3Cache());
+        if (cache == null) {
+            cache = createCache(okHttpProperties.getCache());
+        }
+        if (cache != null) {
+            builder.cache(cache);
         }
 
-        builder.connectTimeout(properties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
-        builder.readTimeout(properties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
-        builder.writeTimeout(properties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
-        builder.pingInterval(properties.getPingInterval().toMillis(), TimeUnit.MILLISECONDS);
+        builder.connectTimeout(okHttpProperties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        builder.readTimeout(okHttpProperties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        builder.writeTimeout(okHttpProperties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
+        builder.pingInterval(okHttpProperties.getPingInterval().toMillis(), TimeUnit.MILLISECONDS);
 
         if (cookieJar != null) {
             builder.cookieJar(cookieJar);
@@ -70,9 +65,9 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
             builder.dns(dns);
         }
 
-        builder.followRedirects(properties.isFollowRedirects());
-        builder.followSslRedirects(properties.isFollowSslRedirects());
-        builder.retryOnConnectionFailure(properties.isRetryOnConnectionFailure());
+        builder.followRedirects(okHttpProperties.isFollowRedirects());
+        builder.followSslRedirects(okHttpProperties.isFollowSslRedirects());
+        builder.retryOnConnectionFailure(okHttpProperties.isRetryOnConnectionFailure());
 
         if (applicationInterceptors != null && !applicationInterceptors.isEmpty()) {
             builder.interceptors().addAll(applicationInterceptors);
@@ -89,6 +84,14 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
         }
 
         return builder.build();
+    }
+
+    private Cache createCache(OkHttpProperties.Cache cacheProperties) {
+        if (cacheProperties.getDirectory() != null && cacheProperties.getMaxSize() < 0) {
+            return new Cache(cacheProperties.getDirectory(), cacheProperties.getMaxSize());
+        } else {
+            return null;
+        }
     }
 
     /**

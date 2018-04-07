@@ -1,12 +1,13 @@
 package io.freefair.spring.okhttp;
 
 import lombok.Data;
-import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.time.Duration;
-
-import static lombok.AccessLevel.NONE;
 
 /**
  * @author Lars Grefer
@@ -40,7 +41,6 @@ public class OkHttpProperties {
      */
     private Duration pingInterval = Duration.ZERO;
 
-    @Setter(NONE)
     private Cache cache = new Cache();
 
     /**
@@ -63,35 +63,24 @@ public class OkHttpProperties {
      * @author Lars Grefer
      */
     @Data
+    @Slf4j
     public static class Cache {
         /**
          * The maximum number of bytes this cache should use to store.
          */
-        private long size = 10485760;
+        private long maxSize = 10485760;
 
         /**
          * The path of the directory where the cache should be stored.
          */
-        private String directory;
+        private File directory;
 
-        private Mode mode = Mode.TEMPORARY;
-
-        /**
-         * @author Lars Grefer
-         */
-        public enum Mode {
-            /**
-             * No caching.
-             */
-            NONE,
-            /**
-             * Caching in a temporary directory.
-             */
-            TEMPORARY,
-            /**
-             * Caching in a persistent directory.
-             */
-            PERSISTENT
+        public Cache() {
+            try {
+                directory = Files.createTempDirectory("okhttp-cache").toFile();
+            } catch (IOException e) {
+                log.warn("Failed to create default temp directory", e);
+            }
         }
     }
 }
