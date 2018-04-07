@@ -20,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Lars Grefer
  */
-@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
@@ -37,12 +36,6 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
     @NetworkInterceptor
     private List<Interceptor> networkInterceptors;
 
-    @Autowired(required = false)
-    private CookieJar cookieJar;
-
-    @Autowired(required = false)
-    private Dns dns;
-
     @Lazy
     @Bean
     @ConditionalOnMissingBean
@@ -54,7 +47,10 @@ public class OkHttp3AutoConfiguration extends OkHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public OkHttpClient okHttp3Client() throws IOException {
+    public OkHttpClient okHttp3Client(
+            @Autowired(required = false) CookieJar cookieJar,
+            @Autowired(required = false) Dns dns
+    ) throws IOException {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {

@@ -25,9 +25,9 @@ abstract class OkHttpAutoConfiguration {
                 break;
             case PERSISTENT:
                 if (directory != null) {
-                    cacheDir = new File(directory).getAbsoluteFile();
+                    cacheDir = new File(directory);
                 } else {
-                    cacheDir = new File(prefix).getAbsoluteFile();
+                    cacheDir = new File(prefix);
                 }
                 break;
             case NONE:

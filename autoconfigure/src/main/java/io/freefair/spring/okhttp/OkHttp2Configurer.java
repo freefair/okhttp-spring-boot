@@ -5,7 +5,7 @@ import com.squareup.okhttp.OkHttpClient;
 /**
  * @author Lars Grefer
  */
-@SuppressWarnings("unused")
+@FunctionalInterface
 public interface OkHttp2Configurer extends Configurer<OkHttpClient> {
 
 }

@@ -1,6 +1,6 @@
 package io.freefair.spring.okhttp;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -11,9 +11,7 @@ import static lombok.AccessLevel.NONE;
 /**
  * @author Lars Grefer
  */
-@SuppressWarnings("WeakerAccess")
-@Getter
-@Setter
+@Data
 @ConfigurationProperties(prefix = "okhttp")
 public class OkHttpProperties {
 
@@ -37,7 +35,7 @@ public class OkHttpProperties {
      * automatically send web socket ping frames until either the web socket fails or it is closed.
      * This keeps the connection alive and may detect connectivity failures early. No timeouts are
      * enforced on the acknowledging pongs.
-     * <p>
+     *
      * <p>The default value of 0 disables client-initiated pings.
      */
     private Duration pingInterval = Duration.ZERO;
@@ -64,8 +62,7 @@ public class OkHttpProperties {
     /**
      * @author Lars Grefer
      */
-    @Getter
-    @Setter
+    @Data
     public static class Cache {
         /**
          * The maximum number of bytes this cache should use to store.

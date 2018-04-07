@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Lars Grefer
  */
-@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
@@ -38,12 +37,6 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
     @NetworkInterceptor
     private List<Interceptor> networkInterceptors;
 
-    @Autowired(required = false)
-    private CookieHandler cookieHandler;
-
-    @Autowired(required = false)
-    private Dns dns;
-
     @Lazy
     @Bean
     @ConditionalOnMissingBean
@@ -55,24 +48,23 @@ public class OkHttp2AutoConfiguration extends OkHttpAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public OkHttpClient okHttp2Client() throws IOException {
+    public OkHttpClient okHttp2Client(
+            @Autowired(required = false) CookieHandler cookieHandler,
+            @Autowired(required = false) Dns dns
+    ) throws IOException {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         if (properties.getCache().getMode() != OkHttpProperties.Cache.Mode.NONE) {
             okHttpClient.setCache(okHttp2Cache());
         }
 
-        if (cookieHandler != null) {
-            okHttpClient.setCookieHandler(cookieHandler);
-        }
+        okHttpClient.setCookieHandler(cookieHandler);
 
         okHttpClient.setConnectTimeout(properties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
         okHttpClient.setReadTimeout(properties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
         okHttpClient.setWriteTimeout(properties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
 
-        if (dns != null) {
-            okHttpClient.setDns(dns);
-        }
+        okHttpClient.setDns(dns);
 
         okHttpClient.setFollowRedirects(properties.isFollowRedirects());
         okHttpClient.setFollowSslRedirects(properties.isFollowSslRedirects());
