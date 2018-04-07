@@ -31,13 +31,14 @@ public class OkHttp2AutoConfigurationTest {
     public void testDefaultClient() {
         applicationContextRunner.run(context -> {
             assertThat(context).hasSingleBean(OkHttpClient.class);
+            assertThat(context.getBean(OkHttpClient.class).getCache()).isNotNull();
         });
     }
 
     @Test
     public void testNoCache() {
         applicationContextRunner
-                .withPropertyValues("okhttp.cache.mode=none")
+                .withPropertyValues("okhttp.cache.max-size=0")
                 .run(context -> {
             assertThat(context).hasSingleBean(OkHttpClient.class);
 

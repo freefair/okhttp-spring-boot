@@ -87,7 +87,7 @@ public class OkHttp3AutoConfiguration {
     }
 
     private Cache createCache(OkHttpProperties.Cache cacheProperties) {
-        if (cacheProperties.getDirectory() != null && cacheProperties.getMaxSize() < 0) {
+        if (cacheProperties.getDirectory() != null && cacheProperties.getMaxSize() > 0) {
             return new Cache(cacheProperties.getDirectory(), cacheProperties.getMaxSize());
         } else {
             return null;
