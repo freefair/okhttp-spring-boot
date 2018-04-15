@@ -4,6 +4,7 @@ plugins {
     id "jacoco"
     id "io.spring.dependency-management" version "1.0.4.RELEASE"
 }
+apply plugin: "io.freefair.lombok"
 apply plugin: "io.freefair.maven-jars"
 apply plugin: "io.freefair.javadoc-links"
 apply plugin: "io.freefair.maven-publish-java"
@@ -34,8 +35,6 @@ configurations {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     compile 'org.springframework.boot:spring-boot-autoconfigure'
