@@ -36,6 +36,7 @@ configurations {
 
 dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.springframework.boot:spring-boot-autoconfigure-processor'
 
     compile 'org.springframework.boot:spring-boot-autoconfigure'
     compile 'org.slf4j:slf4j-api'
