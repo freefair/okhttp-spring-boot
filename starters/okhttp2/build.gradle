@@ -1,7 +1,0 @@
-apply plugin: "io.freefair.maven-publish-java"
-apply plugin: "io.freefair.maven-jars"
-
-dependencies {
-    compile project(':autoconfigure')
-    compile 'com.squareup.okhttp:okhttp:2.7.5'
-}
