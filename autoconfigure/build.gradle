@@ -1,5 +1,4 @@
 plugins {
-    id "findbugs"
     id "checkstyle"
     id "jacoco"
     id "io.spring.dependency-management" version "1.0.5.RELEASE"
