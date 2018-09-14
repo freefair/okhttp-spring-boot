@@ -12,10 +12,9 @@ publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure
 
 javadoc.options.linkSource true
 
-checkstyle.toolVersion = "8.8"
+checkstyle.toolVersion = "8.12"
 
 if (JavaVersion.current().isJava11Compatible()) {
-    jacoco.toolVersion = "0.8.2-SNAPSHOT"
     javadoc.failOnError = false
 }
 
