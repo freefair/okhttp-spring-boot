@@ -17,6 +17,7 @@ checkstyle.toolVersion = "8.8"
 
 if (JavaVersion.current().isJava11Compatible()) {
     jacoco.toolVersion = "0.8.2-SNAPSHOT"
+    javadoc.failOnError = false
 }
 
 compileJava.dependsOn(processResources)
