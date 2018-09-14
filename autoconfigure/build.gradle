@@ -2,9 +2,10 @@ plugins {
     id "findbugs"
     id "checkstyle"
     id "jacoco"
-    id "io.freefair.lombok" version "2.5.11"
+    id "io.freefair.lombok" version "2.6"
 }
 apply plugin: "io.freefair.maven-jars"
+apply plugin: "io.freefair.maven-optional"
 apply plugin: "io.freefair.javadoc-links"
 apply plugin: "io.freefair.maven-publish-java"
 
@@ -20,12 +21,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 jacocoTestReport.reports.xml.enabled = true
-
-configurations {
-    optional
-    compileOnly.extendsFrom(optional)
-    testCompile.extendsFrom(optional)
-}
 
 dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
