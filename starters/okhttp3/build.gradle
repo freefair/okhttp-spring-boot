@@ -3,5 +3,5 @@ apply plugin: "io.freefair.maven-jars"
 
 dependencies {
     compile project(':autoconfigure')
-    compile 'com.squareup.okhttp3:okhttp:3.11.0'
+    compile 'com.squareup.okhttp3:okhttp'
 }

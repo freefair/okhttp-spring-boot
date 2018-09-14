@@ -5,6 +5,7 @@ buildscript {
         }
     }
     dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE"
         classpath "io.freefair.gradle:maven-plugin:2.5.11"
     }
 }
@@ -15,4 +16,83 @@ allprojects {
     }
 
     group = "io.freefair.okhttp-spring-boot"
+
+    apply plugin: "io.spring.dependency-management"
+
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+
+        dependencies {
+            dependency 'com.squareup.okhttp:okhttp:2.7.5'
+            dependency 'com.squareup.okhttp:logging-interceptor:2.7.5'
+
+            dependency 'com.squareup.okhttp3:okhttp:3.11.0'
+            dependency 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+        }
+    }
+
+    plugins.withId("maven-publish") {
+        publishing {
+            publications.withType(MavenPublication) {
+                pom {
+                    name = provider { project.description }
+                    licenses {
+                        license {
+                            name = 'MIT License'
+                            url = 'https://opensource.org/licenses/MIT'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'larsgrefer'
+                            name = 'Lars Grefer'
+                            email = 'github@larsgrefer.de'
+                            timezone = 'Europe/Berlin'
+                        }
+                    }
+                    ciManagement {
+                        system = 'Travis CI'
+                        url = 'https://travis-ci.org/freefair/okhttp-spring-boot'
+                    }
+                    issueManagement {
+                        system = 'Github'
+                        url = 'https://github.com/freefair/okhttp-spring-boot/issues'
+                    }
+                    scm {
+                        connection = 'scm:git:https://github.com/freefair/okhttp-spring-boot.git'
+                        developerConnection = 'scm:git:git@github.com:freefair/okhttp-spring-boot.git'
+                        url = 'https://github.com/freefair/okhttp-spring-boot'
+                    }
+                }
+            }
+        }
+    }
 }
+
+apply plugin: "maven-publish"
+
+publishing {
+    publications {
+        bom(MavenPublication) {
+            artifactId = 'okhttp-spring-boot-dependencies'
+
+            pom {
+                name = 'OkHttp Spring Boot Dependencies'
+            }
+
+            pom.withXml {
+                rootProject.subprojects { p ->
+                    if (p.pluginManager.hasPlugin('maven-publish')) {
+                        def depNode = asNode().dependencyManagement.first().get('dependencies').first().appendNode('dependency')
+                        depNode.appendNode('groupId', p.group)
+                        depNode.appendNode('artifactId', p.publishing.publications.mavenJava.artifactId)
+                        depNode.appendNode('version', p.version)
+                    }
+                }
+            }
+        }
+    }
+}
+

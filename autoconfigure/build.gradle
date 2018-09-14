@@ -2,7 +2,6 @@ plugins {
     id "findbugs"
     id "checkstyle"
     id "jacoco"
-    id "io.spring.dependency-management" version "1.0.5.RELEASE"
     id "io.freefair.lombok" version "2.5.11"
 }
 apply plugin: "io.freefair.maven-jars"
@@ -16,12 +15,6 @@ javadoc.options.linkSource true
 checkstyle.toolVersion = "8.8"
 
 compileJava.dependsOn(processResources)
-
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.boot:spring-boot-dependencies:2.0.4.RELEASE'
-    }
-}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -43,11 +36,11 @@ dependencies {
 
     optional 'org.springframework:spring-web'
 
-    optional 'com.squareup.okhttp3:okhttp:3.+'
-    optional 'com.squareup.okhttp3:logging-interceptor:3.+'
+    optional 'com.squareup.okhttp3:okhttp'
+    optional 'com.squareup.okhttp3:logging-interceptor'
 
-    optional 'com.squareup.okhttp:okhttp:2.+'
-    optional 'com.squareup.okhttp:logging-interceptor:2.+'
+    optional 'com.squareup.okhttp:okhttp'
+    optional 'com.squareup.okhttp:logging-interceptor'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
