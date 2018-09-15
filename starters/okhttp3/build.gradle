@@ -2,6 +2,7 @@ apply plugin: "io.freefair.maven-publish-java"
 apply plugin: "io.freefair.maven-jars"
 
 dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
     compile project(':autoconfigure')
     compile 'com.squareup.okhttp3:okhttp'
 }
