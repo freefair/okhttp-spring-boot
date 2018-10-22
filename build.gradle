@@ -58,7 +58,7 @@ allprojects {
                         url = 'https://travis-ci.org/freefair/okhttp-spring-boot'
                     }
                     issueManagement {
-                        system = 'Github'
+                        system = 'GitHub'
                         url = 'https://github.com/freefair/okhttp-spring-boot/issues'
                     }
                     scm {
