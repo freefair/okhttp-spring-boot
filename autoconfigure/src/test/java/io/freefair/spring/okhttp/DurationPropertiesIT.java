@@ -1,12 +1,10 @@
 package io.freefair.spring.okhttp;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Duration;
 
@@ -16,7 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Lars Grefer
  */
-@RunWith(SpringRunner.class)
 @SpringBootTest(
         properties = {
                 "okhttp.connectTimeout=10s",

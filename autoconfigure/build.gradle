@@ -38,5 +38,13 @@ dependencies {
     optional 'com.squareup.okhttp3:okhttp'
     optional 'com.squareup.okhttp3:logging-interceptor'
 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: "junit", module: "junit"
+    }
+    testCompile 'org.junit.jupiter:junit-jupiter-api'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
 }

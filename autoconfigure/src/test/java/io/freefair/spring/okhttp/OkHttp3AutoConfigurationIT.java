@@ -3,14 +3,12 @@ package io.freefair.spring.okhttp;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
@@ -21,7 +19,6 @@ import static org.assertj.core.api.Assertions.fail;
  * @author Lars Grefer
  */
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class OkHttp3AutoConfigurationIT {
 
     @Autowired

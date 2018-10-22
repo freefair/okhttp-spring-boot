@@ -1,8 +1,8 @@
 package io.freefair.spring.okhttp.logging;
 
 import okhttp3.logging.HttpLoggingInterceptor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,7 @@ public class OkHttp3LoggingInterceptorAutoConfigurationTest {
 
     private ApplicationContextRunner applicationContextRunner;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         applicationContextRunner = new ApplicationContextRunner()
                 .withConfiguration(AutoConfigurations.of(OkHttp3LoggingInterceptorAutoConfiguration.class));
