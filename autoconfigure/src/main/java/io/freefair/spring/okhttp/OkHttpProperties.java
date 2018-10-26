@@ -62,7 +62,6 @@ public class OkHttpProperties {
      * @author Lars Grefer
      */
     @Data
-    @Slf4j
     public static class Cache {
 
         private boolean enabled;
