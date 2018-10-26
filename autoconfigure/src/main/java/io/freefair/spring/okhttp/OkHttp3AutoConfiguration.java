@@ -6,12 +6,17 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -39,31 +44,22 @@ public class OkHttp3AutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public OkHttpClient okHttp3Client(
-            @Autowired(required = false) Cache cache,
-            @Autowired(required = false) CookieJar cookieJar,
-            @Autowired(required = false) Dns dns
+            @Autowired Optional<Cache> cache,
+            @Autowired Optional<CookieJar> cookieJar,
+            @Autowired Optional<Dns> dns
     ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        if (cache == null) {
-            cache = createCache(okHttpProperties.getCache());
-        }
-        if (cache != null) {
-            builder.cache(cache);
-        }
+        cache.ifPresent(builder::cache);
 
         builder.connectTimeout(okHttpProperties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.readTimeout(okHttpProperties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.writeTimeout(okHttpProperties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.pingInterval(okHttpProperties.getPingInterval().toMillis(), TimeUnit.MILLISECONDS);
 
-        if (cookieJar != null) {
-            builder.cookieJar(cookieJar);
-        }
+        cookieJar.ifPresent(builder::cookieJar);
 
-        if (dns != null) {
-            builder.dns(dns);
-        }
+        dns.ifPresent(builder::dns);
 
         builder.followRedirects(okHttpProperties.isFollowRedirects());
         builder.followSslRedirects(okHttpProperties.isFollowSslRedirects());
@@ -86,12 +82,15 @@ public class OkHttp3AutoConfiguration {
         return builder.build();
     }
 
-    private Cache createCache(OkHttpProperties.Cache cacheProperties) {
-        if (cacheProperties.getDirectory() != null && cacheProperties.getMaxSize() > 0) {
-            return new Cache(cacheProperties.getDirectory(), cacheProperties.getMaxSize());
-        } else {
-            return null;
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(value = "okhttp.cache.enabled", havingValue = "true", matchIfMissing = true)
+    public Cache okhttp3Cache() throws IOException {
+        File directory = okHttpProperties.getCache().getDirectory();
+        if (directory == null) {
+            directory = Files.createTempDirectory("okhttp-cache").toFile();
         }
+        return new Cache(directory, okHttpProperties.getCache().getMaxSize().toBytes());
     }
 
     /**

@@ -23,7 +23,6 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
     @Autowired
     private OkHttp3LoggingInterceptorProperties properties;
 
-    @SuppressWarnings("Duplicates")
     @Bean
     @ApplicationInterceptor
     @ConditionalOnMissingBean
