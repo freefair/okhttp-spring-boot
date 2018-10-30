@@ -1,12 +1,9 @@
 buildscript {
     repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RC1"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE"
         classpath "io.freefair.gradle:maven-plugin:2.7.3"
     }
 }
@@ -14,7 +11,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url "https://repo.spring.io/milestone" }
     }
 
     group = "io.freefair.okhttp-spring-boot"
