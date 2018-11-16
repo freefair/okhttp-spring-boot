@@ -1,10 +1,13 @@
 buildscript {
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE"
-        classpath "io.freefair.gradle:maven-plugin:2.7.3"
+        classpath "io.freefair.gradle:maven-plugin:2.8.2"
+        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.12.0"
+        classpath "com.github.marcphilipp.nexus-publish-plugin:de.marcphilipp.nexus-publish.gradle.plugin:6da8acc"
     }
 }
 
@@ -31,10 +34,19 @@ allprojects {
     }
 
     plugins.withId("maven-publish") {
+        project.apply plugin: 'de.marcphilipp.nexus-publish'
+        project.apply plugin: "signing"
+
+        signing {
+            required { !version.endsWith('SNAPSHOT') && gradle.taskGraph.hasTask("publish") }
+        }
+        
         publishing {
             publications.withType(MavenPublication) {
                 pom {
                     name = provider { project.description }
+                    description = provider { project.description }
+                    url = "https://github.com/freefair/okhttp-spring-boot"
                     licenses {
                         license {
                             name = 'MIT License'
@@ -77,6 +89,7 @@ publishing {
 
             pom {
                 name = 'OkHttp Spring Boot Dependencies'
+                description = 'OkHttp Spring Boot Dependencies'
             }
 
             pom.withXml {
@@ -89,7 +102,17 @@ publishing {
                     }
                 }
             }
+
+            signing.sign it
         }
     }
+}
+
+apply plugin: "io.codearte.nexus-staging"
+
+nexusStaging {
+    stagingProfileId = '7e6204597a774f'
+    username = findProperty('ossrhUser')
+    password = findProperty('ossrhPass')
 }
 

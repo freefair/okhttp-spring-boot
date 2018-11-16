@@ -8,6 +8,8 @@ apply plugin: "io.freefair.maven-optional"
 apply plugin: "io.freefair.javadoc-links"
 apply plugin: "io.freefair.maven-publish-java"
 
+description = "OkHttp Spring Boot AutoConfigure"
+
 publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
