@@ -3,5 +3,3 @@ include 'starters:okhttp'
 include 'starters:okhttp3'
 
 rootProject.name = 'okhttp-spring-boot'
-
-enableFeaturePreview('STABLE_PUBLISHING')

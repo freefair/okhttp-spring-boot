@@ -1,7 +1,7 @@
 plugins {
     id "checkstyle"
     id "jacoco"
-    id "io.freefair.lombok" version "2.7.3"
+    id "io.freefair.lombok"
 }
 apply plugin: "io.freefair.maven-jars"
 apply plugin: "io.freefair.maven-optional"
@@ -13,9 +13,6 @@ description = "OkHttp Spring Boot AutoConfigure"
 publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
-
-checkstyle.toolVersion = "8.12"
-jacoco.toolVersion = "0.8.2"
 
 if (JavaVersion.current().isJava11Compatible()) {
     javadoc.failOnError = false
