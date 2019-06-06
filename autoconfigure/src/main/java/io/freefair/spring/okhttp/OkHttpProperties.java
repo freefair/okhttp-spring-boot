@@ -51,14 +51,16 @@ public class OkHttpProperties {
      */
     private boolean followRedirects = true;
 
-
     /**
      * Whether to retry or not when a connectivity problem is encountered.
      */
     private boolean retryOnConnectionFailure = true;
 
+    private final ConnectionPoolProperties connectionPool = new ConnectionPoolProperties();
+
     /**
      * @author Lars Grefer
+     * @see okhttp3.Cache
      */
     @Data
     public static class Cache {
@@ -74,5 +76,19 @@ public class OkHttpProperties {
          * The path of the directory where the cache should be stored.
          */
         private File directory;
+    }
+
+    /**
+     * @see okhttp3.ConnectionPool
+     */
+    @Data
+    public static class ConnectionPoolProperties {
+
+        /**
+         * The maximum number of idle connections for each address.
+         */
+        private int maxIdleConnections = 5;
+
+        private Duration keepAliveDuration = Duration.ofMinutes(5);
     }
 }

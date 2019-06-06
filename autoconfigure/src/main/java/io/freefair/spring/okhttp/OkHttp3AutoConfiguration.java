@@ -15,6 +15,7 @@ import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +47,8 @@ public class OkHttp3AutoConfiguration {
     public OkHttpClient okHttp3Client(
             @Autowired Optional<Cache> cache,
             @Autowired Optional<CookieJar> cookieJar,
-            @Autowired Optional<Dns> dns
+            @Autowired Optional<Dns> dns,
+            ConnectionPool connectionPool
     ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
@@ -60,6 +62,8 @@ public class OkHttp3AutoConfiguration {
         cookieJar.ifPresent(builder::cookieJar);
 
         dns.ifPresent(builder::dns);
+
+        builder.connectionPool(connectionPool);
 
         builder.followRedirects(okHttpProperties.isFollowRedirects());
         builder.followSslRedirects(okHttpProperties.isFollowSslRedirects());
@@ -78,6 +82,14 @@ public class OkHttp3AutoConfiguration {
         }
 
         return builder.build();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ConnectionPool okHttp3ConnectionPool() {
+        int maxIdleConnections = okHttpProperties.getConnectionPool().getMaxIdleConnections();
+        Duration keepAliveDuration = okHttpProperties.getConnectionPool().getKeepAliveDuration();
+        return new ConnectionPool(maxIdleConnections, keepAliveDuration.toNanos(), TimeUnit.NANOSECONDS);
     }
 
     @Bean
