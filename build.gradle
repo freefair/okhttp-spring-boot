@@ -47,7 +47,7 @@ allprojects {
         signing {
             required { !version.endsWith('SNAPSHOT') && gradle.taskGraph.hasTask("publish") }
         }
-        
+
         publishing {
             publications.withType(MavenPublication) {
                 pom {
@@ -123,3 +123,15 @@ nexusStaging {
     password = findProperty('ossrhPass')
 }
 
+task uploadDocumentation(type: DefaultTask) {
+    dependsOn "aggregateJavadocJar"
+    doLast {
+        project.exec {
+            executable "curl"
+            args "--http1.1"
+            args "--user", "user:${findProperty('freefairDocsPass')}"
+            args "--upload-file", aggregateJavadocJar.archiveFile.get().asFile
+            args "https://docs.freefair.io/api/$project.version?path=okhttp-spring-boot"
+        }
+    }
+}
