@@ -1,6 +1,6 @@
 # Spring Boot Starters for [OkHttp](http://square.github.io/okhttp/) 
 
-Latest version: [![](https://jitpack.io/v/io.freefair/okhttp-spring-boot.svg)](https://jitpack.io/#io.freefair/okhttp-spring-boot)
+Latest version: ![Maven Central](https://img.shields.io/maven-central/v/io.freefair.okhttp-spring-boot/okhttp-spring-boot-starter.svg)
 
 [![codecov](https://codecov.io/gh/freefair/okhttp-spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/freefair/okhttp-spring-boot)
 
