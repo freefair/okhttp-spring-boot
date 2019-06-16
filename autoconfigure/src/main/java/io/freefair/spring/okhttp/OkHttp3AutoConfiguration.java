@@ -1,6 +1,7 @@
 package io.freefair.spring.okhttp;
 
 import okhttp3.*;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -16,14 +17,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Duration;
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lars Grefer
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttp3AutoConfiguration {
@@ -31,37 +30,37 @@ public class OkHttp3AutoConfiguration {
     @Autowired
     private OkHttpProperties okHttpProperties;
 
-    @Autowired(required = false)
-    private List<Configurer<OkHttpClient.Builder>> configurers;
+    @Autowired
+    private ObjectProvider<Configurer<OkHttpClient.Builder>> configurers;
 
-    @Autowired(required = false)
+    @Autowired
     @ApplicationInterceptor
-    private List<Interceptor> applicationInterceptors;
+    private ObjectProvider<Interceptor> applicationInterceptors;
 
-    @Autowired(required = false)
+    @Autowired
     @NetworkInterceptor
-    private List<Interceptor> networkInterceptors;
+    private ObjectProvider<Interceptor> networkInterceptors;
 
     @Bean
     @ConditionalOnMissingBean
     public OkHttpClient okHttp3Client(
-            @Autowired Optional<Cache> cache,
-            @Autowired Optional<CookieJar> cookieJar,
-            @Autowired Optional<Dns> dns,
+            ObjectProvider<Cache> cache,
+            ObjectProvider<CookieJar> cookieJar,
+            ObjectProvider<Dns> dns,
             ConnectionPool connectionPool
     ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
-        cache.ifPresent(builder::cache);
+        cache.ifUnique(builder::cache);
 
         builder.connectTimeout(okHttpProperties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.readTimeout(okHttpProperties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.writeTimeout(okHttpProperties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.pingInterval(okHttpProperties.getPingInterval().toMillis(), TimeUnit.MILLISECONDS);
 
-        cookieJar.ifPresent(builder::cookieJar);
+        cookieJar.ifUnique(builder::cookieJar);
 
-        dns.ifPresent(builder::dns);
+        dns.ifUnique(builder::dns);
 
         builder.connectionPool(connectionPool);
 
@@ -69,17 +68,11 @@ public class OkHttp3AutoConfiguration {
         builder.followSslRedirects(okHttpProperties.isFollowSslRedirects());
         builder.retryOnConnectionFailure(okHttpProperties.isRetryOnConnectionFailure());
 
-        if (applicationInterceptors != null) {
-            builder.interceptors().addAll(applicationInterceptors);
-        }
+        applicationInterceptors.forEach(i -> builder.interceptors().add(i));
 
-        if (networkInterceptors != null) {
-            builder.networkInterceptors().addAll(networkInterceptors);
-        }
+        networkInterceptors.forEach(i -> builder.networkInterceptors().add(i));
 
-        if (configurers != null) {
-            configurers.forEach(configurer -> configurer.configure(builder));
-        }
+        configurers.forEach(configurer -> configurer.configure(builder));
 
         return builder.build();
     }
@@ -95,7 +88,7 @@ public class OkHttp3AutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     @ConditionalOnProperty(value = "okhttp.cache.enabled", havingValue = "true", matchIfMissing = true)
-    public Cache okhttp3Cache() throws IOException {
+    public Cache okHttp3Cache() throws IOException {
         File directory = okHttpProperties.getCache().getDirectory();
         if (directory == null) {
             directory = Files.createTempDirectory("okhttp-cache").toFile();
@@ -106,7 +99,7 @@ public class OkHttp3AutoConfiguration {
     /**
      * @author Lars Grefer
      */
-    @Configuration
+    @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(OkHttp3ClientHttpRequestFactory.class)
     @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)
     @AutoConfigureAfter(OkHttp3AutoConfiguration.class)

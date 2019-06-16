@@ -3,6 +3,7 @@ package io.freefair.spring.okhttp.logging;
 import io.freefair.spring.okhttp.ApplicationInterceptor;
 import io.freefair.spring.okhttp.OkHttp3AutoConfiguration;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -14,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author Lars Grefer
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(HttpLoggingInterceptor.class)
 @AutoConfigureBefore(OkHttp3AutoConfiguration.class)
 @EnableConfigurationProperties(OkHttp3LoggingInterceptorProperties.class)
@@ -27,17 +28,18 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
     @ApplicationInterceptor
     @ConditionalOnMissingBean
     public HttpLoggingInterceptor okHttp3LoggingInterceptor(
-            @Autowired(required = false) HttpLoggingInterceptor.Logger logger
+            ObjectProvider<HttpLoggingInterceptor.Logger> logger
     ) {
         HttpLoggingInterceptor httpLoggingInterceptor;
 
-        if (logger != null) {
-            httpLoggingInterceptor = new HttpLoggingInterceptor(logger);
-        } else {
+        if (logger.getIfAvailable() != null) {
+            httpLoggingInterceptor = new HttpLoggingInterceptor(logger.getIfAvailable());
+        }
+        else {
             httpLoggingInterceptor = new HttpLoggingInterceptor();
         }
 
-        httpLoggingInterceptor.setLevel(properties.getLevel());
+        httpLoggingInterceptor.level(properties.getLevel());
 
         return httpLoggingInterceptor;
     }

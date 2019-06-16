@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @author Lars Grefer
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass({RestTemplateCustomizer.class, RestTemplate.class})
 @AutoConfigureBefore(RestTemplateAutoConfiguration.class)
 public class OkHttpRestTemplateAutoConfiguration {
@@ -22,7 +22,7 @@ public class OkHttpRestTemplateAutoConfiguration {
     @Bean
     @Order(2)
     @ConditionalOnBean(OkHttp3ClientHttpRequestFactory.class)
-    public RestTemplateCustomizer okhttp3RestTemplateCustomizer(OkHttp3ClientHttpRequestFactory requestFactory) {
+    public RestTemplateCustomizer okHttp3RestTemplateCustomizer(OkHttp3ClientHttpRequestFactory requestFactory) {
         return restTemplate -> restTemplate.setRequestFactory(requestFactory);
     }
 
