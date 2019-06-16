@@ -1,9 +1,10 @@
 buildscript {
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://repo.spring.io/milestone' }
     }
     dependencies {
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.5.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.0.M3"
         classpath "io.freefair.gradle:maven-plugin:3.7.1"
         classpath "io.freefair.gradle:lombok-plugin:3.7.1"
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.0"
@@ -17,7 +18,8 @@ plugins {
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
     }
 
     group = "io.freefair.okhttp-spring-boot"
@@ -30,7 +32,7 @@ allprojects {
         }
 
         dependencies {
-            dependencySet('com.squareup.okhttp3:3.14.2') {
+            dependencySet('com.squareup.okhttp3:4.0.0-RC1') {
                 entry 'okhttp'
                 entry 'logging-interceptor'
             }
