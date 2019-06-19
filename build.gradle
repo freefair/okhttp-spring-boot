@@ -4,20 +4,22 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE"
-        classpath "io.freefair.gradle:maven-plugin:3.7.1"
-        classpath "io.freefair.gradle:lombok-plugin:3.7.1"
+        classpath "io.freefair.gradle:maven-plugin:3.7.4"
+        classpath "io.freefair.gradle:lombok-plugin:3.7.4"
+        classpath "io.freefair.gradle:okhttp-plugin:3.7.4"
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.0"
         classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.2.0"
     }
 }
 
 plugins {
-    id "io.freefair.git-version" version "3.7.1"
+    id "io.freefair.git-version" version "3.7.4"
+    id "io.freefair.aggregate-javadoc-jar" version "3.7.4"
 }
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     group = "io.freefair.okhttp-spring-boot"
@@ -120,3 +122,12 @@ nexusStaging {
     password = findProperty('ossrhPass')
 }
 
+apply plugin: "io.freefair.okhttp"
+
+task uploadDocumentation(type: io.freefair.gradle.plugins.okhttp.tasks.UploadFile) {
+    dependsOn "aggregateJavadocJar"
+    username = "user"
+    password = findProperty('freefairDocsPass')
+    file = aggregateJavadocJar.archiveFile
+    url = "https://docs.freefair.io/api/$project.version?path=okhttp-spring-boot"
+}
