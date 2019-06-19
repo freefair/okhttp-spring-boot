@@ -30,3 +30,4 @@ deploy:
     on:
       jdk: openjdk11
       tags: false
+      all_branches: true
