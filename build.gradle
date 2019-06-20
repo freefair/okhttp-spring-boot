@@ -16,6 +16,7 @@ buildscript {
 plugins {
     id "io.freefair.git-version" version "3.7.4"
     id "io.freefair.aggregate-javadoc-jar" version "3.7.4"
+    id "io.freefair.javadoc-links" version "3.7.4"
 }
 
 allprojects {
