@@ -35,7 +35,7 @@ allprojects {
         }
 
         dependencies {
-            dependencySet('com.squareup.okhttp3:4.0.0-RC1') {
+            dependencySet('com.squareup.okhttp3:4.0.1') {
                 entry 'okhttp'
                 entry 'logging-interceptor'
             }
