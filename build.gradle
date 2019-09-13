@@ -14,7 +14,7 @@ buildscript {
 }
 
 plugins {
-    id "io.freefair.git-version" version "4.0.2"
+    id "io.freefair.git-version" version "4.1.0"
 }
 
 apply plugin: "io.freefair.aggregate-javadoc-jar"
