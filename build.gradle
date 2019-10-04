@@ -5,16 +5,16 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.0.M6"
-        classpath "io.freefair.gradle:maven-plugin:4.1.1"
-        classpath "io.freefair.gradle:lombok-plugin:4.1.1"
-        classpath "io.freefair.gradle:okhttp-plugin:4.1.1"
+        classpath "io.freefair.gradle:maven-plugin:4.1.2"
+        classpath "io.freefair.gradle:lombok-plugin:4.1.2"
+        classpath "io.freefair.gradle:okhttp-plugin:4.1.2"
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.21.1"
         classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.2.0"
     }
 }
 
 plugins {
-    id "io.freefair.git-version" version "4.1.1"
+    id "io.freefair.git-version" version "4.1.2"
 }
 
 apply plugin: "io.freefair.aggregate-javadoc-jar"
