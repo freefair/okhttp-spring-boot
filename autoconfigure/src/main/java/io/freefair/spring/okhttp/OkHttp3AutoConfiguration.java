@@ -3,15 +3,12 @@ package io.freefair.spring.okhttp;
 import okhttp3.*;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,21 +91,5 @@ public class OkHttp3AutoConfiguration {
             directory = Files.createTempDirectory("okhttp-cache").toFile();
         }
         return new Cache(directory, okHttpProperties.getCache().getMaxSize().toBytes());
-    }
-
-    /**
-     * @author Lars Grefer
-     */
-    @Configuration(proxyBeanMethods = false)
-    @ConditionalOnClass(OkHttp3ClientHttpRequestFactory.class)
-    @AutoConfigureBefore(OkHttpRestTemplateAutoConfiguration.class)
-    @AutoConfigureAfter(OkHttp3AutoConfiguration.class)
-    public static class RequestFactoryAutoConfiguration {
-
-        @Bean
-        @ConditionalOnMissingBean(OkHttp3ClientHttpRequestFactory.class)
-        public OkHttp3ClientHttpRequestFactory okHttp3ClientHttpRequestFactory(OkHttpClient okHttpClient) {
-            return new OkHttp3ClientHttpRequestFactory(okHttpClient);
-        }
     }
 }
