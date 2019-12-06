@@ -4,7 +4,7 @@ buildscript {
         maven { url 'https://repo.spring.io/milestone' }
     }
     dependencies {
-        def freefairGradleVersion = "4.1.5"
+        def freefairGradleVersion = "4.1.6"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.1.RELEASE"
         classpath "io.freefair.gradle:maven-plugin:${freefairGradleVersion}"
         classpath "io.freefair.gradle:lombok-plugin:${freefairGradleVersion}"
