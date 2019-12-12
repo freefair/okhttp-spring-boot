@@ -20,7 +20,7 @@ before_deploy: openssl aes-256-cbc -K $encrypted_a8202a3d8441_key -iv $encrypted
 deploy:
   - provider: script
     skip_cleanup: true
-    script: "./gradlew publishToNexus uploadDocumentation closeAndReleaseRepository -s -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$TRAVIS_BUILD_DIR/secring.gpg"
+    script: "./gradlew --no-parallel publishToSonatype uploadDocumentation closeAndReleaseRepository -s -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$TRAVIS_BUILD_DIR/secring.gpg"
     on:
       jdk: openjdk11
       tags: true
