@@ -1,8 +1,8 @@
 apply plugin: "io.freefair.maven-publish-java"
-apply plugin: "io.freefair.maven-jars"
+apply plugin: "java-library"
 
 description = "OkHttp Spring Boot Starter"
 
 dependencies {
-    compile project(':starters:okhttp3')
+    api project(':starters:okhttp3')
 }

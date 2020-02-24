@@ -2,8 +2,8 @@ plugins {
     id "checkstyle"
     id "jacoco"
     id "io.freefair.lombok"
+    id "java-library"
 }
-apply plugin: "io.freefair.maven-jars"
 apply plugin: "io.freefair.maven-optional"
 apply plugin: "io.freefair.javadoc-links"
 apply plugin: "io.freefair.maven-publish-java"
@@ -29,19 +29,19 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.springframework.boot:spring-boot-autoconfigure-processor'
 
-    compile 'org.springframework.boot:spring-boot-autoconfigure'
-    compile 'org.slf4j:slf4j-api'
+    api 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.slf4j:slf4j-api'
 
     optional 'org.springframework:spring-web'
 
     optional 'com.squareup.okhttp3:okhttp'
     optional 'com.squareup.okhttp3:logging-interceptor'
 
-    testCompile('org.springframework.boot:spring-boot-starter-test') {
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: "junit", module: "junit"
     }
-    testCompile 'org.junit.jupiter:junit-jupiter-api'
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {

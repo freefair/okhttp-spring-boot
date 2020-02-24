@@ -4,7 +4,7 @@ buildscript {
         maven { url 'https://repo.spring.io/milestone' }
     }
     dependencies {
-        def freefairGradleVersion = "4.1.6"
+        def freefairGradleVersion = "5.0.0-rc4"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE"
         classpath "io.freefair.gradle:maven-plugin:${freefairGradleVersion}"
         classpath "io.freefair.gradle:lombok-plugin:${freefairGradleVersion}"
@@ -39,6 +39,13 @@ allprojects {
                 entry 'okhttp'
                 entry 'logging-interceptor'
             }
+        }
+    }
+
+    plugins.withId("java") {
+        java {
+            withSourcesJar()
+            withJavadocJar()
         }
     }
 

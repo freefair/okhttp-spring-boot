@@ -1,10 +1,10 @@
 apply plugin: "io.freefair.maven-publish-java"
-apply plugin: "io.freefair.maven-jars"
+apply plugin: "java-library"
 
 description = "OkHttp 3 Spring Boot Starter"
 
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter'
-    compile project(':autoconfigure')
-    compile 'com.squareup.okhttp3:okhttp'
+    api 'org.springframework.boot:spring-boot-starter'
+    api project(':autoconfigure')
+    api 'com.squareup.okhttp3:okhttp'
 }
