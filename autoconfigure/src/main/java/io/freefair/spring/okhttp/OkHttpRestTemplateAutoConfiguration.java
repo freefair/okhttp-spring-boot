@@ -17,6 +17,7 @@ import org.springframework.boot.web.client.RestTemplateRequestCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
 public class OkHttpRestTemplateAutoConfiguration {
 
     @Bean
+    @Lazy
     @ConditionalOnMissingBean
     public RestTemplateBuilder restTemplateBuilder(ObjectProvider<HttpMessageConverters> messageConverters,
                                                    ObjectProvider<RestTemplateCustomizer> restTemplateCustomizers,
