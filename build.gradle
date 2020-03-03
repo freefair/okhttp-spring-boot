@@ -46,6 +46,8 @@ allprojects {
         project.apply plugin: 'de.marcphilipp.nexus-publish'
 
         nexusPublishing {
+            clientTimeout = Duration.ofMinutes(5)
+            connectTimeout = Duration.ofMinutes(5)
             repositories {
                 sonatype()
             }
