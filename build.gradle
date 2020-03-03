@@ -32,6 +32,10 @@ allprojects {
             withSourcesJar()
             withJavadocJar()
         }
+
+        jar.into("META-INF") {
+            from rootProject.file("LICENSE")
+        }
     }
 
     plugins.withId("maven-publish") {
