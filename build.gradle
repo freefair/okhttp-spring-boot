@@ -42,6 +42,12 @@ allprojects {
         }
     }
 
+    plugins.withId("java") {
+        jar.into("META-INF") {
+            from rootProject.file("LICENSE")
+        }
+    }
+
     plugins.withId("maven-publish") {
         project.apply plugin: 'de.marcphilipp.nexus-publish'
 
