@@ -26,6 +26,9 @@ targetCompatibility = 1.8
 jacocoTestReport.reports.xml.enabled = true
 
 dependencies {
+    api platform(project(":dependencies"))
+    annotationProcessor platform(project(":dependencies"))
+
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.springframework.boot:spring-boot-autoconfigure-processor'
 

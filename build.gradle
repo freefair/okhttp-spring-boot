@@ -27,21 +27,6 @@ allprojects {
 
     group = "io.freefair.okhttp-spring-boot"
 
-    apply plugin: "io.spring.dependency-management"
-
-    dependencyManagement {
-        imports {
-            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
-        }
-
-        dependencies {
-            dependencySet('com.squareup.okhttp3:4.2.2') {
-                entry 'okhttp'
-                entry 'logging-interceptor'
-            }
-        }
-    }
-
     plugins.withId("java") {
         java {
             withSourcesJar()
@@ -104,32 +89,6 @@ allprojects {
 }
 
 apply plugin: "maven-publish"
-
-publishing {
-    publications {
-        bom(MavenPublication) {
-            artifactId = 'okhttp-spring-boot-dependencies'
-
-            pom {
-                name = 'OkHttp Spring Boot Dependencies'
-                description = 'OkHttp Spring Boot Dependencies'
-            }
-
-            pom.withXml {
-                rootProject.subprojects { p ->
-                    if (p.pluginManager.hasPlugin('maven-publish')) {
-                        def depNode = asNode().dependencyManagement.first().get('dependencies').first().appendNode('dependency')
-                        depNode.appendNode('groupId', p.group)
-                        depNode.appendNode('artifactId', p.publishing.publications.mavenJava.artifactId)
-                        depNode.appendNode('version', p.version)
-                    }
-                }
-            }
-
-            signing.sign it
-        }
-    }
-}
 
 apply plugin: "io.codearte.nexus-staging"
 

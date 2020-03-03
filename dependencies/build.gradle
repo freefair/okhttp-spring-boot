@@ -1,0 +1,36 @@
+plugins {
+    id "java-platform"
+    id "maven-publish"
+}
+
+javaPlatform {
+    allowDependencies()
+}
+
+dependencies {
+    api platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES.toString())
+    api platform('com.squareup.okhttp3:okhttp-bom:4.4.0')
+
+    constraints {
+        api project(":autoconfigure")
+        api project(":starters:okhttp")
+        api project(":starters:okhttp3")
+    }
+}
+
+publishing {
+    publications {
+        bom(MavenPublication) {
+            from components.javaPlatform
+
+            artifactId = 'okhttp-spring-boot-dependencies'
+
+            pom {
+                name = 'OkHttp Spring Boot Dependencies'
+                description = 'OkHttp Spring Boot Dependencies'
+            }
+
+            signing.sign it
+        }
+    }
+}
