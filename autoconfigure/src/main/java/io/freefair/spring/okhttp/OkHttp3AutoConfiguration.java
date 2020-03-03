@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Lars Grefer
  */
+@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
@@ -28,7 +29,7 @@ public class OkHttp3AutoConfiguration {
     private OkHttpProperties okHttpProperties;
 
     @Autowired
-    private ObjectProvider<Configurer<OkHttpClient.Builder>> configurers;
+    private ObjectProvider<OkHttp3Configurer> configurers;
 
     @Autowired
     @ApplicationInterceptor
