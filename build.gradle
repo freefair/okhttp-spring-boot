@@ -5,7 +5,9 @@ buildscript {
     }
     dependencies {
         def freefairGradleVersion = "5.0.0-rc6"
-        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.3.0.M4"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.0.M4") {
+            exclude group: "com.squareup.okhttp3"
+        }
         classpath "io.freefair.gradle:maven-plugin:${freefairGradleVersion}"
         classpath "io.freefair.gradle:lombok-plugin:${freefairGradleVersion}"
         classpath "io.freefair.gradle:okhttp-plugin:${freefairGradleVersion}"
