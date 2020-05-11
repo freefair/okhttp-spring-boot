@@ -1,4 +1,6 @@
 language: java
+os: linux
+dist: bionic
 jdk:
   - openjdk8
   - openjdk11
