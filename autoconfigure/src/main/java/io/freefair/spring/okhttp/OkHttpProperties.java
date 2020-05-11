@@ -2,6 +2,7 @@ package io.freefair.spring.okhttp;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.util.unit.DataSize;
 
 import java.io.File;
@@ -39,7 +40,8 @@ public class OkHttpProperties {
      */
     private Duration pingInterval = Duration.ZERO;
 
-    private Cache cache = new Cache();
+    @NestedConfigurationProperty
+    private CacheProperties cache = new CacheProperties();
 
     /**
      * Whether to follow redirects from HTTPS to HTTP and from HTTP to HTTPS.
@@ -56,6 +58,7 @@ public class OkHttpProperties {
      */
     private boolean retryOnConnectionFailure = true;
 
+    @NestedConfigurationProperty
     private final ConnectionPoolProperties connectionPool = new ConnectionPoolProperties();
 
     /**
@@ -63,7 +66,7 @@ public class OkHttpProperties {
      * @see okhttp3.Cache
      */
     @Data
-    public static class Cache {
+    public static class CacheProperties {
 
         private boolean enabled;
 

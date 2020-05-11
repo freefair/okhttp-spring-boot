@@ -66,9 +66,9 @@ public class OkHttp3AutoConfiguration {
         builder.followSslRedirects(okHttpProperties.isFollowSslRedirects());
         builder.retryOnConnectionFailure(okHttpProperties.isRetryOnConnectionFailure());
 
-        applicationInterceptors.forEach(i -> builder.interceptors().add(i));
+        applicationInterceptors.forEach(builder::addInterceptor);
 
-        networkInterceptors.forEach(i -> builder.networkInterceptors().add(i));
+        networkInterceptors.forEach(builder::addNetworkInterceptor);
 
         configurers.forEach(configurer -> configurer.configure(builder));
 
