@@ -41,10 +41,8 @@ dependencies {
     optional 'com.squareup.okhttp3:logging-interceptor'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: "junit", module: "junit"
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    testImplementation 'org.junit.jupiter:junit-jupiter-api'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
