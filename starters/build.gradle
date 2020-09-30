@@ -2,4 +2,10 @@ subprojects { Project starterProject ->
     starterProject.pluginManager.withPlugin("io.freefair.maven-publish-java") {
         starterProject.publishing.publications.mavenJava.artifactId = "$starterProject.name-spring-boot-starter"
     }
+
+    starterProject.apply plugin: "java-library"
+
+    starterProject.jar.manifest {
+        attributes 'Spring-Boot-Jar-Type': 'dependencies-starter'
+    }
 }
