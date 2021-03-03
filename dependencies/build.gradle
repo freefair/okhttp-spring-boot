@@ -9,7 +9,7 @@ javaPlatform {
 
 dependencies {
     api platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES.toString())
-    api platform('com.squareup.okhttp3:okhttp-bom:4.9.0')
+    api platform('com.squareup.okhttp3:okhttp-bom:4.9.1')
 
     constraints {
         api project(":autoconfigure")
