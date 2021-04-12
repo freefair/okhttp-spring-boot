@@ -13,10 +13,6 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-after_success:
-  - ./gradlew jacocoTestReport
-  - bash <(curl -s https://codecov.io/bash)
-
 before_deploy: openssl aes-256-cbc -K $encrypted_a8202a3d8441_key -iv $encrypted_a8202a3d8441_iv -in secring.gpg.enc -out secring.gpg -d
 
 deploy:
