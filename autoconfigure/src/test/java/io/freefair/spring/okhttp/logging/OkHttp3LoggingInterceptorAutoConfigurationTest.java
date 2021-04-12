@@ -35,6 +35,27 @@ public class OkHttp3LoggingInterceptorAutoConfigurationTest {
     }
 
     @Test
+    public void testDefaultLogger_enabled() {
+        applicationContextRunner
+                .withPropertyValues("okhttp.logging.enabled=true")
+                .run(context -> {
+                    assertThat(context).hasSingleBean(HttpLoggingInterceptor.class);
+
+                    assertThat(context).getBean(HttpLoggingInterceptor.class)
+                            .hasFieldOrPropertyWithValue("logger", HttpLoggingInterceptor.Logger.DEFAULT);
+                });
+    }
+
+    @Test
+    public void testDefaultLogger_disabled() {
+        applicationContextRunner
+                .withPropertyValues("okhttp.logging.enabled=false")
+                .run(context -> {
+                    assertThat(context).doesNotHaveBean(HttpLoggingInterceptor.class);
+                });
+    }
+
+    @Test
     public void testCustomLogger() {
 
         applicationContextRunner
