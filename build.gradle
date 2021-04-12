@@ -3,7 +3,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        def freefairGradleVersion = "5.3.0"
+        def freefairGradleVersion = "5.3.3.3"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.6.RELEASE") {
             exclude group: "com.squareup.okhttp3"
         }
