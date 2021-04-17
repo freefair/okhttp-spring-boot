@@ -116,3 +116,7 @@ task uploadDocumentation(type: io.freefair.gradle.plugins.okhttp.tasks.UploadFil
     file = aggregateJavadocJar.archiveFile
     url = "https://docs.freefair.io/api/$project.version?path=okhttp-spring-boot"
 }
+
+tasks.named('wrapper') {
+    distributionType = Wrapper.DistributionType.ALL
+}
