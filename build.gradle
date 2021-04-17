@@ -12,9 +12,11 @@ buildscript {
         classpath "io.freefair.gradle:lombok-plugin:${freefairGradleVersion}"
         classpath "io.freefair.gradle:okhttp-plugin:${freefairGradleVersion}"
         classpath "io.freefair.gradle:git-plugin:${freefairGradleVersion}"
-        classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.30.0"
-        classpath "de.marcphilipp.gradle:nexus-publish-plugin:0.4.0"
     }
+}
+
+plugins {
+    id "io.github.gradle-nexus.publish-plugin" version "1.0.0"
 }
 
 apply plugin: "io.freefair.git-version"
@@ -41,15 +43,6 @@ allprojects {
     }
 
     plugins.withId("maven-publish") {
-        project.apply plugin: 'de.marcphilipp.nexus-publish'
-
-        nexusPublishing {
-            clientTimeout = Duration.ofMinutes(5)
-            connectTimeout = Duration.ofMinutes(5)
-            repositories {
-                sonatype()
-            }
-        }
 
         project.apply plugin: "signing"
 
@@ -78,8 +71,8 @@ allprojects {
                         }
                     }
                     ciManagement {
-                        system = 'Travis CI'
-                        url = 'https://travis-ci.org/freefair/okhttp-spring-boot'
+                        system = 'GitHub Actions'
+                        url = 'https://github.com/freefair/okhttp-spring-boot/actions'
                     }
                     issueManagement {
                         system = 'GitHub'
@@ -98,13 +91,12 @@ allprojects {
 
 apply plugin: "maven-publish"
 
-apply plugin: "io.codearte.nexus-staging"
-
-nexusStaging {
-    stagingProfileId = '7e6204597a774f'
-    username = findProperty('ossrhUser')
-    password = findProperty('ossrhPass')
-    delayBetweenRetriesInMillis = 5000
+nexusPublishing {
+    repositories {
+        sonatype {
+            stagingProfileId = '7e6204597a774f'
+        }
+    }
 }
 
 apply plugin: "io.freefair.okhttp"
