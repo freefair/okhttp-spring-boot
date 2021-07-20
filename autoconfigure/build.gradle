@@ -37,8 +37,8 @@ dependencies {
 
     optional 'org.springframework:spring-web'
 
-    optional 'com.squareup.okhttp3:okhttp'
-    optional 'com.squareup.okhttp3:logging-interceptor'
+    optional 'com.squareup.okhttp3:okhttp:3.+'
+    optional 'com.squareup.okhttp3:logging-interceptor:3.+'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
