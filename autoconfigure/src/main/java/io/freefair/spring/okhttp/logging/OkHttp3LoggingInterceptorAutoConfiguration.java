@@ -33,7 +33,6 @@ public class OkHttp3LoggingInterceptorAutoConfiguration {
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(actualLogger);
 
-        //noinspection deprecation
         httpLoggingInterceptor.setLevel(properties.getLevel());
 
         return httpLoggingInterceptor;
