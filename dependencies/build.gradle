@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id "java-platform"
     id "maven-publish"
@@ -8,7 +10,7 @@ javaPlatform {
 }
 
 dependencies {
-    api platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES.toString())
+    api platform(SpringBootPlugin.BOM_COORDINATES)
     api platform('com.squareup.okhttp3:okhttp-bom:4.9.1')
 
     constraints {
