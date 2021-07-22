@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id "checkstyle"
     id "jacoco"
@@ -26,8 +28,8 @@ targetCompatibility = 1.8
 jacocoTestReport.reports.xml.enabled = true
 
 dependencies {
-    api platform(project(":dependencies"))
-    annotationProcessor platform(project(":dependencies"))
+    api platform(SpringBootPlugin.BOM_COORDINATES)
+    annotationProcessor platform(SpringBootPlugin.BOM_COORDINATES)
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.springframework.boot:spring-boot-autoconfigure-processor'
@@ -37,8 +39,10 @@ dependencies {
 
     optional 'org.springframework:spring-web'
 
-    optional 'com.squareup.okhttp3:okhttp:3.+'
-    optional 'com.squareup.okhttp3:logging-interceptor:3.+'
+    optional 'com.squareup.okhttp3:okhttp'
+    optional 'com.squareup.okhttp3:logging-interceptor'
+
+    testImplementation platform('com.squareup.okhttp3:okhttp-bom:4.9.1')
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
