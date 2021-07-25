@@ -42,6 +42,10 @@ allprojects {
         }
     }
 
+    tasks.withType(Javadoc) {
+        options.addBooleanOption "Xdoclint:-missing", true
+    }
+
     plugins.withId("maven-publish") {
 
         project.apply plugin: "signing"
