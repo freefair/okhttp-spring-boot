@@ -4,7 +4,7 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.18.RELEASE"
-        classpath "io.freefair.gradle:maven-plugin:3.7.5"
+        classpath "io.freefair.gradle:maven-plugin:6.1.0"
         classpath "io.freefair.gradle:lombok-plugin:3.7.5"
         classpath "io.freefair.gradle:okhttp-plugin:3.7.5"
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.22.0"
