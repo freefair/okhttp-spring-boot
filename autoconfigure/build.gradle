@@ -25,7 +25,7 @@ compileJava.dependsOn(processResources)
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-jacocoTestReport.reports.xml.enabled = true
+jacocoTestReport.reports.xml.required = true
 
 dependencies {
     api platform(SpringBootPlugin.BOM_COORDINATES)
