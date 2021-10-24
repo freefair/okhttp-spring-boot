@@ -20,9 +20,6 @@ if (JavaVersion.current().isJava11Compatible()) {
 
 compileJava.dependsOn(processResources)
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 jacocoTestReport.reports.xml.enabled = true
 
 dependencies {

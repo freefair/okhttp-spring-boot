@@ -33,6 +33,9 @@ allprojects {
             withJavadocJar()
         }
 
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+
         jar.into("META-INF") {
             from rootProject.file("LICENSE")
         }
