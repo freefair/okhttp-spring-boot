@@ -34,7 +34,7 @@ dependencies {
 
     optional 'org.springframework:spring-web'
 
-    optional 'com.squareup.okhttp3:okhttp:3.+'
+    optional 'com.squareup.okhttp3:okhttp:4.+'
     optional 'com.squareup.okhttp3:logging-interceptor:3.+'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
