@@ -7,6 +7,7 @@ version: 2
 updates:
   - package-ecosystem: "gradle"
     directory: "/" # Location of package manifests
+    target-branch: "2.6.x"
     schedule:
       interval: "daily"
   - package-ecosystem: "gradle"
@@ -19,7 +20,9 @@ updates:
     target-branch: "2.4.x"
     schedule:
       interval: "daily"
+
+  # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
