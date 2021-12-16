@@ -15,10 +15,7 @@ description = "OkHttp Spring Boot AutoConfigure"
 publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
 
 javadoc.options.linkSource true
-
-if (JavaVersion.current().isJava11Compatible()) {
-    javadoc.failOnError = false
-}
+javadoc.failOnError = false
 
 compileJava.dependsOn(processResources)
 
