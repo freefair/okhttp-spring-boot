@@ -2,10 +2,11 @@ buildscript {
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
     }
     dependencies {
         def freefairGradleVersion = "6.3.0"
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.1") {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:3.0.0-SNAPSHOT") {
             exclude group: "com.squareup.okhttp3"
         }
         classpath "io.freefair.gradle:maven-plugin:${freefairGradleVersion}"
@@ -27,6 +28,7 @@ allprojects {
     repositories {
         mavenCentral()
         maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
     }
 
     group = "io.freefair.okhttp-spring-boot"
@@ -37,8 +39,8 @@ allprojects {
             withJavadocJar()
         }
 
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility = 17
+        targetCompatibility = 17
 
         jar.into("META-INF") {
             from rootProject.file("LICENSE")
