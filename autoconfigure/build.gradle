@@ -35,6 +35,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-api'
 
     optional 'org.springframework:spring-web'
+    optional 'org.springframework.boot:spring-boot-starter-actuator'
 
     optional 'com.squareup.okhttp3:okhttp'
     optional 'com.squareup.okhttp3:logging-interceptor'
