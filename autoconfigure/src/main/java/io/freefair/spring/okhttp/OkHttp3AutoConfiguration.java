@@ -45,11 +45,14 @@ public class OkHttp3AutoConfiguration {
             ObjectProvider<Cache> cache,
             ObjectProvider<CookieJar> cookieJar,
             ObjectProvider<Dns> dns,
-            ConnectionPool connectionPool
+            ConnectionPool connectionPool,
+            ObjectProvider<EventListener> eventListener
     ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
         cache.ifUnique(builder::cache);
+
+        eventListener.ifUnique(builder::eventListener);
 
         builder.connectTimeout(okHttpProperties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
         builder.readTimeout(okHttpProperties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
