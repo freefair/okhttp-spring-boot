@@ -10,6 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.net.ssl.HostnameVerifier;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -45,6 +46,8 @@ public class OkHttp3AutoConfiguration {
             ObjectProvider<Cache> cache,
             ObjectProvider<CookieJar> cookieJar,
             ObjectProvider<Dns> dns,
+            ObjectProvider<HostnameVerifier> hostnameVerifier,
+            ObjectProvider<CertificatePinner> certificatePinner,
             ConnectionPool connectionPool
     ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -59,6 +62,9 @@ public class OkHttp3AutoConfiguration {
         cookieJar.ifUnique(builder::cookieJar);
 
         dns.ifUnique(builder::dns);
+
+        hostnameVerifier.ifUnique(builder::hostnameVerifier);
+        certificatePinner.ifUnique(builder::certificatePinner);
 
         builder.connectionPool(connectionPool);
 
