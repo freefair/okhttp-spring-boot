@@ -12,6 +12,11 @@ updates:
       interval: "daily"
   - package-ecosystem: "gradle"
     directory: "/"
+    target-branch: "2.7.x"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "/"
     target-branch: "2.6.x"
     schedule:
       interval: "daily"
