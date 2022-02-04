@@ -17,6 +17,8 @@ dependencies {
         api project(":autoconfigure")
         api project(":starters:okhttp")
         api project(":starters:okhttp3")
+        api project(":starters:okhttp4")
+        api project(":starters:okhttp5")
     }
 }
 
