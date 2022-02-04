@@ -35,10 +35,10 @@ allprojects {
         java {
             withSourcesJar()
             withJavadocJar()
+            toolchain {
+                languageVersion = JavaLanguageVersion.of(8)
+            }
         }
-
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
 
         jar.into("META-INF") {
             from rootProject.file("LICENSE")
