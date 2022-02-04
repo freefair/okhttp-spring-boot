@@ -1,0 +1,11 @@
+apply plugin: "io.freefair.maven-publish-java"
+apply plugin: "java-library"
+
+description = "OkHttp 4 Spring Boot Starter"
+
+dependencies {
+    api platform(project(":dependencies"))
+    api 'org.springframework.boot:spring-boot-starter'
+    api project(':autoconfigure')
+    api 'com.squareup.okhttp3:okhttp'
+}
