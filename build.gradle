@@ -4,7 +4,7 @@ buildscript {
         maven { url 'https://repo.spring.io/milestone' }
     }
     dependencies {
-        def freefairGradleVersion = "6.3.0"
+        def freefairGradleVersion = "6.4.0"
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.5.9") {
             exclude group: "com.squareup.okhttp3"
         }
