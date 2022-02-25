@@ -3,12 +3,12 @@ package io.freefair.spring.okhttp;
 import okhttp3.*;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.net.ssl.HostnameVerifier;
 import java.io.File;
@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * @author Lars Grefer
  */
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ConditionalOnClass(OkHttpClient.class)
 @EnableConfigurationProperties(OkHttpProperties.class)
 public class OkHttp3AutoConfiguration {

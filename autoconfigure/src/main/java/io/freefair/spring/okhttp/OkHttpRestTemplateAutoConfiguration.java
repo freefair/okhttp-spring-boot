@@ -2,8 +2,7 @@ package io.freefair.spring.okhttp;
 
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -16,7 +15,6 @@ import org.springframework.boot.web.client.RestTemplateCustomizer;
 import org.springframework.boot.web.client.RestTemplateRequestCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -30,10 +28,8 @@ import java.util.stream.Collectors;
  * @author Lars Grefer
  * @see RestTemplateAutoConfiguration
  */
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration(before = RestTemplateAutoConfiguration.class, after = HttpMessageConvertersAutoConfiguration.class)
 @ConditionalOnClass({RestTemplateCustomizer.class, RestTemplate.class})
-@AutoConfigureBefore(RestTemplateAutoConfiguration.class)
-@AutoConfigureAfter(HttpMessageConvertersAutoConfiguration.class)
 @Conditional(OkHttpRestTemplateAutoConfiguration.NotReactiveWebApplicationCondition.class)
 public class OkHttpRestTemplateAutoConfiguration {
 
