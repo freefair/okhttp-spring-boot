@@ -1,7 +1,6 @@
 include 'dependencies'
 include 'autoconfigure'
 include 'starters:okhttp'
-include 'starters:okhttp3'
 include 'starters:okhttp4'
 include 'starters:okhttp5'
 
