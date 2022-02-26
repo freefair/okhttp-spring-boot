@@ -40,12 +40,14 @@ allprojects {
             }
         }
 
-        jar.into("META-INF") {
-            from rootProject.file("LICENSE")
+        tasks.named('jar', Jar) {
+            into("META-INF") {
+                from rootProject.file("LICENSE")
+            }
         }
     }
 
-    tasks.withType(Javadoc) {
+    tasks.withType(Javadoc).configureEach {
         options.addBooleanOption "Xdoclint:-missing", true
     }
 
@@ -113,7 +115,7 @@ nexusPublishing {
 
 apply plugin: "io.freefair.okhttp"
 
-task uploadDocumentation(type: io.freefair.gradle.plugins.okhttp.tasks.UploadFile) {
+tasks.register('uploadDocumentation', io.freefair.gradle.plugins.okhttp.tasks.UploadFile) {
     dependsOn "aggregateJavadocJar"
     username = "user"
     password = findProperty('freefairDocsPass')

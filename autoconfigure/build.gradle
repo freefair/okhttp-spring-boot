@@ -14,12 +14,18 @@ description = "OkHttp Spring Boot AutoConfigure"
 
 publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
 
-javadoc.options.linkSource true
-javadoc.failOnError = false
+tasks.named('javadoc', Javadoc) {
+    options.linkSource true
+    failOnError = false
+}
 
-compileJava.dependsOn(processResources)
+tasks.named('compileJava') {
+    inputs.files(processResources)
+}
 
-jacocoTestReport.reports.xml.required = true
+tasks.named('jacocoTestReport', JacocoReport) {
+    reports.xml.required = true
+}
 
 dependencies {
     api platform(SpringBootPlugin.BOM_COORDINATES)
@@ -43,6 +49,6 @@ dependencies {
     }
 }
 
-test {
+tasks.named('test', Test) {
     useJUnitPlatform()
 }
