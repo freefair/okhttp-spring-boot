@@ -5,7 +5,9 @@ subprojects { Project starterProject ->
 
     starterProject.apply plugin: "java-library"
 
-    starterProject.jar.manifest {
-        attributes 'Spring-Boot-Jar-Type': 'dependencies-starter'
+    starterProject.tasks.named('jar', Jar) {
+        manifest {
+            attributes 'Spring-Boot-Jar-Type': 'dependencies-starter'
+        }
     }
 }
