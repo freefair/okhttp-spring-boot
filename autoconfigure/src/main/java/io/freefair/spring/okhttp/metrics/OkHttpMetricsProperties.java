@@ -1,7 +1,7 @@
 package io.freefair.spring.okhttp.metrics;
 
-import io.micrometer.binder.okhttp3.OkHttpConnectionPoolMetrics;
-import io.micrometer.binder.okhttp3.OkHttpMetricsEventListener;
+import io.micrometer.core.instrument.binder.okhttp3.OkHttpConnectionPoolMetrics;
+import io.micrometer.core.instrument.binder.okhttp3.OkHttpMetricsEventListener;
 import lombok.Data;
 import okhttp3.Request;
 import org.springframework.boot.context.properties.ConfigurationProperties;
