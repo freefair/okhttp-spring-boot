@@ -20,11 +20,6 @@ updates:
     target-branch: "2.6.x"
     schedule:
       interval: "daily"
-  - package-ecosystem: "gradle"
-    directory: "/"
-    target-branch: "2.5.x"
-    schedule:
-      interval: "daily"
 
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
