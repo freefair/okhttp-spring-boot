@@ -11,7 +11,7 @@ javaPlatform {
 
 dependencies {
     api platform(SpringBootPlugin.BOM_COORDINATES)
-    api platform('com.squareup.okhttp3:okhttp-bom:4.9.3')
+    api platform('com.squareup.okhttp3:okhttp-bom:4.10.0')
 
     constraints {
         api project(":autoconfigure")
