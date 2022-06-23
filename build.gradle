@@ -1,25 +1,16 @@
 buildscript {
-    repositories {
-        maven { url "https://plugins.gradle.org/m2/" }
-        maven { url 'https://repo.spring.io/milestone' }
-    }
     dependencies {
-        def freefairGradleVersion = "6.5.0.2"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:2.7.1"
-        classpath "io.freefair.gradle:maven-plugin:${freefairGradleVersion}"
-        classpath "io.freefair.gradle:lombok-plugin:${freefairGradleVersion}"
-        classpath "io.freefair.gradle:okhttp-plugin:${freefairGradleVersion}"
-        classpath "io.freefair.gradle:git-plugin:${freefairGradleVersion}"
     }
 }
 
 plugins {
+    id "io.freefair.git-version"
     id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
+    id "io.freefair.aggregate-javadoc-jar"
+    id "io.freefair.javadoc-links"
+    id "io.freefair.okhttp"
 }
-
-apply plugin: "io.freefair.git-version"
-apply plugin: "io.freefair.aggregate-javadoc-jar"
-apply plugin: "io.freefair.javadoc-links"
 
 allprojects {
     repositories {
@@ -110,8 +101,6 @@ nexusPublishing {
         }
     }
 }
-
-apply plugin: "io.freefair.okhttp"
 
 tasks.register('uploadDocumentation', io.freefair.gradle.plugins.okhttp.tasks.UploadFile) {
     dependsOn "aggregateJavadocJar"

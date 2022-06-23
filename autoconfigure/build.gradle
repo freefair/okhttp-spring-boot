@@ -5,10 +5,10 @@ plugins {
     id "jacoco"
     id "io.freefair.lombok"
     id "java-library"
+    id "io.freefair.maven-optional"
+    id "io.freefair.javadoc-links"
+    id "io.freefair.maven-publish-java"
 }
-apply plugin: "io.freefair.maven-optional"
-apply plugin: "io.freefair.javadoc-links"
-apply plugin: "io.freefair.maven-publish-java"
 
 description = "OkHttp Spring Boot AutoConfigure"
 
