@@ -14,6 +14,13 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+}
+
 include 'dependencies'
 include 'autoconfigure'
 include 'starters:okhttp'

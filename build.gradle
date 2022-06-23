@@ -8,11 +8,6 @@ plugins {
 }
 
 allprojects {
-    repositories {
-        mavenCentral()
-        maven { url 'https://repo.spring.io/milestone' }
-        maven { url 'https://repo.spring.io/snapshot' }
-    }
 
     group = "io.freefair.okhttp-spring-boot"
 
