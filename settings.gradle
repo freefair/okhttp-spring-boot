@@ -14,6 +14,12 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
 include 'dependencies'
 include 'autoconfigure'
 include 'starters:okhttp'

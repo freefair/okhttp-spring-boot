@@ -15,11 +15,6 @@ plugins {
 }
 
 allprojects {
-    repositories {
-        mavenCentral()
-        maven { url 'https://repo.spring.io/milestone' }
-    }
-
     group = "io.freefair.okhttp-spring-boot"
 
     plugins.withId("java") {
