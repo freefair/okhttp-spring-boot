@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.9") {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.6.10") {
             exclude group: "com.squareup.okhttp3"
         }
     }
