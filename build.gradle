@@ -69,7 +69,7 @@ allprojects {
                         url = 'https://github.com/freefair/okhttp-spring-boot/actions'
                     }
                     issueManagement {
-                        system = 'GitHub'
+                        system = 'GitHub Issues'
                         url = 'https://github.com/freefair/okhttp-spring-boot/issues'
                     }
                     scm {
