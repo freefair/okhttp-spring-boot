@@ -3,7 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         maven { url 'https://repo.spring.io/milestone' }
     }
-    def freefairGradleVersion= "6.6.2"
+    def freefairGradleVersion= "6.6.3"
     plugins {
         id "io.freefair.git-version" version "$freefairGradleVersion"
         id "io.freefair.lombok" version "$freefairGradleVersion"
