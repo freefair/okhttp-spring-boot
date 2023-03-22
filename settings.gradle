@@ -1,17 +1,5 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven { url 'https://repo.spring.io/milestone' }
-    }
-    def freefairGradleVersion= "6.6.3"
-    plugins {
-        id "io.freefair.git-version" version "$freefairGradleVersion"
-        id "io.freefair.lombok" version "$freefairGradleVersion"
-        id "io.freefair.maven-publish-java" version "$freefairGradleVersion"
-        id "io.freefair.aggregate-javadoc-jar" version "$freefairGradleVersion"
-        id "io.freefair.javadoc-links" version "$freefairGradleVersion"
-        id "io.freefair.okhttp" version "$freefairGradleVersion"
-    }
+plugins {
+    id "io.freefair.settings.plugin-versions" version "8.0.1"
 }
 
 dependencyResolutionManagement {
