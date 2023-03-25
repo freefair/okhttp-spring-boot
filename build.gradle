@@ -1,5 +1,5 @@
 plugins {
-    id "org.springframework.boot" version "2.7.9" apply false
+    id "org.springframework.boot" version "2.7.10" apply false
     id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
     id "io.freefair.git-version"
     id "io.freefair.okhttp"
