@@ -2,6 +2,27 @@ plugins {
     id "io.freefair.settings.plugin-versions" version "8.2.2"
 }
 
+gradleEnterprise {
+    if (isCiServer) {
+        buildScan {
+            publishAlways()
+            termsOfServiceUrl = "https://gradle.com/terms-of-service"
+            termsOfServiceAgree = "yes"
+        }
+    }
+}
+
+buildCache {
+    remote(HttpBuildCache) {
+        url = 'https://build-cache.grefer-hosting.de/cache/'
+        push = isCiServer
+        credentials {
+            username = "freefair"
+            password = providers.gradleProperty('freefairBuildCachePassword').getOrElse(null)
+        }
+    }
+}
+
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
