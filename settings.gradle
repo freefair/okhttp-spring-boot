@@ -7,7 +7,10 @@ pluginManagement {
 
 plugins {
     id "io.freefair.settings.plugin-versions" version "8.2.2"
+    id "com.gradle.enterprise" version "3.14.1"
 }
+
+boolean isCiServer = System.getenv().containsKey("CI")
 
 gradleEnterprise {
     if (isCiServer) {
