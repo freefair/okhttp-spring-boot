@@ -7,6 +7,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      ORG_GRADLE_PROJECT_freefairBuildCachePassword: ${{ secrets.BUILD_CACHE_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -14,6 +16,8 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - name: Publish package
         run: ./gradlew --no-parallel publishToSonatype uploadDocumentation closeAndReleaseSonatypeStagingRepository
         env:
