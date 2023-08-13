@@ -12,6 +12,7 @@ jobs:
   deploy-plugin:
     runs-on: ubuntu-latest
     env:
+      ORG_GRADLE_PROJECT_freefairBuildCachePassword: ${{ secrets.BUILD_CACHE_PASSWORD }}
       ORG_GRADLE_PROJECT_freefairDocsUser: ${{ secrets.FREEFAIR_DOCS_USER }}
       ORG_GRADLE_PROJECT_freefairDocsPass: ${{ secrets.FREEFAIR_DOCS_PASS }}
     steps:
@@ -21,6 +22,8 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
       - run: ./gradlew uploadDocumentation -s
       - run: ./gradlew publish
         if: ${{ github.event_name == 'push' && github.ref_type == 'branch' }}
