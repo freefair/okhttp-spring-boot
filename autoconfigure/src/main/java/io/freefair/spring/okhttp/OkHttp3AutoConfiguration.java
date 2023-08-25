@@ -57,10 +57,10 @@ public class OkHttp3AutoConfiguration {
 
         eventListener.ifUnique(builder::eventListener);
 
-        builder.connectTimeout(okHttpProperties.getConnectTimeout().toMillis(), TimeUnit.MILLISECONDS);
-        builder.readTimeout(okHttpProperties.getReadTimeout().toMillis(), TimeUnit.MILLISECONDS);
-        builder.writeTimeout(okHttpProperties.getWriteTimeout().toMillis(), TimeUnit.MILLISECONDS);
-        builder.pingInterval(okHttpProperties.getPingInterval().toMillis(), TimeUnit.MILLISECONDS);
+        builder.connectTimeout(okHttpProperties.getConnectTimeout());
+        builder.readTimeout(okHttpProperties.getReadTimeout());
+        builder.writeTimeout(okHttpProperties.getWriteTimeout());
+        builder.pingInterval(okHttpProperties.getPingInterval());
 
         cookieJar.ifUnique(builder::cookieJar);
 

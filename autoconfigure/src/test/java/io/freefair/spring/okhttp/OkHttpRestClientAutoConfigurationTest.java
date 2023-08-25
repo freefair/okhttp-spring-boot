@@ -1,5 +1,6 @@
 package io.freefair.spring.okhttp;
 
+import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import okhttp3.OkHttpClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.client.AbstractClientHttpRequestFactoryWrapper;
 import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 
 import java.lang.reflect.Field;
@@ -50,13 +50,10 @@ class OkHttpRestClientAutoConfigurationTest {
             requestFactory = (ClientHttpRequestFactory) field.get(requestFactory);
         }
 
-        assertThat(requestFactory).isInstanceOf(OkHttp3ClientHttpRequestFactory.class);
+        assertThat(requestFactory).isInstanceOf(OkHttpClientRequestFactory.class);
 
-        Field field = OkHttp3ClientHttpRequestFactory.class.getDeclaredField("client");
-        field.setAccessible(true);
-        return (OkHttpClient) field.get(requestFactory);
+        return ((OkHttpClientRequestFactory)requestFactory).okHttpClient();
     }
-
 
     @SpringBootConfiguration
     @EnableAutoConfiguration

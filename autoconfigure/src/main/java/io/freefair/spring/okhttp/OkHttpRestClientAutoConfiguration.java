@@ -1,5 +1,6 @@
 package io.freefair.spring.okhttp;
 
+import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -7,7 +8,6 @@ import org.springframework.boot.autoconfigure.web.client.RestClientAutoConfigura
 import org.springframework.boot.web.client.RestClientCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 
 /**
@@ -21,7 +21,7 @@ public class OkHttpRestClientAutoConfiguration {
 
     @Bean
     public RestClientCustomizer okHttpRestClientCustomizer(OkHttpClient okHttpClient) {
-        return restClientBuilder -> restClientBuilder.requestFactory(new OkHttp3ClientHttpRequestFactory(okHttpClient));
+        return restClientBuilder -> restClientBuilder.requestFactory(new OkHttpClientRequestFactory(okHttpClient));
     }
 
 }
