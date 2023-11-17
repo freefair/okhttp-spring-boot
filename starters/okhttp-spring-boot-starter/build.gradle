@@ -5,5 +5,5 @@ description = "OkHttp Spring Boot Starter"
 
 dependencies {
     api platform(project(":okhttp-spring-boot-dependencies"))
-    api project(':starters:okhttp4')
+    api project(':starters:okhttp4-spring-boot-starter')
 }

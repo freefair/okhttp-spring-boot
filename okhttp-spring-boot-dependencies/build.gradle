@@ -14,9 +14,9 @@ dependencies {
 
     constraints {
         api project(":okhttp-spring-boot-autoconfigure")
-        api project(":starters:okhttp")
-        api project(":starters:okhttp4")
-        api project(":starters:okhttp5")
+        api project(":starters:okhttp-spring-boot-starter")
+        api project(":starters:okhttp4-spring-boot-starter")
+        api project(":starters:okhttp5-spring-boot-starter")
     }
 }
 

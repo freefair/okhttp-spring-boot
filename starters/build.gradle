@@ -1,8 +1,4 @@
 subprojects { Project starterProject ->
-    starterProject.pluginManager.withPlugin("io.freefair.maven-publish-java") {
-        starterProject.publishing.publications.mavenJava.artifactId = "$starterProject.name-spring-boot-starter"
-    }
-
     starterProject.apply plugin: "java-library"
 
     starterProject.tasks.named('jar', Jar) {
