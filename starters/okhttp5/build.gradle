@@ -4,7 +4,7 @@ apply plugin: "java-library"
 description = "OkHttp 5 Spring Boot Starter"
 
 dependencies {
-    api platform(project(":dependencies"))
+    api platform(project(":okhttp-spring-boot-dependencies"))
     api platform('com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.11')
 
     api 'org.springframework.boot:spring-boot-starter'

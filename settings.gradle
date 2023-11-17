@@ -42,7 +42,7 @@ dependencyResolutionManagement {
 
 include 'okhttp-spring-client'
 
-include 'dependencies'
+include 'okhttp-spring-boot-dependencies'
 include 'okhttp-spring-boot-autoconfigure'
 include 'starters:okhttp'
 include 'starters:okhttp4'

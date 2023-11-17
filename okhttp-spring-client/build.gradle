@@ -8,7 +8,7 @@ plugins {
 description = "OkHttp Spring Client"
 
 dependencies {
-    implementation platform(project(":dependencies"))
+    implementation platform(project(":okhttp-spring-boot-dependencies"))
 
     api "com.squareup.okhttp3:okhttp"
     api "org.springframework:spring-web"
