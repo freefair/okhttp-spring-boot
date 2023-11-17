@@ -1,5 +1,6 @@
 package io.freefair.spring.okhttp;
 
+import io.freefair.spring.okhttp.autoconfigure.OkHttp3AutoConfiguration;
 import okhttp3.Cache;
 import okhttp3.Dns;
 import okhttp3.OkHttpClient;

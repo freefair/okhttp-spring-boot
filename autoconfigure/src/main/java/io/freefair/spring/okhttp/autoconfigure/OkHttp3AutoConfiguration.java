@@ -1,5 +1,8 @@
-package io.freefair.spring.okhttp;
+package io.freefair.spring.okhttp.autoconfigure;
 
+import io.freefair.spring.okhttp.ApplicationInterceptor;
+import io.freefair.spring.okhttp.NetworkInterceptor;
+import io.freefair.spring.okhttp.OkHttp3Configurer;
 import okhttp3.*;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;

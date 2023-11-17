@@ -1,4 +1,4 @@
-package io.freefair.spring.okhttp;
+package io.freefair.spring.okhttp.autoconfigure;
 
 import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ import java.util.function.Function;
  * @see RestTemplateAutoConfiguration
  */
 @AutoConfiguration(before = RestTemplateAutoConfiguration.class, after = HttpMessageConvertersAutoConfiguration.class)
-@ConditionalOnClass({RestTemplateCustomizer.class, RestTemplate.class})
+@ConditionalOnClass({RestTemplateCustomizer.class, RestTemplate.class, OkHttpClientRequestFactory.class})
 @Conditional(NotReactiveWebApplicationCondition.class)
 public class OkHttpRestTemplateAutoConfiguration {
 

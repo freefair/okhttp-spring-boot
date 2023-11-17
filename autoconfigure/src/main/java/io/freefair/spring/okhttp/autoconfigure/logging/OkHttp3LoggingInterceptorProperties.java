@@ -1,4 +1,4 @@
-package io.freefair.spring.okhttp.logging;
+package io.freefair.spring.okhttp.autoconfigure.logging;
 
 import lombok.Data;
 import okhttp3.logging.HttpLoggingInterceptor;

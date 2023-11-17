@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.freefair.spring.okhttp;
+package io.freefair.spring.okhttp.autoconfigure;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.NoneNestedConditions;

@@ -1,4 +1,4 @@
-package io.freefair.spring.okhttp;
+package io.freefair.spring.okhttp.autoconfigure;
 
 import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import okhttp3.OkHttpClient;
@@ -15,7 +15,7 @@ import org.springframework.web.client.RestClient;
  * @see RestClientAutoConfiguration
  */
 @AutoConfiguration
-@ConditionalOnClass({RestClientCustomizer.class, RestClient.class})
+@ConditionalOnClass({RestClientCustomizer.class, RestClient.class, OkHttpClientRequestFactory.class})
 @Conditional(NotReactiveWebApplicationCondition.class)
 public class OkHttpRestClientAutoConfiguration {
 

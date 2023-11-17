@@ -40,6 +40,8 @@ dependencyResolutionManagement {
     }
 }
 
+include 'okhttp-spring-client'
+
 include 'dependencies'
 include 'autoconfigure'
 include 'starters:okhttp'

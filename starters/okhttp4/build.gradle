@@ -5,7 +5,9 @@ description = "OkHttp 4 Spring Boot Starter"
 
 dependencies {
     api platform(project(":dependencies"))
+
     api 'org.springframework.boot:spring-boot-starter'
     api project(':autoconfigure')
+    api project(':okhttp-spring-client')
     api 'com.squareup.okhttp3:okhttp'
 }

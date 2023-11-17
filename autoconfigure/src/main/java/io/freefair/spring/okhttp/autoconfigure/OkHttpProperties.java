@@ -1,4 +1,4 @@
-package io.freefair.spring.okhttp;
+package io.freefair.spring.okhttp.autoconfigure;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

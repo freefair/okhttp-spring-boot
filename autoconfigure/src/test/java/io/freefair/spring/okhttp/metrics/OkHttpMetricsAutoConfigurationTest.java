@@ -1,5 +1,6 @@
 package io.freefair.spring.okhttp.metrics;
 
+import io.freefair.spring.okhttp.autoconfigure.metrics.OkHttpMetricsAutoConfiguration;
 import io.micrometer.core.instrument.MeterRegistry;
 import okhttp3.EventListener;
 import org.junit.jupiter.api.BeforeEach;

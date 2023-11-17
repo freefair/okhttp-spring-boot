@@ -1,7 +1,7 @@
-package io.freefair.spring.okhttp.logging;
+package io.freefair.spring.okhttp.autoconfigure.logging;
 
 import io.freefair.spring.okhttp.ApplicationInterceptor;
-import io.freefair.spring.okhttp.OkHttp3AutoConfiguration;
+import io.freefair.spring.okhttp.autoconfigure.OkHttp3AutoConfiguration;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;

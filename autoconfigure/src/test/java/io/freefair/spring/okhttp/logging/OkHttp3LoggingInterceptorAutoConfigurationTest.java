@@ -1,5 +1,6 @@
 package io.freefair.spring.okhttp.logging;
 
+import io.freefair.spring.okhttp.autoconfigure.logging.OkHttp3LoggingInterceptorAutoConfiguration;
 import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

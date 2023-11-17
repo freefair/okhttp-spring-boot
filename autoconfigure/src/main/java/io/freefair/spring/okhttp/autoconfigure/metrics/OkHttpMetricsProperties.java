@@ -1,4 +1,4 @@
-package io.freefair.spring.okhttp.metrics;
+package io.freefair.spring.okhttp.autoconfigure.metrics;
 
 import io.micrometer.core.instrument.binder.okhttp3.OkHttpConnectionPoolMetrics;
 import io.micrometer.core.instrument.binder.okhttp3.OkHttpMetricsEventListener;
