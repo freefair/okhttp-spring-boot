@@ -12,8 +12,6 @@ plugins {
 
 description = "OkHttp Spring Boot AutoConfigure"
 
-publishing.publications.mavenJava.artifactId = "okhttp-spring-boot-autoconfigure"
-
 tasks.named('javadoc', Javadoc) {
     options.linkSource true
     failOnError = false
