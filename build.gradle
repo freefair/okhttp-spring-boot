@@ -108,6 +108,7 @@ dependencies {
 tasks.named('javadoc', Javadoc) {
     options.locale "en_US"
     options.linkSource true
+    options.links "https://square.github.io/okhttp/3.x/"
     failOnError = false
 }
 
