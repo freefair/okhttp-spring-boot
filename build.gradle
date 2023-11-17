@@ -106,6 +106,7 @@ dependencies {
 }
 
 tasks.named('javadoc', Javadoc) {
+    options.locale "en_US"
     options.linkSource true
     failOnError = false
 }
