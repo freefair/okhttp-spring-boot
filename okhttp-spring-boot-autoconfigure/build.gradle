@@ -12,11 +12,6 @@ plugins {
 
 description = "OkHttp Spring Boot AutoConfigure"
 
-tasks.named('javadoc', Javadoc) {
-    options.linkSource true
-    failOnError = false
-}
-
 tasks.named('compileJava') {
     inputs.files(processResources)
 }

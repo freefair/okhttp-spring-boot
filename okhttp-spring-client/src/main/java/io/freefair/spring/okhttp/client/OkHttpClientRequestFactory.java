@@ -1,10 +1,10 @@
 package io.freefair.spring.okhttp.client;
 
-import lombok.NonNull;
 import okhttp3.OkHttpClient;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.lang.NonNull;
 
 import java.net.URI;
 
@@ -21,6 +21,5 @@ public record OkHttpClientRequestFactory(@NonNull OkHttpClient okHttpClient) imp
     public ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod) {
         return new OkHttpClientRequest(okHttpClient, uri, httpMethod);
     }
-
 
 }

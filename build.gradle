@@ -1,9 +1,12 @@
+import io.freefair.gradle.plugins.okhttp.tasks.UploadFile
+
 plugins {
     id "org.springframework.boot" version "3.2.0-RC2" apply false
     id "io.github.gradle-nexus.publish-plugin" version "1.3.0"
     id "io.freefair.git-version"
     id "io.freefair.okhttp"
     id "io.freefair.maven-central.validate-poms" apply false
+    id "io.freefair.aggregate-javadoc"
 }
 
 allprojects {
@@ -93,11 +96,25 @@ nexusPublishing {
     }
 }
 
-tasks.register('uploadDocumentation', io.freefair.gradle.plugins.okhttp.tasks.UploadFile) {
-    dependsOn ":autoconfigure:javadocJar"
+dependencies {
+    javadoc project(":okhttp-spring-client")
+    javadoc project(":okhttp-spring-boot-autoconfigure")
+    javadoc project(":starters:okhttp-spring-boot-starter")
+
+    javadocClasspath "org.springframework.boot:spring-boot-starter-actuator"
+    javadocClasspath 'com.squareup.okhttp3:logging-interceptor'
+}
+
+tasks.named('javadoc', Javadoc) {
+    options.linkSource true
+    failOnError = false
+}
+
+tasks.register('uploadDocumentation', UploadFile) {
+    dependsOn ":javadocJar"
     username = "user"
     password = findProperty('freefairDocsPass')
-    file = tasks.findByPath(":autoconfigure:javadocJar").archiveFile
+    file = tasks.named("javadocJar", Jar).flatMap {it.archiveFile}
     url = "https://docs.freefair.io/api/$project.version?path=okhttp-spring-boot"
 }
 
