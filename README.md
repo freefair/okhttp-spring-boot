@@ -7,13 +7,14 @@
 
 ## Available Starters
 
-- `okhttp3-spring-boot-starter`
-- `okhttp-spring-boot-starter` (Alias for `okhttp3-spring-boot-starter`)
+- `okhttp4-spring-boot-starter`
+- `okhttp5-spring-boot-starter`
+- `okhttp-spring-boot-starter` (Alias for `okhttp4-spring-boot-starter`)
 
 ## Using Gradle
 ```gradle
 dependencies {
-    compile "io.freefair.okhttp-spring-boot:okhttp3-spring-boot-starter:$version"
+    compile "io.freefair.okhttp-spring-boot:okhttp-spring-boot-starter:$version"
 }
 ```
 ## Using Maven
