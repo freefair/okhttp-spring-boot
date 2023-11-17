@@ -13,6 +13,7 @@ dependencies {
     api platform(SpringBootPlugin.BOM_COORDINATES)
 
     constraints {
+        api project(":okhttp-spring-client")
         api project(":okhttp-spring-boot-autoconfigure")
         api project(":starters:okhttp-spring-boot-starter")
         api project(":starters:okhttp4-spring-boot-starter")
@@ -24,8 +25,6 @@ publishing {
     publications {
         bom(MavenPublication) {
             from components.javaPlatform
-
-            artifactId = 'okhttp-spring-boot-dependencies'
 
             pom {
                 name = 'OkHttp Spring Boot Dependencies'
