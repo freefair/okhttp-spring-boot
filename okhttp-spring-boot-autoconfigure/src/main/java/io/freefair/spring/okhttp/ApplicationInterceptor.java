@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @author Lars Grefer
  * @see NetworkInterceptor
  */
-@Target({METHOD, FIELD, CONSTRUCTOR})
+@Target({METHOD, FIELD, CONSTRUCTOR, TYPE})
 @Retention(RUNTIME)
 @Qualifier
 public @interface ApplicationInterceptor {
