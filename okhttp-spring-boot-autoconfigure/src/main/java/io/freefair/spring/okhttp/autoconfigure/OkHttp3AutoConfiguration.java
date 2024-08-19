@@ -3,6 +3,8 @@ package io.freefair.spring.okhttp.autoconfigure;
 import io.freefair.spring.okhttp.ApplicationInterceptor;
 import io.freefair.spring.okhttp.NetworkInterceptor;
 import io.freefair.spring.okhttp.OkHttp3Configurer;
+import jakarta.annotation.PreDestroy;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.FileSystemUtils;
 
 import javax.net.ssl.HostnameVerifier;
 import java.io.File;
@@ -23,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Lars Grefer
  */
+@Slf4j
 @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @AutoConfiguration
 @ConditionalOnClass(OkHttpClient.class)
@@ -42,6 +46,8 @@ public class OkHttp3AutoConfiguration {
     @Autowired
     @NetworkInterceptor
     private ObjectProvider<Interceptor> networkInterceptors;
+
+    private File tempDirCache = null;
 
     @Bean
     @ConditionalOnMissingBean
@@ -101,8 +107,21 @@ public class OkHttp3AutoConfiguration {
     public Cache okHttp3Cache() throws IOException {
         File directory = okHttpProperties.getCache().getDirectory();
         if (directory == null) {
-            directory = Files.createTempDirectory("okhttp-cache").toFile();
+            tempDirCache = Files.createTempDirectory("okhttp-cache").toFile();
+            directory = tempDirCache;
         }
         return new Cache(directory, okHttpProperties.getCache().getMaxSize().toBytes());
+    }
+
+    @PreDestroy
+    public void deleteTempCache() {
+        if (tempDirCache != null) {
+            log.debug("Deleting the temporary OkHttp Cache at {}", tempDirCache.getAbsolutePath());
+            try {
+                FileSystemUtils.deleteRecursively(tempDirCache);
+            } catch (Exception e) {
+                log.warn("Failed to delete the temporary OkHttp Cache at {}", tempDirCache.getAbsolutePath());
+            }
+        }
     }
 }
