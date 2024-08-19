@@ -6,13 +6,18 @@
 version: 2
 updates:
   - package-ecosystem: "gradle"
-    directory: "/" # Location of package manifests
-    target-branch: "3.1.x"
+    directory: "/"
+    target-branch: "3.2.x"
     schedule:
       interval: "daily"
   - package-ecosystem: "gradle"
     directory: "/"
-    target-branch: "3.2.x"
+    target-branch: "3.3.x"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "/"
+    target-branch: "3.4.x"
     schedule:
       interval: "daily"
 
