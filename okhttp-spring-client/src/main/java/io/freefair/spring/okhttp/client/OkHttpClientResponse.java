@@ -18,7 +18,7 @@ import java.io.InputStream;
  * @see OkHttpClientRequest
  */
 @RequiredArgsConstructor
-class OkHttpClientResponse implements ClientHttpResponse {
+public class OkHttpClientResponse implements ClientHttpResponse {
 
     private final Response okHttpResponse;
 

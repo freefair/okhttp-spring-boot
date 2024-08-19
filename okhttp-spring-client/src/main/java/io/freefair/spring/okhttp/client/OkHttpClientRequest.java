@@ -26,7 +26,7 @@ import java.net.URI;
  * @see OkHttpClientRequestFactory
  */
 @RequiredArgsConstructor
-class OkHttpClientRequest extends AbstractClientHttpRequest implements StreamingHttpOutputMessage {
+public class OkHttpClientRequest extends AbstractClientHttpRequest implements StreamingHttpOutputMessage {
 
     private final OkHttpClient okHttpClient;
 
