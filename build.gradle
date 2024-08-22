@@ -121,5 +121,5 @@ tasks.register('uploadDocumentation', UploadFile) {
 }
 
 tasks.named('wrapper') {
-    distributionType = Wrapper.DistributionType.ALL
+    distributionType = Wrapper.DistributionType.BIN
 }
