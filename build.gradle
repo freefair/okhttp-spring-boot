@@ -1,7 +1,7 @@
 import io.freefair.gradle.plugins.okhttp.tasks.UploadFile
 
 plugins {
-    id "org.springframework.boot" version "3.3.3" apply false
+    id "org.springframework.boot" version "3.3.4" apply false
     id "io.github.gradle-nexus.publish-plugin" version "2.0.0"
     id "io.freefair.git-version"
     id "io.freefair.okhttp"
