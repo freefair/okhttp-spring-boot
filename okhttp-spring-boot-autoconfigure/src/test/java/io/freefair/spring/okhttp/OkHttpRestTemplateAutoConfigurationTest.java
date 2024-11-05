@@ -42,7 +42,7 @@ class OkHttpRestTemplateAutoConfigurationTest {
         ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
 
         while (requestFactory instanceof AbstractClientHttpRequestFactoryWrapper) {
-            requestFactory = ((AbstractClientHttpRequestFactoryWrapper)requestFactory).getDelegate();
+            requestFactory = ((AbstractClientHttpRequestFactoryWrapper) requestFactory).getDelegate();
         }
 
         assertThat(requestFactory).isInstanceOf(OkHttpClientRequestFactory.class);
