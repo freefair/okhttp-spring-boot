@@ -38,7 +38,7 @@ class OkHttpRestTemplateAutoConfigurationTest {
         assertThat(client.writeTimeoutMillis()).isEqualTo(Duration.ofSeconds(21).toMillis());
     }
 
-    private OkHttpClient extractClient(RestTemplate restTemplate) throws NoSuchFieldException, IllegalAccessException {
+    private OkHttpClient extractClient(RestTemplate restTemplate) {
         ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
 
         while (requestFactory instanceof AbstractClientHttpRequestFactoryWrapper) {
