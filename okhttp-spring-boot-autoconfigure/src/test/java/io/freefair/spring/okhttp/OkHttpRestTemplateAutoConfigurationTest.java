@@ -12,7 +12,6 @@ import org.springframework.http.client.AbstractClientHttpRequestFactoryWrapper;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.Field;
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,7 +29,7 @@ class OkHttpRestTemplateAutoConfigurationTest {
 
     @Test
     void testTimeouts() throws NoSuchFieldException, IllegalAccessException {
-        RestTemplate restTemplate = restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(42)).build();
+        RestTemplate restTemplate = restTemplateBuilder.connectTimeout(Duration.ofSeconds(42)).build();
 
         OkHttpClient client = extractClient(restTemplate);
 
@@ -43,9 +42,7 @@ class OkHttpRestTemplateAutoConfigurationTest {
         ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
 
         while (requestFactory instanceof AbstractClientHttpRequestFactoryWrapper) {
-            Field field = AbstractClientHttpRequestFactoryWrapper.class.getDeclaredField("requestFactory");
-            field.setAccessible(true);
-            requestFactory = (ClientHttpRequestFactory) field.get(requestFactory);
+            requestFactory = ((AbstractClientHttpRequestFactoryWrapper) requestFactory).getDelegate();
         }
 
         assertThat(requestFactory).isInstanceOf(OkHttpClientRequestFactory.class);

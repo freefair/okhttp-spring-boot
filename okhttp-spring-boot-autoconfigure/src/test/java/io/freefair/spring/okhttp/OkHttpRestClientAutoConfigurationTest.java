@@ -45,9 +45,7 @@ class OkHttpRestClientAutoConfigurationTest {
         ClientHttpRequestFactory requestFactory = (ClientHttpRequestFactory) clientRequestFactoryField.get(restClient);
 
         while (requestFactory instanceof AbstractClientHttpRequestFactoryWrapper) {
-            Field field = AbstractClientHttpRequestFactoryWrapper.class.getDeclaredField("requestFactory");
-            field.setAccessible(true);
-            requestFactory = (ClientHttpRequestFactory) field.get(requestFactory);
+            requestFactory = ((AbstractClientHttpRequestFactoryWrapper) requestFactory).getDelegate();
         }
 
         assertThat(requestFactory).isInstanceOf(OkHttpClientRequestFactory.class);

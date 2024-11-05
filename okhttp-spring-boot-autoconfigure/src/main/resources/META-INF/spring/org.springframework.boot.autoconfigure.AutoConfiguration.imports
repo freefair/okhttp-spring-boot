@@ -1,5 +1,4 @@
 io.freefair.spring.okhttp.autoconfigure.OkHttp3AutoConfiguration
-io.freefair.spring.okhttp.autoconfigure.OkHttpRestClientAutoConfiguration
-io.freefair.spring.okhttp.autoconfigure.OkHttpRestTemplateAutoConfiguration
+io.freefair.spring.okhttp.autoconfigure.OkHttpClientRequestFactoryBuilderAutoConfiguration
 io.freefair.spring.okhttp.autoconfigure.metrics.OkHttpMetricsAutoConfiguration
 io.freefair.spring.okhttp.autoconfigure.logging.OkHttp3LoggingInterceptorAutoConfiguration
