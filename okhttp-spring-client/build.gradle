@@ -12,6 +12,4 @@ dependencies {
 
     api "com.squareup.okhttp3:okhttp"
     api "org.springframework:spring-web"
-
-    compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
