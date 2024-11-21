@@ -29,6 +29,10 @@ allprojects {
         }
     }
 
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += ['-Werror']
+    }
+
     tasks.withType(Javadoc).configureEach {
         options.addBooleanOption "Xdoclint:-missing", true
         failOnError = false
