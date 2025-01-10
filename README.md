@@ -21,7 +21,7 @@ dependencies {
 ```xml
 <dependency>
     <groupId>io.freefair.okhttp-spring-boot</groupId>
-    <artifactId>okhttp3-spring-boot-starter</artifactId>
+    <artifactId>okhttp-spring-boot-starter</artifactId>
     <version>${version}</version>
 </dependency>
 ```
