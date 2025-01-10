@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.FileSystemUtils;
 
 import javax.net.ssl.HostnameVerifier;
@@ -83,6 +84,10 @@ public class OkHttp3AutoConfiguration {
         builder.followRedirects(okHttpProperties.isFollowRedirects());
         builder.followSslRedirects(okHttpProperties.isFollowSslRedirects());
         builder.retryOnConnectionFailure(okHttpProperties.isRetryOnConnectionFailure());
+
+        if (!CollectionUtils.isEmpty(okHttpProperties.getProtocols())) {
+            builder.protocols(okHttpProperties.getProtocols());
+        }
 
         applicationInterceptors.forEach(builder::addInterceptor);
 

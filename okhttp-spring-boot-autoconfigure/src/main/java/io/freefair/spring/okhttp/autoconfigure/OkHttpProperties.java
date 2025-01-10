@@ -1,12 +1,14 @@
 package io.freefair.spring.okhttp.autoconfigure;
 
 import lombok.Data;
+import okhttp3.Protocol;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.util.unit.DataSize;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.List;
 
 /**
  * @author Lars Grefer
@@ -57,6 +59,11 @@ public class OkHttpProperties {
      * Whether to retry or not when a connectivity problem is encountered.
      */
     private boolean retryOnConnectionFailure = true;
+
+    /**
+     * Configure the protocols used by this client to communicate with remote servers.
+     */
+    private List<Protocol> protocols = null;
 
     @NestedConfigurationProperty
     private final ConnectionPoolProperties connectionPool = new ConnectionPoolProperties();

@@ -4,6 +4,7 @@ import io.freefair.spring.okhttp.autoconfigure.OkHttp3AutoConfiguration;
 import okhttp3.Cache;
 import okhttp3.Dns;
 import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.File;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -71,6 +73,39 @@ public class OkHttp3AutoConfigurationTest {
                     assertThat(context).hasSingleBean(OkHttpClient.class);
 
                     assertThat(context.getBean(OkHttpClient.class).cache()).isEqualTo(CustomCacheConfiguration.CACHE);
+                });
+    }
+
+    @Test
+    public void testProtocols() {
+        applicationContextRunner
+                .withPropertyValues("okhttp.protocols=H2_PRIOR_KNOWLEDGE")
+                .run(context -> {
+                    assertThat(context).hasSingleBean(OkHttpClient.class);
+
+                    List<Protocol> protocols = context.getBean(OkHttpClient.class).protocols();
+                    assertThat(protocols).containsExactly(Protocol.H2_PRIOR_KNOWLEDGE);
+                });
+    }
+
+    @Test
+    public void testProtocols_invalid() {
+        applicationContextRunner
+                .withPropertyValues("okhttp.protocols=Foo")
+                .run(context -> {
+                    assertThat(context).hasFailed();
+                });
+    }
+
+    @Test
+    public void testProtocols_empty() {
+        applicationContextRunner
+                .withPropertyValues("okhttp.protocols=")
+                .run(context -> {
+                    assertThat(context).hasSingleBean(OkHttpClient.class);
+
+                    List<Protocol> protocols = context.getBean(OkHttpClient.class).protocols();
+                    assertThat(protocols).contains(Protocol.HTTP_1_1, Protocol.HTTP_2);
                 });
     }
 
