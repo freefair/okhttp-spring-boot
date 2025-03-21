@@ -27,6 +27,11 @@ allprojects {
                 from rootProject.file("LICENSE")
             }
         }
+
+        dependencies {
+            testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+            testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+        }
     }
 
     tasks.withType(JavaCompile).configureEach {
