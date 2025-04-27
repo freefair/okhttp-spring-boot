@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
 import org.springframework.boot.ssl.SslBundle;
+import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.net.ssl.SSLContext;
@@ -23,8 +24,16 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
     private final OkHttpClient okHttpClient;
 
     @Override
-    public OkHttpClientRequestFactory build(ClientHttpRequestFactorySettings settings) {
+    public OkHttpClientRequestFactory build() {
+        return this.build(null);
+    }
+
+    @Override
+    public OkHttpClientRequestFactory build(@Nullable ClientHttpRequestFactorySettings settings) {
         OkHttpClient.Builder builder = okHttpClient.newBuilder();
+        if (settings == null) {
+            return new OkHttpClientRequestFactory(builder.build());
+        }
 
         Duration connectTimeout = settings.connectTimeout();
         if (connectTimeout != null) {
