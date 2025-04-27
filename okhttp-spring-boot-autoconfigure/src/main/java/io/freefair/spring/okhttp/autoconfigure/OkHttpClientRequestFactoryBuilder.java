@@ -6,7 +6,6 @@ import okhttp3.OkHttpClient;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
 import org.springframework.boot.ssl.SslBundle;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.net.ssl.SSLContext;

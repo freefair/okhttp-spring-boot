@@ -10,6 +10,7 @@ description = "OkHttp Spring Client"
 dependencies {
     implementation platform(project(":okhttp-spring-boot-dependencies"))
 
+    api "org.jspecify:jspecify"
     api "com.squareup.okhttp3:okhttp"
     api "org.springframework:spring-web"
 }
