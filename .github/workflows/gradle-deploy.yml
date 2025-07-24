@@ -9,7 +9,7 @@ on:
       - 'dependabot**'
 
 jobs:
-  deploy-plugin:
+  deploy-docs:
     runs-on: ubuntu-latest
     env:
       ORG_GRADLE_PROJECT_freefairBuildCachePassword: ${{ secrets.BUILD_CACHE_PASSWORD }}
@@ -25,8 +25,3 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
       - run: ./gradlew uploadDocumentation -s
-      - run: ./gradlew publish
-        if: ${{ github.event_name == 'push' && github.ref_type == 'branch' }}
-        env:
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.OSSRH_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.OSSRH_PASSWORD }}
