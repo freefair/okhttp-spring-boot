@@ -18,14 +18,15 @@ jobs:
           distribution: 'temurin'
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
-      - name: Publish package
-        run: ./gradlew --no-parallel publishToSonatype uploadDocumentation closeAndReleaseSonatypeStagingRepository
+      - name: Publish local
+        run: ./gradlew publish
         env:
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.OSSRH_USERNAME }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.OSSRH_PASSWORD }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.FREEFAIR_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.FREEFAIR_SIGNING_PASSWORD }}
-          GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
-          GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+      - name: Publish package
+        run: ./gradlew --no-parallel uploadDocumentation jreleaserFullRelease
+        env:
+          JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          JRELEASER_MAVENCENTRAL_TOKEN: ${{ secrets.OSSRH_PASSWORD }}
           ORG_GRADLE_PROJECT_freefairDocsUser: ${{ secrets.FREEFAIR_DOCS_USER }}
           ORG_GRADLE_PROJECT_freefairDocsPass: ${{ secrets.FREEFAIR_DOCS_PASS }}
