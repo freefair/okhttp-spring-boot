@@ -30,6 +30,10 @@ dependencies {
     api 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.slf4j:slf4j-api'
 
+    optional 'org.springframework.boot:spring-boot-http-client'
+    optional 'org.springframework.boot:spring-boot-restclient'
+    optional 'org.springframework.boot:spring-boot-metrics'
+
     optional project(':okhttp-spring-client')
     optional 'org.springframework:spring-web'
     optional 'org.springframework.boot:spring-boot-starter-actuator'

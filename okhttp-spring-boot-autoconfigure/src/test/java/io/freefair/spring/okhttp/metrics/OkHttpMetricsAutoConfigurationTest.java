@@ -5,9 +5,9 @@ import io.micrometer.core.instrument.MeterRegistry;
 import okhttp3.EventListener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.actuate.autoconfigure.metrics.CompositeMeterRegistryAutoConfiguration;
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
+import org.springframework.boot.metrics.autoconfigure.CompositeMeterRegistryAutoConfiguration;
+import org.springframework.boot.metrics.autoconfigure.MetricsAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;

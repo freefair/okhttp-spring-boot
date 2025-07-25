@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
+import org.springframework.boot.http.client.HttpRedirects;
 import org.springframework.boot.ssl.SslBundle;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -59,7 +60,7 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
             builder.sslSocketFactory(socketFactory, (X509TrustManager) trustManagers[0]);
         }
 
-        ClientHttpRequestFactorySettings.Redirects redirects = settings.redirects();
+        HttpRedirects redirects = settings.redirects();
         if (redirects != null) {
             switch (redirects) {
                 case FOLLOW_WHEN_POSSIBLE, FOLLOW -> {
