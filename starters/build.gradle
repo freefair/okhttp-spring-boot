@@ -6,4 +6,6 @@ subprojects { Project starterProject ->
             attributes 'Spring-Boot-Jar-Type': 'dependencies-starter'
         }
     }
+
+    test.useJUnitPlatform()
 }
