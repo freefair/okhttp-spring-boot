@@ -2,11 +2,11 @@ import io.freefair.gradle.plugins.okhttp.tasks.UploadFile
 
 plugins {
     id "org.springframework.boot" version "4.0.0-M1" apply false
-    id "io.github.gradle-nexus.publish-plugin" version "2.0.0"
     id "io.freefair.git-version"
     id "io.freefair.okhttp"
     id "io.freefair.maven-central.validate-poms" apply false
     id "io.freefair.aggregate-javadoc"
+    id 'org.jreleaser' version '1.19.0'
 }
 
 allprojects {
@@ -90,19 +90,18 @@ allprojects {
                     }
                 }
             }
+
+            repositories {
+                maven {
+                    name = "mavenCentralStaging"
+                    url = rootProject.layout.buildDirectory.dir('staging-deploy')
+                }
+            }
         }
     }
 }
 
 apply plugin: "maven-publish"
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            stagingProfileId = '7e6204597a774f'
-        }
-    }
-}
 
 dependencies {
     javadoc project(":okhttp-spring-client")
@@ -131,4 +130,46 @@ tasks.register('uploadDocumentation', UploadFile) {
 
 tasks.named('wrapper') {
     distributionType = Wrapper.DistributionType.BIN
+}
+
+jreleaser {
+    project {
+        license = 'MIT'
+        inceptionYear = '2016'
+    }
+    signing {
+        active = 'NEVER'
+    }
+    release {
+        github {
+            repoOwner = "freefair"
+            name = "okhttp-spring-boot"
+            tagName = "$version"
+            skipTag = true
+            overwrite = false
+            update {
+                enabled = true
+            }
+            releaseNotes {
+                enabled = false
+            }
+            changelog {
+                enabled = true
+            }
+        }
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'RELEASE'
+                    namespace = "io.freefair"
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    sign = false //Already done by Gradle
+                    checksums = false //Already done by Gradle
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
+    }
 }
