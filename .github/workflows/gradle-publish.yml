@@ -26,8 +26,8 @@ jobs:
       - name: Publish package
         run: ./gradlew --no-parallel uploadDocumentation jreleaserFullRelease
         env:
-          JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          JRELEASER_MAVENCENTRAL_TOKEN: ${{ secrets.OSSRH_PASSWORD }}
+          JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.MAVENCENTRAL_USERNAME }}
+          JRELEASER_MAVENCENTRAL_PASSWORD: ${{ secrets.MAVENCENTRAL_PASSWORD }}
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_freefairDocsUser: ${{ secrets.FREEFAIR_DOCS_USER }}
           ORG_GRADLE_PROJECT_freefairDocsPass: ${{ secrets.FREEFAIR_DOCS_PASS }}

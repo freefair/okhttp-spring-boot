@@ -168,7 +168,6 @@ jreleaser {
                     sign = false //Already done by Gradle
                     checksums = false //Already done by Gradle
                     stagingRepository('build/staging-deploy')
-                    retryDelay = 20
                 }
             }
         }
