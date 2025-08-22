@@ -32,7 +32,7 @@ dependencies {
 
     optional 'org.springframework.boot:spring-boot-http-client'
     optional 'org.springframework.boot:spring-boot-restclient'
-    optional 'org.springframework.boot:spring-boot-metrics'
+    optional 'org.springframework.boot:spring-boot-micrometer-metrics'
 
     optional project(':okhttp-spring-client')
     optional 'org.springframework:spring-web'
