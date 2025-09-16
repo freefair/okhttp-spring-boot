@@ -44,6 +44,6 @@ class StreamingBodyRequestBody extends RequestBody {
 
     @Override
     public boolean isOneShot() {
-        return true;
+        return !streamingBody.repeatable();
     }
 }
