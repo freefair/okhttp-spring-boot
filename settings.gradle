@@ -20,17 +20,6 @@ develocity {
     }
 }
 
-buildCache {
-    remote(HttpBuildCache) {
-        url = 'https://build-cache.grefer-hosting.de/cache/'
-        push = isCiServer
-        credentials {
-            username = "freefair"
-            password = providers.gradleProperty('freefairBuildCachePassword').getOrElse(null)
-        }
-    }
-}
-
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
