@@ -12,7 +12,6 @@ jobs:
   deploy-docs:
     runs-on: ubuntu-latest
     env:
-      ORG_GRADLE_PROJECT_freefairBuildCachePassword: ${{ secrets.BUILD_CACHE_PASSWORD }}
       ORG_GRADLE_PROJECT_freefairDocsUser: ${{ secrets.FREEFAIR_DOCS_USER }}
       ORG_GRADLE_PROJECT_freefairDocsPass: ${{ secrets.FREEFAIR_DOCS_PASS }}
     steps:
@@ -23,5 +22,5 @@ jobs:
           java-version: 17
           distribution: 'temurin'
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
       - run: ./gradlew uploadDocumentation -s
