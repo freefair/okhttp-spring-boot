@@ -24,10 +24,10 @@ jobs:
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.FREEFAIR_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.FREEFAIR_SIGNING_PASSWORD }}
       - name: Publish package
-        run: ./gradlew --no-parallel uploadDocumentation jreleaserFullRelease
+        run: ./gradlew --no-parallel uploadDocumentation jreleaserDeploy
         env:
           JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.MAVENCENTRAL_USERNAME }}
-          JRELEASER_MAVENCENTRAL_PASSWORD: ${{ secrets.MAVENCENTRAL_PASSWORD }}
+          JRELEASER_MAVENCENTRAL_TOKEN: ${{ secrets.MAVENCENTRAL_PASSWORD }}
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ORG_GRADLE_PROJECT_freefairDocsUser: ${{ secrets.FREEFAIR_DOCS_USER }}
           ORG_GRADLE_PROJECT_freefairDocsPass: ${{ secrets.FREEFAIR_DOCS_PASS }}
