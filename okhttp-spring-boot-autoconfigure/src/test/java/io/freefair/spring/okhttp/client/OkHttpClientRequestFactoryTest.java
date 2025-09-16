@@ -7,6 +7,7 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,28 +27,40 @@ class OkHttpClientRequestFactoryTest {
 
     @Test
     void get() {
-        String response = restTemplate.getForObject("https://httpbin.org/get", String.class);
+        try {
+            String response = restTemplate.getForObject("https://httpbin.org/get", String.class);
 
-        assertThat(response).contains("okhttp");
+            assertThat(response).contains("okhttp");
+        } catch (HttpServerErrorException.ServiceUnavailable ignored) {
+        }
     }
 
     @Test
     void put() {
-        restTemplate.put("https://httpbin.org/put", "foo");
+        try {
+            restTemplate.put("https://httpbin.org/put", "foo");
+        } catch (HttpServerErrorException.ServiceUnavailable ignored) {
+        }
     }
 
     @Test
     void post() {
-        String response = restTemplate.postForObject("https://httpbin.org/post", "foobar", String.class);
+        try {
+            String response = restTemplate.postForObject("https://httpbin.org/post", "foobar", String.class);
 
-        assertThat(response).contains("foobar");
+            assertThat(response).contains("foobar");
+        } catch (HttpServerErrorException.ServiceUnavailable ignored) {
+        }
     }
 
     @Test
     void post_empty() {
-        String response = restTemplate.postForObject("https://httpbin.org/post", null, String.class);
+        try {
+            String response = restTemplate.postForObject("https://httpbin.org/post", null, String.class);
 
-        assertThat(response).contains("headers");
+            assertThat(response).contains("headers");
+        } catch (HttpServerErrorException.ServiceUnavailable ignored) {
+        }
     }
 
     @SpringBootConfiguration
