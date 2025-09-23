@@ -1,8 +1,7 @@
 package io.freefair.spring.okhttp.client;
 
-import kotlin.Pair;
+import io.freefair.spring.okhttp.OkHttpUtils;
 import lombok.RequiredArgsConstructor;
-import okhttp3.Headers;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.springframework.http.HttpHeaders;
@@ -55,24 +54,10 @@ public class OkHttpClientResponse implements ClientHttpResponse {
     @Override
     public HttpHeaders getHeaders() {
         if (springHeaders == null) {
-            springHeaders = convertHeaders(okHttpResponse.headers());
+            springHeaders = OkHttpUtils.toSpringHeaders(okHttpResponse.headers());
         }
 
         return springHeaders;
     }
-
-    /**
-     * Converts the given {@link Headers OkHttp Headers} to {@link HttpHeaders Spring Web HttpHeaders}
-     */
-    static HttpHeaders convertHeaders(Headers okHttpHeaders) {
-        HttpHeaders springHeaders = new HttpHeaders();
-
-        for (Pair<? extends String, ? extends String> header : okHttpHeaders) {
-            springHeaders.add(header.getFirst(), header.getSecond());
-        }
-
-        return springHeaders;
-    }
-
 
 }
