@@ -1,4 +1,4 @@
-package io.freefair.spring.okhttp.client;
+package io.freefair.spring.okhttp;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;

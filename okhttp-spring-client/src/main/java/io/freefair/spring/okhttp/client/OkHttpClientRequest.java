@@ -117,8 +117,6 @@ public class OkHttpClientRequest extends AbstractClientHttpRequest implements St
         });
 
         return builder.build();
-
-
     }
 
 }
