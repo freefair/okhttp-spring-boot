@@ -3,8 +3,8 @@ package io.freefair.spring.okhttp;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import okhttp3.ResponseBody;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.AbstractResource;
-import org.springframework.lang.Nullable;
 
 import java.io.Closeable;
 import java.io.FileNotFoundException;

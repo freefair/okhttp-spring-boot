@@ -4,11 +4,11 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
 import okio.Okio;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.MimeType;
 
 import java.io.IOException;

@@ -1,11 +1,11 @@
 package io.freefair.spring.okhttp;
 
 import okhttp3.Response;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMessage;
-import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import java.net.URI;
