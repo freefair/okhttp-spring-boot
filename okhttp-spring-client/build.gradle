@@ -1,7 +1,6 @@
 plugins {
     id 'java-library'
     id "io.freefair.lombok"
-    id "io.freefair.javadoc-links"
     id "io.freefair.maven-publish-java"
 }
 
