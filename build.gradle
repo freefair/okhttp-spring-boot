@@ -42,8 +42,8 @@ allprojects {
     tasks.withType(Javadoc).configureEach {
         options.addBooleanOption "Xdoclint:-missing", true
         options.links "https://square.github.io/okhttp/5.x/"
-        options.links "https://docs.spring.io/spring-boot/3.5/api/java/"
-        options.links "https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/"
+        options.links "https://docs.spring.io/spring-boot/4.0/api/java/"
+        options.links "https://docs.spring.io/spring-framework/docs/7.0.x/javadoc-api/"
     }
 
     plugins.withId("maven-publish") {
