@@ -43,7 +43,7 @@ allprojects {
         options.addBooleanOption "Xdoclint:-missing", true
         failOnError = false
         options.links "https://square.github.io/okhttp/5.x/"
-        options.links "https://docs.spring.io/spring-boot/${SpringBootPlugin.SPRING_BOOT_VERSION}/api/java/"
+        options.links "https://docs.spring.io/spring-boot/3.4/api/java/"
         options.links "https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/"
     }
 
