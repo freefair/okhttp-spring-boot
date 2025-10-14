@@ -1,4 +1,5 @@
 import io.freefair.gradle.plugins.okhttp.tasks.UploadFile
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     id "org.springframework.boot" version "4.0.0-M3" apply false
@@ -40,6 +41,9 @@ allprojects {
 
     tasks.withType(Javadoc).configureEach {
         options.addBooleanOption "Xdoclint:-missing", true
+        options.links "https://square.github.io/okhttp/5.x/"
+        options.links "https://docs.spring.io/spring-boot/3.5/api/java/"
+        options.links "https://docs.spring.io/spring-framework/docs/6.2.x/javadoc-api/"
     }
 
     plugins.withId("maven-publish") {
@@ -116,7 +120,6 @@ dependencies {
 tasks.named('javadoc', Javadoc) {
     options.locale "en_US"
     options.linkSource true
-    options.links "https://square.github.io/okhttp/5.x/"
     failOnError = false
 }
 
