@@ -4,7 +4,7 @@ import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import lombok.RequiredArgsConstructor;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
-import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
+import org.springframework.boot.http.client.HttpClientSettings;
 import org.springframework.boot.http.client.HttpRedirects;
 import org.springframework.boot.ssl.SslBundle;
 import org.springframework.lang.Nullable;
@@ -30,7 +30,7 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
     }
 
     @Override
-    public OkHttpClientRequestFactory build(@Nullable ClientHttpRequestFactorySettings settings) {
+    public OkHttpClientRequestFactory build(@Nullable HttpClientSettings settings) {
         OkHttpClient.Builder builder = okHttpClient.newBuilder();
         if (settings == null) {
             return new OkHttpClientRequestFactory(builder.build());
