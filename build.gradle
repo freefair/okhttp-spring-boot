@@ -2,7 +2,7 @@ import io.freefair.gradle.plugins.okhttp.tasks.UploadFile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id "org.springframework.boot" version "4.0.0-RC2" apply false
+    id "org.springframework.boot" version "4.0.0" apply false
     id "io.freefair.git-version"
     id "io.freefair.okhttp"
     id "io.freefair.maven-central.validate-poms" apply false
