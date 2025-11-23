@@ -4,5 +4,5 @@ apply plugin: "java-library"
 description = "OkHttp Spring Boot Starter"
 
 dependencies {
-    api project(':starters:okhttp4-spring-boot-starter')
+    api project(':starters:okhttp5-spring-boot-starter')
 }
