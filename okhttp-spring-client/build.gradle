@@ -11,9 +11,11 @@ dependencies {
 
     api "com.squareup.okhttp3:okhttp"
     api "org.springframework:spring-web"
+    api 'org.jspecify:jspecify'
 
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.springframework.boot:spring-boot-starter-web"
+    testImplementation("org.instancio:instancio-junit:latest.release")
 }
 
 tasks.named("test", Test) {
