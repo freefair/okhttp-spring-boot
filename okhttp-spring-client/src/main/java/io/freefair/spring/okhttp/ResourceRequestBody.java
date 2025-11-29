@@ -4,25 +4,28 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
 import okio.Okio;
+import org.jspecify.annotations.Nullable;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.lang.Nullable;
 import org.springframework.util.MimeType;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ * @see org.springframework.core.io.Resource
+ * @see org.springframework.util.MimeType
+ * @see okhttp3.RequestBody
+ * @see okhttp3.MediaType
  * @author Lars Grefer
  */
 public class ResourceRequestBody extends RequestBody {
 
     private final Resource resource;
 
-    @Nullable
-    private final MediaType mediaType;
+    private final @Nullable MediaType mediaType;
 
     public ResourceRequestBody(Resource resource) {
         this.resource = resource;
@@ -34,14 +37,13 @@ public class ResourceRequestBody extends RequestBody {
         this.mediaType = MediaType.parse(springMimeType.toString());
     }
 
-    public ResourceRequestBody(Resource resource, MediaType okhttpMediaType) {
+    public ResourceRequestBody(Resource resource, @Nullable MediaType okhttpMediaType) {
         this.resource = resource;
         this.mediaType = okhttpMediaType;
     }
 
     @Override
-    @Nullable
-    public MediaType contentType() {
+    public @Nullable MediaType contentType() {
         return mediaType;
     }
 

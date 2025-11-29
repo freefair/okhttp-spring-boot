@@ -20,6 +20,7 @@ import java.util.List;
 @UtilityClass
 @NullMarked
 public class OkHttpUtils {
+    public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 
     public static HttpHeaders toSpringHeaders (@NonNull Headers okhttpHeaders) {
         var springHeaders = new HttpHeaders();

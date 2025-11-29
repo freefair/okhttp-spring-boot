@@ -1,12 +1,14 @@
 package io.freefair.spring.okhttp.client;
 
+import lombok.Getter;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.StreamingHttpOutputMessage;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 
@@ -23,22 +25,15 @@ class StreamingBodyRequestBody extends RequestBody {
 
     private final MediaType contentType;
 
-    @Nullable
-    private final long contentLength;
+    @Getter(onMethod_=@Override) @Accessors(fluent = true) private final long contentLength;
 
-    @Nullable
     @Override
-    public MediaType contentType() {
+    public @Nullable MediaType contentType() {
         return contentType;
     }
 
     @Override
-    public long contentLength() {
-        return contentLength;
-    }
-
-    @Override
-    public void writeTo(@NotNull BufferedSink bufferedSink) throws IOException {
+    public void writeTo(@NonNull BufferedSink bufferedSink) throws IOException {
         streamingBody.writeTo(bufferedSink.outputStream());
     }
 

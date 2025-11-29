@@ -1,4 +1,4 @@
-@NonNullApi
+@NullMarked
 package io.freefair.spring.okhttp.client;
 
-import org.springframework.lang.NonNullApi;
+import org.jspecify.annotations.NullMarked;
