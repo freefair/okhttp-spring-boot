@@ -9,6 +9,7 @@ import org.springframework.util.unit.DataSize;
 import java.io.File;
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lars Grefer
@@ -19,6 +20,8 @@ public class OkHttpProperties {
 
     /**
      * The default connect timeout for new connections.
+     * @see okhttp3.OkHttpClient.Builder#connectTimeout(java.time.Duration)
+     * @see okhttp3.Interceptor.Chain#withConnectTimeout(int, TimeUnit)
      */
     private Duration connectTimeout = Duration.ofSeconds(10);
 
@@ -61,7 +64,7 @@ public class OkHttpProperties {
     private boolean retryOnConnectionFailure = true;
 
     /**
-     * Configure the protocols used by this client to communicate with remote servers.
+     * Configure the {@link Protocol Protocols} used by this client to communicate with remote servers.
      */
     private List<Protocol> protocols = null;
 

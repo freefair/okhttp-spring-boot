@@ -5,7 +5,15 @@ import io.freefair.spring.okhttp.NetworkInterceptor;
 import io.freefair.spring.okhttp.OkHttp3Configurer;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
+import okhttp3.Cache;
+import okhttp3.CertificatePinner;
+import okhttp3.ConnectionPool;
+import okhttp3.CookieJar;
+import okhttp3.Dispatcher;
+import okhttp3.Dns;
+import okhttp3.EventListener;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -59,7 +67,8 @@ public class OkHttp3AutoConfiguration {
             ObjectProvider<HostnameVerifier> hostnameVerifier,
             ObjectProvider<CertificatePinner> certificatePinner,
             ConnectionPool connectionPool,
-            ObjectProvider<EventListener> eventListener
+            ObjectProvider<EventListener> eventListener,
+            ObjectProvider<Dispatcher> dispatcher
     ) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
@@ -94,6 +103,8 @@ public class OkHttp3AutoConfiguration {
         networkInterceptors.forEach(builder::addNetworkInterceptor);
 
         configurers.forEach(configurer -> configurer.configure(builder));
+
+        dispatcher.ifUnique(builder::dispatcher);
 
         return builder.build();
     }
