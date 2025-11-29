@@ -114,7 +114,7 @@ public class OkHttpUtils {
         // encodedPathSegments.toPathString(this)
         List<String> encodedPathSegments = b.getEncodedPathSegments$okhttp();
         for (var ps : encodedPathSegments){
-            if (nonEmpty(ps)){// избавимся и от финальной / и от // (пустой pathSegment: имеет право на жизнь, но Spring чистит 🤷‍♀️)
+            if (nonEmpty(ps)){// let's get rid of both the final / and // (empty pathSegment: has the right to live, but Spring cleans up)
                 sb.append('/').append(ps);
             }
         }
@@ -133,7 +133,7 @@ public class OkHttpUtils {
                     sb.append('=').append(value);
                 }
                 if (it.hasNext()){
-                    sb.append('&');// за нами есть ещё кто-то
+                    sb.append('&');// there's someone else behind us
                 }
             }
         }

@@ -187,7 +187,7 @@ class OkHttpUtilsTest {
         assertEquals("http://ya.ru", OkHttpUtils.toString(b, false));
         assertEquals("http://ya.ru/", OkHttpUtils.toString(b, true));
 
-        b.port(80);// у http такой по умолчанию ⇒ ignore
+        b.port(80);// default http port ⇒ ignore
         assertEquals("http://ya.ru//", b.toString());
         assertEquals("http://ya.ru", OkHttpUtils.toString(b, false));
         assertEquals("http://ya.ru/", OkHttpUtils.toString(b, true));
