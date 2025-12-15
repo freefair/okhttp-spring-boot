@@ -2,10 +2,12 @@ package io.freefair.spring.okhttp.autoconfigure;
 
 import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import lombok.RequiredArgsConstructor;
+import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.ClientHttpRequestFactorySettings;
 import org.springframework.boot.ssl.SslBundle;
+import org.springframework.boot.ssl.SslOptions;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
@@ -14,6 +16,7 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.time.Duration;
+import java.util.List;
 
 /**
  * @author Lars Grefer
@@ -47,7 +50,16 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
 
         SslBundle sslBundle = settings.sslBundle();
         if (sslBundle != null) {
-            Assert.state(!sslBundle.getOptions().isSpecified(), "SSL Options cannot be specified with OkHttp");
+
+            SslOptions sslOptions = sslBundle.getOptions();
+            if (sslOptions.isSpecified()) {
+                ConnectionSpec connectionSpec = new ConnectionSpec.Builder(true)
+                        .cipherSuites(sslOptions.getCiphers())
+                        .tlsVersions(sslOptions.getEnabledProtocols())
+                        .build();
+
+                builder.connectionSpecs(List.of(connectionSpec));
+            }
 
             SSLContext sslContext = sslBundle.createSslContext();
             SSLSocketFactory socketFactory = sslContext.getSocketFactory();
