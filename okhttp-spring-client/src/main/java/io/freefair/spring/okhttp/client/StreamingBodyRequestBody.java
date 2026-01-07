@@ -4,9 +4,8 @@ import lombok.RequiredArgsConstructor;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.BufferedSink;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.StreamingHttpOutputMessage;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 
@@ -23,7 +22,6 @@ class StreamingBodyRequestBody extends RequestBody {
 
     private final MediaType contentType;
 
-    @Nullable
     private final long contentLength;
 
     @Nullable
@@ -38,7 +36,7 @@ class StreamingBodyRequestBody extends RequestBody {
     }
 
     @Override
-    public void writeTo(@NotNull BufferedSink bufferedSink) throws IOException {
+    public void writeTo(BufferedSink bufferedSink) throws IOException {
         streamingBody.writeTo(bufferedSink.outputStream());
     }
 

@@ -1,7 +1,6 @@
 package io.freefair.spring.okhttp;
 
 import okhttp3.Response;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +20,6 @@ public class OkHttpResponseResource extends OkHttpResponseBodyResource implement
     }
 
     @Override
-    @NonNull
     public String getDescription() {
         return "OkHttpResponse [ " + response + " ]";
     }
@@ -39,19 +37,16 @@ public class OkHttpResponseResource extends OkHttpResponseBodyResource implement
     }
 
     @Override
-    @NonNull
     public URL getURL() {
         return response.request().url().url();
     }
 
     @Override
-    @NonNull
     public URI getURI() {
         return response.request().url().uri();
     }
 
     @Override
-    @NonNull
     public HttpHeaders getHeaders() {
         return OkHttpUtils.toSpringHeaders(response.headers());
     }

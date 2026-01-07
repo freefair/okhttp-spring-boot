@@ -1,7 +1,6 @@
 package io.freefair.spring.okhttp.client;
 
 import okhttp3.OkHttpClient;
-import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -15,7 +14,7 @@ import java.net.URI;
  *
  * @author Lars Grefer
  */
-public record OkHttpClientRequestFactory(@NonNull OkHttpClient okHttpClient) implements ClientHttpRequestFactory {
+public record OkHttpClientRequestFactory(OkHttpClient okHttpClient) implements ClientHttpRequestFactory {
 
     @Override
     public ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod) {
