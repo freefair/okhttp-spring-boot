@@ -4,12 +4,12 @@ import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import lombok.RequiredArgsConstructor;
 import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.HttpClientSettings;
 import org.springframework.boot.http.client.HttpRedirects;
 import org.springframework.boot.ssl.SslBundle;
 import org.springframework.boot.ssl.SslOptions;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import javax.net.ssl.SSLContext;

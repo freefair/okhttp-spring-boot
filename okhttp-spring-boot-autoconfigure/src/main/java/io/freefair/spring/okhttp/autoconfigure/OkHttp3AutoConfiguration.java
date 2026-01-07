@@ -6,6 +6,7 @@ import io.freefair.spring.okhttp.OkHttp3Configurer;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
@@ -48,6 +49,7 @@ public class OkHttp3AutoConfiguration {
     @NetworkInterceptor
     private ObjectProvider<Interceptor> networkInterceptors;
 
+    @Nullable
     private File tempDirCache = null;
 
     @Bean
