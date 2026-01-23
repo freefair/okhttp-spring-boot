@@ -7,17 +7,17 @@ version: 2
 updates:
   - package-ecosystem: "gradle"
     directory: "/"
-    target-branch: "3.4.x"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "gradle"
-    directory: "/"
     target-branch: "3.5.x"
     schedule:
       interval: "daily"
   - package-ecosystem: "gradle"
     directory: "/"
     target-branch: "4.0.x"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "gradle"
+    directory: "/"
+    target-branch: "4.1.x"
     schedule:
       interval: "daily"
 
