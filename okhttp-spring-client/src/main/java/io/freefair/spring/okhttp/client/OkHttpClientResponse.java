@@ -1,6 +1,7 @@
 package io.freefair.spring.okhttp.client;
 
 import io.freefair.spring.okhttp.OkHttpUtils;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -15,11 +16,12 @@ import java.io.InputStream;
  *
  * @author Lars Grefer
  * @see OkHttpClientRequest
+ * @see org.springframework.http.client.OkHttp3ClientHttpResponse
  */
 @RequiredArgsConstructor
 public class OkHttpClientResponse implements ClientHttpResponse {
 
-    private final Response okHttpResponse;
+    @Getter private final Response okHttpResponse;
 
     private HttpHeaders springHeaders;
 

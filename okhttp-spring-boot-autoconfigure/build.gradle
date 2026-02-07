@@ -28,6 +28,7 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-autoconfigure'
     implementation 'org.slf4j:slf4j-api'
+    api 'org.jspecify:jspecify'
 
     optional project(':okhttp-spring-client')
     optional 'org.springframework:spring-web'
