@@ -1,7 +1,7 @@
 import io.freefair.gradle.plugins.okhttp.tasks.UploadFile
 
 plugins {
-    id "org.springframework.boot" version "3.5.11" apply false
+    id "org.springframework.boot" version "3.5.13" apply false
     id "io.freefair.git-version"
     id "io.freefair.okhttp"
     id "io.freefair.maven-central.validate-poms" apply false
