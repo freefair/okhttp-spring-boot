@@ -45,7 +45,7 @@ public class SslBundleTest {
 
         RestTemplate restTemplate = restTemplateBuilder
                 .sslBundle(ssl)
-                .rootUri("https://localhost:" + port)
+                .baseUri("https://localhost:" + port)
                 .build();
 
         String result = restTemplate.getForObject("/foo", String.class);

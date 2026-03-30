@@ -28,7 +28,7 @@ class OkHttpClientRequestFactoryTest {
     @BeforeEach
     void setUp() {
         restTemplate = restTemplateBuilder
-                .rootUri("http://localhost:" + port)
+                .baseUri("http://localhost:" + port)
                 .build();
     }
 
