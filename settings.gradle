@@ -23,7 +23,6 @@ develocity {
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
-        maven { url = 'https://repo.spring.io/milestone' }
     }
 }
 
@@ -32,7 +31,6 @@ include 'okhttp-spring-client'
 include 'okhttp-spring-boot-dependencies'
 include 'okhttp-spring-boot-autoconfigure'
 include 'starters:okhttp-spring-boot-starter'
-include 'starters:okhttp4-spring-boot-starter'
 include 'starters:okhttp5-spring-boot-starter'
 
 rootProject.name = 'okhttp-spring-boot'

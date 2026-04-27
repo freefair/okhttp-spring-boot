@@ -11,6 +11,7 @@ dependencies {
     api project(':okhttp-spring-boot-autoconfigure')
     api project(':okhttp-spring-client')
     api 'com.squareup.okhttp3:okhttp'
+    api 'com.squareup.okhttp3:logging-interceptor'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
