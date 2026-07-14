@@ -6,7 +6,7 @@ plugins {
     id "io.freefair.okhttp"
     id "io.freefair.maven-central.validate-poms" apply false
     id "io.freefair.aggregate-javadoc"
-    id 'org.jreleaser' version '1.24.0'
+    id 'org.jreleaser' version '1.25.0'
 }
 
 allprojects {
