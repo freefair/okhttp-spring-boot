@@ -52,13 +52,8 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
         SslBundle sslBundle = settings.sslBundle();
         if (sslBundle != null) {
 
-            SslOptions sslOptions = sslBundle.getOptions();
-            if (sslOptions.isSpecified()) {
-                ConnectionSpec connectionSpec = new ConnectionSpec.Builder(true)
-                        .cipherSuites(sslOptions.getCiphers())
-                        .tlsVersions(sslOptions.getEnabledProtocols())
-                        .build();
-
+            ConnectionSpec connectionSpec = toConnectionSpec(sslBundle.getOptions());
+            if (connectionSpec != null) {
                 builder.connectionSpecs(List.of(connectionSpec));
             }
 
@@ -88,5 +83,24 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
         }
 
         return new OkHttpClientRequestFactory(builder.build());
+    }
+
+    @Nullable
+    static ConnectionSpec toConnectionSpec(@Nullable SslOptions sslOptions) {
+        if (sslOptions == null || !sslOptions.isSpecified()) {
+            return null;
+        }
+
+        ConnectionSpec.Builder connectionSpecBuilder = new ConnectionSpec.Builder(true);
+
+        if (sslOptions.getCiphers() != null) {
+            connectionSpecBuilder.cipherSuites(sslOptions.getCiphers());
+        }
+
+        if (sslOptions.getEnabledProtocols() != null) {
+            connectionSpecBuilder.tlsVersions(sslOptions.getEnabledProtocols());
+        }
+
+        return connectionSpecBuilder.build();
     }
 }
