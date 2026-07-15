@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
  * @author Lars Grefer
  * @see RestTemplateAutoConfiguration
  */
-@AutoConfiguration(before = ImperativeHttpClientAutoConfiguration.class)
+@AutoConfiguration(before = ImperativeHttpClientAutoConfiguration.class, after = OkHttp3AutoConfiguration.class)
 @ConditionalOnClass({ClientHttpRequestFactoryBuilder.class, OkHttpClientRequestFactory.class})
 public class OkHttpClientRequestFactoryBuilderAutoConfiguration {
 
