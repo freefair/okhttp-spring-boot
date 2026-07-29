@@ -14,9 +14,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.ssl.SslBundle;
+import org.springframework.boot.ssl.SslBundles;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
 
 import javax.net.ssl.HostnameVerifier;
 import java.io.File;
@@ -48,6 +51,9 @@ public class OkHttp3AutoConfiguration {
     @Autowired
     @NetworkInterceptor
     private ObjectProvider<Interceptor> networkInterceptors;
+
+    @Autowired
+    private SslBundles sslBundles;
 
     @Nullable
     private File tempDirCache = null;
@@ -94,6 +100,11 @@ public class OkHttp3AutoConfiguration {
         applicationInterceptors.forEach(builder::addInterceptor);
 
         networkInterceptors.forEach(builder::addNetworkInterceptor);
+
+        if (StringUtils.hasText(okHttpProperties.getSsl().getBundle())) {
+            SslBundle sslBundle = sslBundles.getBundle(okHttpProperties.getSsl().getBundle());
+            OkHttpSslUtil.applySslBundle(builder, sslBundle);
+        }
 
         configurers.forEach(configurer -> configurer.configure(builder));
 

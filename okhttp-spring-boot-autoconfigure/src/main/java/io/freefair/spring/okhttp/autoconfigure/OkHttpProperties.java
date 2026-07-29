@@ -70,6 +70,9 @@ public class OkHttpProperties {
     @NestedConfigurationProperty
     private final ConnectionPoolProperties connectionPool = new ConnectionPoolProperties();
 
+    @NestedConfigurationProperty
+    private final Ssl ssl = new Ssl();
+
     /**
      * @author Lars Grefer
      * @see okhttp3.Cache
@@ -103,5 +106,11 @@ public class OkHttpProperties {
         private int maxIdleConnections = 5;
 
         private Duration keepAliveDuration = Duration.ofMinutes(5);
+    }
+
+    @Data
+    public static class Ssl {
+        @Nullable
+        private String bundle;
     }
 }

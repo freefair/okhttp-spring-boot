@@ -8,6 +8,7 @@ import okhttp3.Protocol;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
+import org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ public class OkHttp3AutoConfigurationTest {
     @BeforeEach
     public void setUp() {
         applicationContextRunner = new ApplicationContextRunner()
-                .withConfiguration(AutoConfigurations.of(OkHttp3AutoConfiguration.class));
+                .withConfiguration(AutoConfigurations.of(OkHttp3AutoConfiguration.class, SslAutoConfiguration.class));
     }
 
     @Test
