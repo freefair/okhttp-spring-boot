@@ -3,7 +3,7 @@ package io.freefair.spring.okhttp.ssl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.restclient.RestTemplateBuilder;
+import org.springframework.boot.restclient.autoconfigure.RestClientSsl;
 import org.springframework.boot.ssl.SslBundle;
 import org.springframework.boot.ssl.SslBundles;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 import javax.net.ssl.HostnameVerifier;
 
@@ -30,7 +30,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SslBundleTest {
 
     @Autowired
-    private RestTemplateBuilder restTemplateBuilder;
+    private RestClient.Builder restClientBuilder;
+
+    @Autowired
+    private RestClientSsl restClientSsl;
 
     @Autowired
     private SslBundles sslBundles;
@@ -43,12 +46,11 @@ public class SslBundleTest {
 
         SslBundle ssl = sslBundles.getBundle("a");
 
-        RestTemplate restTemplate = restTemplateBuilder
-                .sslBundle(ssl)
-                .baseUri("https://localhost:" + port)
+        RestClient restTemplate = restClientBuilder.apply(restClientSsl.fromBundle(ssl))
+                .baseUrl("https://localhost:" + port)
                 .build();
 
-        String result = restTemplate.getForObject("/foo", String.class);
+        String result = restTemplate.get().uri("/foo").retrieve().body(String.class);
         assertThat(result).isEqualTo("bar");
 
     }

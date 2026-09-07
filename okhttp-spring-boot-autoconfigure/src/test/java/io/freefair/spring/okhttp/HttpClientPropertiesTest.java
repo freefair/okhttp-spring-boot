@@ -24,6 +24,8 @@ public class HttpClientPropertiesTest {
 
 
     @Test
+    @SuppressWarnings("removal")
+    @Deprecated(forRemoval = true, since = "4.2.0")
     void testRestTemplateConfig(@Autowired RestTemplateBuilder restTemplateBuilder) {
         RestTemplate restTemplate = restTemplateBuilder.build();
 

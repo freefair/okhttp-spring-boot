@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @UtilityClass
 public class OkHttpTestUtils {
 
+    @SuppressWarnings("removal")
+    @Deprecated(forRemoval = true, since = "4.2.0")
     public static OkHttpClient extractClient(RestTemplate restTemplate) {
         ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
 

@@ -5,22 +5,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.restclient.RestTemplateBuilder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OkHttpClientRequestFactoryTest {
 
-    RestTemplate restTemplate;
+    RestClient restTemplate;
 
     @Autowired
-    RestTemplateBuilder restTemplateBuilder;
+    RestClient.Builder restTemplateBuilder;
 
     @LocalServerPort
     private int port;
@@ -28,25 +27,25 @@ class OkHttpClientRequestFactoryTest {
     @BeforeEach
     void setUp() {
         restTemplate = restTemplateBuilder
-                .baseUri("http://localhost:" + port)
+                .baseUrl("http://localhost:" + port)
                 .build();
     }
 
     @Test
     void get() {
-        String response = restTemplate.getForObject("/user-agent", String.class);
+        String response = restTemplate.get().uri("/user-agent").retrieve().body(String.class);
 
         assertThat(response).contains("okhttp");
     }
 
     @Test
     void put() {
-        restTemplate.put("/put", "foo");
+        restTemplate.put().uri("/put").body("foo").retrieve().toBodilessEntity();
     }
 
     @Test
     void post() {
-        String response = restTemplate.postForObject("/post", "foobar", String.class);
+        String response = restTemplate.post().uri("/post").body("foobar").retrieve().body(String.class);
 
         assertThat(response).contains("foobar");
     }
