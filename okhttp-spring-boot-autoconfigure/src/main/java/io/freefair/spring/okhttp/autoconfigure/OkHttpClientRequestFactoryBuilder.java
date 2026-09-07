@@ -2,22 +2,14 @@ package io.freefair.spring.okhttp.autoconfigure;
 
 import io.freefair.spring.okhttp.client.OkHttpClientRequestFactory;
 import lombok.RequiredArgsConstructor;
-import okhttp3.ConnectionSpec;
 import okhttp3.OkHttpClient;
 import org.jspecify.annotations.Nullable;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.HttpClientSettings;
 import org.springframework.boot.http.client.HttpRedirects;
 import org.springframework.boot.ssl.SslBundle;
-import org.springframework.boot.ssl.SslOptions;
-import org.springframework.util.Assert;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.time.Duration;
-import java.util.List;
 
 /**
  * @author Lars Grefer
@@ -51,20 +43,7 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
 
         SslBundle sslBundle = settings.sslBundle();
         if (sslBundle != null) {
-
-            ConnectionSpec connectionSpec = toConnectionSpec(sslBundle.getOptions());
-            if (connectionSpec != null) {
-                builder.connectionSpecs(List.of(connectionSpec));
-            }
-
-            SSLContext sslContext = sslBundle.createSslContext();
-            SSLSocketFactory socketFactory = sslContext.getSocketFactory();
-
-            TrustManager[] trustManagers = sslBundle.getManagers().getTrustManagers();
-            Assert.state(trustManagers.length == 1,
-                    "Trust material must be provided in the SSL bundle for OkHttp3ClientHttpRequestFactory");
-
-            builder.sslSocketFactory(socketFactory, (X509TrustManager) trustManagers[0]);
+            OkHttpSslUtil.applySslBundle(builder, sslBundle);
         }
 
         HttpRedirects redirects = settings.redirects();
@@ -85,22 +64,5 @@ public class OkHttpClientRequestFactoryBuilder implements ClientHttpRequestFacto
         return new OkHttpClientRequestFactory(builder.build());
     }
 
-    @Nullable
-    static ConnectionSpec toConnectionSpec(@Nullable SslOptions sslOptions) {
-        if (sslOptions == null || !sslOptions.isSpecified()) {
-            return null;
-        }
 
-        ConnectionSpec.Builder connectionSpecBuilder = new ConnectionSpec.Builder(true);
-
-        if (sslOptions.getCiphers() != null) {
-            connectionSpecBuilder.cipherSuites(sslOptions.getCiphers());
-        }
-
-        if (sslOptions.getEnabledProtocols() != null) {
-            connectionSpecBuilder.tlsVersions(sslOptions.getEnabledProtocols());
-        }
-
-        return connectionSpecBuilder.build();
-    }
 }

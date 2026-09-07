@@ -3,6 +3,7 @@ package io.freefair.spring.okhttp.autoconfigure;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
+import org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration;
 import org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.JettyClientHttpRequestFactoryBuilder;
 import org.springframework.boot.http.client.autoconfigure.imperative.ImperativeHttpClientAutoConfiguration;
@@ -23,6 +24,7 @@ class OkHttpClientRequestFactoryBuilderAutoConfigurationTest {
         autoConfigurations = AutoConfigurations.of(
                 OkHttp3AutoConfiguration.class,
                 OkHttpClientRequestFactoryBuilderAutoConfiguration.class,
+                SslAutoConfiguration.class,
                 ImperativeHttpClientAutoConfiguration.class);
     }
 
